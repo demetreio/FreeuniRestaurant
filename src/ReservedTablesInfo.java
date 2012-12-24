@@ -4,7 +4,7 @@ import java.sql.SQLException;
 public class ReservedTablesInfo implements ReservedTebles {
 
 	public ReservedTablesInfo(){
-		
+		//test
 	}
 	
 	/**
