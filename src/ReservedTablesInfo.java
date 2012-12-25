@@ -12,9 +12,10 @@ public class ReservedTablesInfo implements ReservedTables {
 	 * one hour period. Value 'true' on index i means that 
 	 * the table is reserved after the i-th hour after
 	 * the restaurant is opened
+	 * @throws SQLException 
 	 */
 	@Override
-	public boolean[] getReservation(Table table) {
+	public boolean[] getReservation(Table table) throws SQLException {
 		int id = table.getId();
 		return getReservationInfo(id);
 	}
@@ -23,8 +24,9 @@ public class ReservedTablesInfo implements ReservedTables {
 	 * Connect to db and obtain reservation data
 	 * @param id Table id
 	 * @return
+	 * @throws SQLException 
 	 */
-	private boolean[] getReservationInfo(int id){
+	private boolean[] getReservationInfo(int id) throws SQLException{
 		DBConnector dbc = DBConnector.getInstance();
 		ResultSet rs = null;
 		try {

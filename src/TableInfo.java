@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class TableInfo {
 	
 	
-	public ArrayList<Table> getAllTables(){
+	public ArrayList<Table> getAllTables() throws SQLException{
 		DBConnector dbc = DBConnector.getInstance();
 		ResultSet rs = null;
 		try {
