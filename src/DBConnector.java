@@ -85,9 +85,7 @@ public class DBConnector{
 		char[] arr = str.toCharArray();
 		arr[timeIndex] = 1;
 		String newOne = new String(arr);
-		
 		stmt.executeUpdate("update ReservedTables set reserveInfo = '" + newOne + "' where id =" +table_id);
-		
 		
 		return true;
 	}
