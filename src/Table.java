@@ -18,7 +18,6 @@ public class Table {
 	
 	public int getSize(){
 		return size;
-		
 	}
 	
 	public String getDescription(){

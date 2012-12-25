@@ -1,5 +1,9 @@
+/**
+ * The class that connects to the database. It's a synchronized singleton class. It has several methods that update or select
+ * information from the database.
+ */
+
 import java.sql.*;
-import java.util.*;
 
 public class DBConnector{
 	private static Object lock  = new Object();
@@ -10,6 +14,9 @@ public class DBConnector{
 	private static  Connection con;
 	private static DBConnector db;
 	
+	/**
+	 * This method returns the DBManager object, initialized AT MOST once.
+	 */
 	public static DBConnector getInstance(){
 		synchronized(lock){
 			if(db==null) db = new DBConnector();
@@ -17,12 +24,14 @@ public class DBConnector{
 		}
 	}
 	
+	/**
+	 * The constructor of this class.
+	 */
 	private DBConnector(){
 		try {
 			 Class.forName("com.mysql.jdbc.Driver");
 			 con = DriverManager.getConnection("jdbc:mysql://" + server, account, password);
 		}
-		//es eqseption rom ar moxdes conector jar chaagdet web-inf_is lib foldershic
 		catch (ClassNotFoundException e) {
 			  e.printStackTrace();
 		}
@@ -31,8 +40,30 @@ public class DBConnector{
 		}
 	}
 	
-	public ResultSet getTables(){
-		
+	/**
+	 * @return the information about all the tables the restaurant from the database. (Note: It's not a SQL table,
+	 * but ordinary one :) Ex: I am a table.).
+	 * @throws SQLException
+	 */
+	public ResultSet getTables() throws SQLException{
+		ResultSet rset;
+		Statement stmt = con.createStatement();
+		stmt.executeQuery("use 	" + database);
+		rset = stmt.executeQuery("select * from tables");
+		return rset;
+
+	}
+	
+	/**
+	 * @param table_id the id of a table we are interested in.
+	 * @return the information about the reservation times of the table.
+	 */
+	public ResultSet getReservedInfo(int table_id) throws SQLException{
+		ResultSet rset;
+		Statement stmt = con.createStatement();
+		stmt.executeQuery("use " + database);
+		rset = stmt.executeQuery("select * from ReservedTables where id = "+table_id);
+		return rset;
 	}
 	
 }
