@@ -24,7 +24,6 @@ public class Table {
 	
 	public String getDescription(){
 		return description;
-		
 	}
 	
 	/**
