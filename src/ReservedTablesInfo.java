@@ -1,7 +1,7 @@
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class ReservedTablesInfo implements ReservedTebles {
+public class ReservedTablesInfo implements ReservedTables {
 
 	public ReservedTablesInfo(){
 		//test

@@ -1,4 +1,4 @@
 
-public interface ReservedTebles {
+public interface ReservedTables {
 	boolean[] getReservation(Table table);
 }
