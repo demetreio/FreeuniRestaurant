@@ -6,13 +6,24 @@ import java.util.ArrayList;
 public class TableInfo {
 	
 	
-	public ArrayList<Table> getAllTables() throws SQLException{
+	public ArrayList<Table> getAllTables(){
 		DBConnector dbc = DBConnector.getInstance();
-		ResultSet rs = dbc.getTables();
+		ResultSet rs = null;
+		try {
+			rs = dbc.getTables();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		ArrayList<Table> list = new ArrayList<Table>();
-		while(rs.next()){
-			Table t = new Table(rs.getInt(1), rs.getInt(2), rs.getString(3));
-			list.add(t);
+		try {
+			while(rs.next()){
+				Table t = new Table(rs.getInt(1), rs.getInt(2), rs.getString(3));
+				list.add(t);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return list;
 	}
