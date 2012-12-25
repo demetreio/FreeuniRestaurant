@@ -64,6 +64,34 @@ public class DBConnector{
 		stmt.executeQuery("use " + database);
 		rset = stmt.executeQuery("select * from ReservedTables where id = "+table_id);
 		return rset;
+		
 	}
+	
+	/**
+	 * @param table_id the id of a table we are interested in.
+	 * @param timeIndex index of the time, it's bit string with length = 30; first 0-14 bits are for the first day reservation
+	 * and 15 - 29 are for second day. the restaurant works from 9:00 t 0 24:00 so 9:00 is index 0, 10:00 is 1 and so on.
+	 * @return true if the table reserved succesfully and false if it is allready reserved.
+	 */
+	
+	public boolean reserveTable(int table_id, int timeIndex) throws SQLException{
+		ResultSet rset;
+		Statement stmt = con.createStatement();
+		stmt.executeQuery("use " + database);
+		rset = stmt.executeQuery("select * from ReservedTables where id = "+table_id);
+
+		String str =  rset.getString("reserveInfo");
+		if(str.charAt(timeIndex) == '1') return false;
+		char[] arr = str.toCharArray();
+		arr[timeIndex] = 1;
+		String newOne = new String(arr);
+		
+		stmt.executeUpdate("update ReservedTables set reserveInfo = '" + newOne + "' where id =" +table_id);
+		
+		
+		return true;
+	}
+	
+	
 	
 }
