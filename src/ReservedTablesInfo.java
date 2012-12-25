@@ -26,7 +26,13 @@ public class ReservedTablesInfo implements ReservedTables {
 	 */
 	private boolean[] getReservationInfo(int id){
 		DBConnector dbc = DBConnector.getInstance();
-		ResultSet rs = dbc.getReservedInfo(id);
+		ResultSet rs = null;
+		try {
+			rs = dbc.getReservedInfo(id);
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		String res = "";
 		try {
 			// Schedule represented as bitstring
