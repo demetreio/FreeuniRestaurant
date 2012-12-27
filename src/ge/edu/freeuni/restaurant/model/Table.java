@@ -1,3 +1,5 @@
+package ge.edu.freeuni.restaurant.model;
+
 import java.sql.SQLException;
 
 
@@ -40,6 +42,5 @@ public class Table {
 	public synchronized boolean reserveTable(int timeIndex) throws SQLException{
 		DBConnector db=DBConnector.getInstance();
 		return db.reserveTable(this.id, timeIndex);
-		
 	}
 }

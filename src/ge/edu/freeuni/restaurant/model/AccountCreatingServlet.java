@@ -1,3 +1,4 @@
+package ge.edu.freeuni.restaurant.model;
 
 
 import java.io.IOException;

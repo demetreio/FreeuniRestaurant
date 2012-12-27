@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-  pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
 <%@ page import="java.util.*"%>
 <%@ page import="ge.edu.freeuni.restaurant.model.*"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -15,11 +15,16 @@
 				<td align="center">Table ID</td>
 				<td align="center">Description</td>
 				<td align="center">Size</td>
+				
+				<%-- es nawili pasuxs agebs "dajavshnuli/ardajavshnulis" tavze saatebis gamotanaze --%>
+				<jsp:include page="ReservedTableViewHeader.jsp" ></jsp:include>
+				
+				
 			</tr>
 			<%
 				TableInfo ti = new TableInfo();
-				ArrayList<Table> tables = ti.getAllTables();
-				Table curTable;
+				ArrayList<ge.edu.freeuni.restaurant.model.Table> tables = ti.getAllTables();
+				ge.edu.freeuni.restaurant.model.Table curTable;
 				for (int i = 0; i < tables.size(); i++) {
 					curTable = tables.get(i);
 					out.print("<tr>");
@@ -32,6 +37,9 @@
 					out.print("<td>");
 					out.print(curTable.getSize());
 					out.print("</td>");
+			%>		<%-- es nawili pasuxs agebs "dajavshnuli/ardajavshnulis" chvenebaze --%>
+					<jsp:include page="ReservedTableView.jsp" ><jsp:param name="tableId" value="<%=curTable.getId()%>" /></jsp:include>
+			<%
 					out.print("</tr>");
 				}
 			%>

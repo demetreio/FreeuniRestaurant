@@ -1,3 +1,5 @@
+package ge.edu.freeuni.restaurant.model;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -26,7 +28,7 @@ public class ReservedTablesInfo implements ReservedTables {
 	 * @return
 	 * @throws SQLException 
 	 */
-	private boolean[] getReservationInfo(int id) throws SQLException{
+	public boolean[] getReservationInfo(int id) throws SQLException{
 		DBConnector dbc = DBConnector.getInstance();
 		ResultSet rs = null;
 		try {
@@ -53,7 +55,7 @@ public class ReservedTablesInfo implements ReservedTables {
 	private boolean[] getArray(String res) {
 		boolean[] arr = new boolean[res.length()];
 		for (int i = 0; i < res.length(); i++) {
-			arr[i] = res.charAt(i)==1? true : false;
+			arr[i] = res.charAt(i)=='1'? true : false; //ertians garshemo char-is brchyalebi aklda
 		}
 		return arr;
 	}
