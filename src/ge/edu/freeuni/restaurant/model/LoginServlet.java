@@ -33,7 +33,12 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		String username = request.getParameter("username");
+		String pass = request.getParameter("pass");
+		DBConnector db = DBConnector.getInstance();
+		if(true){//db.isCorrectUsernameAndPassword(username, pass)
+			
+		}
 	}
 
 }

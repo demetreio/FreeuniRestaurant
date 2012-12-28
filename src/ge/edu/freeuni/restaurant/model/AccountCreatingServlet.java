@@ -36,18 +36,24 @@ public class AccountCreatingServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String	user = request.getParameter("username");
+		String	username = request.getParameter("username");
 		String	pass = request.getParameter("myPass");
 		String	info = request.getParameter("info");
 		String 	name = request.getParameter("name");
 		String	surname =request.getParameter("surname");
-		if(user.equals("") || pass.equals("")){
+		
+		
+		if(username.equals("") || pass.equals("") || info.equals("") || name.equals("") || surname.equals("") ){
 			RequestDispatcher dispatch = request.getRequestDispatcher("FillFields.html");
 			dispatch.forward(request, response);
 		}
 		else{
-			RequestDispatcher dispatch = request.getRequestDispatcher("AccountCreated.jsp");
-			dispatch.forward(request, response);
+			User user = new User(username, pass, name, surname, info);
+			DBConnector db = DBConnector.getInstance();
+			if(true ){//db.registerNewUser(user)
+				RequestDispatcher dispatch = request.getRequestDispatcher("AccountCreated.jsp");
+				dispatch.forward(request, response);
+			}
 		}
 		
 	}
