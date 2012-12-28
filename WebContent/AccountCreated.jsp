@@ -10,7 +10,7 @@
 <% 
 	String user = request.getParameter("username");
 	
-	out.println("" + user + " account has been created ");
+	out.println("<h1>" + user + " account has been created ! </h1>");
 %>
 
 </body>
