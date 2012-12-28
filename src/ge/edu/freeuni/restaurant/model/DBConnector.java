@@ -92,5 +92,57 @@ public class DBConnector{
 	}
 	
 	
+	public boolean isCorrectUsernameAndPassword(String username, String password){
+		try {
+			ResultSet rset;
+			Statement stmt = con.createStatement();
+			stmt.executeQuery("use " + database);
+			rset = stmt.executeQuery("select * from User where username = '"+username + "' and password = '" + password + "'");
+			rset.last();
+			return rset.getRow() > 0;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
+	/**
+	 * writes user in database. returns true if user is not in database, false otherwise
+	 * @param user
+	 * @return
+	 */
+	public boolean registerNewUser(User user){
+		if(isUsernameInUse(user.getUsername())){
+			return false;
+		}
+		try {
+			Statement stmt = con.createStatement();
+			stmt.executeQuery("use " + database);
+			stmt.executeUpdate("insert into User values('"+user.getUsername()+"', '" +
+							user.getPassword() + "', '" + user.getName() +"', '" +user.getSurname()+"', '"+
+							user.getInfo() + "')");	
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
+	private boolean isUsernameInUse(String username){
+		try {
+			ResultSet rset;
+			Statement stmt = con.createStatement();
+			stmt.executeQuery("use " + database);
+			rset = stmt.executeQuery("select * from User where username = '"+username + "'");
+			rset.last();
+			return rset.getRow() > 0;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		
+	}
+	
+	
 	
 }
