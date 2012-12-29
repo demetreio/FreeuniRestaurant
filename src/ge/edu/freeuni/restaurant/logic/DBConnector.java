@@ -1,4 +1,4 @@
-package ge.edu.freeuni.restaurant.model;
+package ge.edu.freeuni.restaurant.logic;
 /**
  * The class that connects to the database. It's a synchronized singleton class. It has several methods that update or select
  * information from the database.

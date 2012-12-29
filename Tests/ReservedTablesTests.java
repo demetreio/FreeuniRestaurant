@@ -1,6 +1,6 @@
-import ge.edu.freeuni.restaurant.model.DBConnector;
-import ge.edu.freeuni.restaurant.model.ReservedTablesInfo;
-import ge.edu.freeuni.restaurant.model.Table;
+import ge.edu.freeuni.restaurant.logic.DBConnector;
+import ge.edu.freeuni.restaurant.logic.ReservedTablesInfo;
+import ge.edu.freeuni.restaurant.logic.Table;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

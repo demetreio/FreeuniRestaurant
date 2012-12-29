@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ page import="java.util.*"%>
-<%@ page import="ge.edu.freeuni.restaurant.model.*"%>
+<%@ page import="ge.edu.freeuni.restaurant.logic.*"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -23,20 +23,20 @@
 			</tr>
 			<%
 				TableInfo ti = new TableInfo();
-				ArrayList<ge.edu.freeuni.restaurant.model.Table> tables = ti.getAllTables();
-				ge.edu.freeuni.restaurant.model.Table curTable;
-				for (int i = 0; i < tables.size(); i++) {
-					curTable = tables.get(i);
-					out.print("<tr>");
-					out.print("<td>");
-					out.print(curTable.getId());
-					out.print("</td>");
-					out.print("<td>");
-					out.print(curTable.getDescription());
-					out.print("</td>");
-					out.print("<td>");
-					out.print(curTable.getSize());
-					out.print("</td>");
+					ArrayList<ge.edu.freeuni.restaurant.logic.Table> tables = ti.getAllTables();
+					ge.edu.freeuni.restaurant.logic.Table curTable;
+					for (int i = 0; i < tables.size(); i++) {
+						curTable = tables.get(i);
+						out.print("<tr>");
+						out.print("<td>");
+						out.print(curTable.getId());
+						out.print("</td>");
+						out.print("<td>");
+						out.print(curTable.getDescription());
+						out.print("</td>");
+						out.print("<td>");
+						out.print(curTable.getSize());
+						out.print("</td>");
 			%>		<%-- es nawili pasuxs agebs "dajavshnuli/ardajavshnulis" chvenebaze --%>
 					<jsp:include page="ReservedTableView.jsp" ><jsp:param name="tableId" value="<%=curTable.getId()%>" /></jsp:include>
 			<%

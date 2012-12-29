@@ -1,4 +1,4 @@
-<%@ page import="ge.edu.freeuni.restaurant.model.*"%>
+<%@ page import="ge.edu.freeuni.restaurant.logic.*"%>
 
 <%
 	int id = Integer.parseInt(request.getParameter("tableId"));

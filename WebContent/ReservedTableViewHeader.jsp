@@ -1,4 +1,4 @@
-<%@ page import="ge.edu.freeuni.restaurant.model.*"%>
+<%@ page import="ge.edu.freeuni.restaurant.logic.*"%>
 
 <%
 	for (double i = 0; i < 30; i+=1) {

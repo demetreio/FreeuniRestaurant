@@ -1,4 +1,4 @@
-package ge.edu.freeuni.restaurant.model;
+package ge.edu.freeuni.restaurant.logic;
 
 public class User {
 	

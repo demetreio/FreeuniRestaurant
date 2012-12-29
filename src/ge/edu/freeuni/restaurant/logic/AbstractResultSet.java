@@ -1,4 +1,4 @@
-package ge.edu.freeuni.restaurant.model;
+package ge.edu.freeuni.restaurant.logic;
 
 import com.mysql.jdbc.MySQLConnection;
 import com.mysql.jdbc.ResultSetImpl;
