@@ -9,9 +9,9 @@ import java.sql.*;
 public class DBConnector{
 	private static Object lock  = new Object();
 	static String server = "localhost";
-	static String password = "callofduty";
+	static String password = ""; //<---------
 	static String account = "root";
-	static String database = "test";
+	static String database = "test"; //<---------
 	private static  Connection con;
 	private static DBConnector db;
 	
@@ -143,6 +143,25 @@ public class DBConnector{
 		
 	}
 	
-	
+	/**
+	 * retrieve admin column from user table and check for admin flag
+	 * @param username
+	 * @return true if the user is admin
+	 */
+	private boolean isAdmin(String username){
+		ResultSet rset;
+		boolean res = false;
+		try {
+			Statement stmt = con.createStatement();
+			stmt.executeQuery("use " + database);
+			rset = stmt.executeQuery("select admin from User where username = '"+username + "'");
+			if(rset.next()){
+				res = rset.getBoolean(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return res;
+	}
 	
 }
