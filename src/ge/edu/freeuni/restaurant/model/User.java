@@ -12,13 +12,16 @@ public class User {
 	
 	private String info;
 	
+	private boolean admin;
 	
-	public User(String username, String password, String name, String surname, String info) {
+	
+	public User(String username, String password, String name, String surname, String info, boolean admin) {
 		this.username = username;
 		this.password = password;
 		this.name = name;
 		this.surname = surname;
 		this.info = info;
+		this.admin = admin;
 	}
 	
 
@@ -71,5 +74,11 @@ public class User {
 		this.info = info;
 	}
 
-
+	public boolean isAdmin(){
+		return admin;
+	}
+	
+	public void makeAdmin(){
+		this.admin = true;
+	}
 }
