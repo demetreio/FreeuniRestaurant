@@ -4,8 +4,8 @@
 	int id = Integer.parseInt(request.getParameter("tableId"));
 	ReservedTablesInfo rti = new ReservedTablesInfo();
 
-	boolean[] b = rti.getReservationInfo(id);
-	for (int i = 0; i < 33 && i < b.length; i++) {
+	boolean[] b = rti.getReservation(id);
+	for (int i = 0; i < b.length/2+1; i++) {
 		out.print("<td style=\"background-color:"+(b[i]?"red":"green")+"\"></td>");
 	}
 %>

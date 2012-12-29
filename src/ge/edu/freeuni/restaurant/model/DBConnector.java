@@ -9,9 +9,9 @@ import java.sql.*;
 public class DBConnector{
 	private static Object lock  = new Object();
 	static String server = "localhost";
-	static String password = "malibu";
+	static String password = "callofduty";
 	static String account = "root";
-	static String database = "mysql";
+	static String database = "test";
 	private static  Connection con;
 	private static DBConnector db;
 	
