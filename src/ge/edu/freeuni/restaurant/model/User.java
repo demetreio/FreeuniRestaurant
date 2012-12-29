@@ -79,6 +79,6 @@ public class User {
 	}
 	
 	public void makeAdmin(){
-		this.admin = true;
+		admin = true;
 	}
 }
