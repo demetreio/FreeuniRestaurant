@@ -51,7 +51,7 @@ public class AccountCreatingServlet extends HttpServlet {
 			dispatch.forward(request, response);
 		}
 		else{
-			User user = new User(username, pass, name, surname, info);
+			User user = new User(username, pass, name, surname, info, false);
 			DBConnector db = DBConnector.getInstance();
 			if(true ){//db.registerNewUser(user)
 				RequestDispatcher dispatch = request.getRequestDispatcher("AccountCreated.jsp");
