@@ -120,7 +120,7 @@ public class DBConnector{
 			stmt.executeQuery("use " + database);
 			stmt.executeUpdate("insert into User values('"+user.getUsername()+"', '" +
 							user.getPassword() + "', '" + user.getName() +"', '" +user.getSurname()+"', '"+
-							user.getInfo() + "')");	
+							user.getInfo() + "'," + false + ")");	
 			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();

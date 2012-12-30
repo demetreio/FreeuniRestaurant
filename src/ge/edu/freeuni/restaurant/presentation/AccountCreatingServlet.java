@@ -3,6 +3,7 @@ package ge.edu.freeuni.restaurant.presentation;
 
 import ge.edu.freeuni.restaurant.logic.DBConnector;
 import ge.edu.freeuni.restaurant.logic.User;
+import ge.edu.freeuni.restaurant.logic.UserManager;
 
 import java.io.IOException;
 
@@ -49,14 +50,18 @@ public class AccountCreatingServlet extends HttpServlet {
 		if(username.equals("") || pass.equals("") || info.equals("") || name.equals("") || surname.equals("") ){
 			RequestDispatcher dispatch = request.getRequestDispatcher("FillFields.html");
 			dispatch.forward(request, response);
-		}
-		else{
+		} else {
 			User user = new User(username, pass, name, surname, info, false);
-			DBConnector db = DBConnector.getInstance();
-			if(true ){//db.registerNewUser(user)
+			UserManager um = new UserManager();
+			boolean reg = um.registerNewUser(user);
+			if(reg){
 				RequestDispatcher dispatch = request.getRequestDispatcher("AccountCreated.jsp");
 				dispatch.forward(request, response);
+			} else {
+				RequestDispatcher dispatch = request.getRequestDispatcher("username-in-use.jsp");
+				dispatch.forward(request, response);
 			}
+			
 		}
 		
 	}

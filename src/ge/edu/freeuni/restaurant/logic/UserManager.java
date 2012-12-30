@@ -20,7 +20,7 @@ public class UserManager {
 	public boolean registerNewUser(User user){
 		return dbc.registerNewUser(user);
 	}
-	private boolean isAdmin(String username){
+	public boolean isAdmin(String username){
 		return dbc.isAdmin(username);
 		
 	}
