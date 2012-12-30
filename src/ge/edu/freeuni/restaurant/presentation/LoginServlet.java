@@ -1,6 +1,7 @@
 package ge.edu.freeuni.restaurant.presentation;
 
 import ge.edu.freeuni.restaurant.logic.DBConnector;
+import ge.edu.freeuni.restaurant.logic.UserManager;
 
 import java.io.IOException;
 
@@ -45,19 +46,21 @@ public class LoginServlet extends HttpServlet {
 			RequestDispatcher dispatch = request.getRequestDispatcher("FillFields.html");
 			dispatch.forward(request, response);
 		}
-		DBConnector db = DBConnector.getInstance();
-		if(true){//db.isCorrectUsernameAndPassword(username, pass)
-				//db.isAdmin(username);
-			
-			//Test
-			RequestDispatcher dispatch;
-			if(username.equals("admin") && pass.equals("admin")){
+		UserManager um = new UserManager();
+		RequestDispatcher dispatch;
+		if(um.isCorrectUsernameAndPassword(username, pass)){
+			if(um.isAdmin(username)){
 				dispatch = request.getRequestDispatcher("welcome.jsp?admin=1");
-			}else{
+				dispatch.forward(request, response);
+			} else {
 				dispatch = request.getRequestDispatcher("welcome.jsp?admin=0");
+				dispatch.forward(request, response);
 			}
+		} else {
+			dispatch = request.getRequestDispatcher("welcome.jsp?admin=2");
 			dispatch.forward(request, response);
 		}
+		
 	}
 
 }
