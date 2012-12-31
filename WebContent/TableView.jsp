@@ -12,9 +12,13 @@
 	<center>
 		<table border="1">
 			<tr>
-				<td align="center">Table ID</td>
-				<td align="center">Description</td>
-				<td align="center">Size</td>
+				<td align="center" rowspan="2">Table ID</td>
+				<td align="center" rowspan="2">Description</td>
+				<td align="center" rowspan="2">Size</td>
+				<td align="center" colspan="15">Today</td>
+				<td align="center" colspan="15">Tomorrow</td>
+			</tr>
+			<tr>
 				
 				<%-- es nawili pasuxs agebs "dajavshnuli/ardajavshnulis" tavze saatebis gamotanaze --%>
 				<jsp:include page="ReservedTableViewHeader.jsp" ></jsp:include>
