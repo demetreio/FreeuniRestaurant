@@ -9,11 +9,12 @@ import java.sql.*;
 public class DBConnector{
 	private static Object lock  = new Object();
 	static String server = "localhost";
-	static String password = "3200909"; //<---------
+	static String password = ""; //<---------
 	static String account = "root";
-	static String database = "test1"; //<---------
+	static String database = "test"; //<---------
 	private static  Connection con;
 	private static DBConnector db;
+	static Statement stmt;
 	
 	/**
 	 * This method returns the DBManager object, initialized AT MOST once.
@@ -32,6 +33,8 @@ public class DBConnector{
 		try {
 			 Class.forName("com.mysql.jdbc.Driver");
 			 con = DriverManager.getConnection("jdbc:mysql://" + server, account, password);
+			 stmt = con.createStatement();
+			 stmt.executeQuery("USE " + database);
 		}
 		catch (ClassNotFoundException e) {
 			  e.printStackTrace();
@@ -48,7 +51,6 @@ public class DBConnector{
 	 */
 	public ResultSet getTables() throws SQLException{
 		ResultSet rset;
-		Statement stmt = con.createStatement();
 		stmt.executeQuery("use 	" + database);
 		rset = stmt.executeQuery("select * from tables");
 		return rset;
@@ -61,8 +63,6 @@ public class DBConnector{
 	 */
 	public ResultSet getReservedInfo(int table_id) throws SQLException{
 		ResultSet rset;
-		Statement stmt = con.createStatement();
-		stmt.executeQuery("use " + database);
 		rset = stmt.executeQuery("select * from ReservedTables where id = "+table_id);
 		return rset;
 		
@@ -77,8 +77,6 @@ public class DBConnector{
 	
 	public boolean reserveTable(int table_id, int timeIndex) throws SQLException{
 		ResultSet rset;
-		Statement stmt = con.createStatement();
-		stmt.executeQuery("use " + database);
 		rset = stmt.executeQuery("select * from ReservedTables where id = "+table_id);
 
 		String str =  rset.getString("reserveInfo");
@@ -95,8 +93,6 @@ public class DBConnector{
 	public boolean isCorrectUsernameAndPassword(String username, String password){
 		try {
 			ResultSet rset;
-			Statement stmt = con.createStatement();
-			stmt.executeQuery("use " + database);
 			rset = stmt.executeQuery("select * from User where username = '"+username + "' and password = '" + password + "'");
 			rset.last();
 			return rset.getRow() > 0;
@@ -116,8 +112,6 @@ public class DBConnector{
 			return false;
 		}
 		try {
-			Statement stmt = con.createStatement();
-			stmt.executeQuery("use " + database);
 			stmt.executeUpdate("insert into User values('"+user.getUsername()+"', '" +
 							user.getPassword() + "', '" + user.getName() +"', '" +user.getSurname()+"', '"+
 							user.getInfo() + "'," + false + ")");	
@@ -131,8 +125,6 @@ public class DBConnector{
 	private boolean isUsernameInUse(String username){
 		try {
 			ResultSet rset;
-			Statement stmt = con.createStatement();
-			stmt.executeQuery("use " + database);
 			rset = stmt.executeQuery("select * from User where username = '"+username + "'");
 			rset.last();
 			return rset.getRow() > 0;
@@ -152,8 +144,6 @@ public class DBConnector{
 		ResultSet rset;
 		boolean res = false;
 		try {
-			Statement stmt = con.createStatement();
-			stmt.executeQuery("use " + database);
 			rset = stmt.executeQuery("select admin from User where username = '"+username + "'");
 			if(rset.next()){
 				res = rset.getBoolean(1);
@@ -162,9 +152,5 @@ public class DBConnector{
 			e.printStackTrace();
 		}
 		return res;
-	}
-	
-	public static void main(String[] args) {
-		System.out.println(1);
 	}
 }
