@@ -1,6 +1,7 @@
 package ge.edu.freeuni.restaurant.presentation;
 
 import ge.edu.freeuni.restaurant.logic.DBConnector;
+import ge.edu.freeuni.restaurant.logic.User;
 import ge.edu.freeuni.restaurant.logic.UserManager;
 
 import java.io.IOException;
@@ -42,25 +43,19 @@ public class LoginServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String username = request.getParameter("username");
 		String pass = request.getParameter("pass");
-		if(username.equals("") || pass.equals("")){
-			RequestDispatcher dispatch = request.getRequestDispatcher("FillFields.html");
-			dispatch.forward(request, response);
-		}
-		UserManager um = new UserManager();
 		RequestDispatcher dispatch;
-		if(um.isCorrectUsernameAndPassword(username, pass)){
-			if(um.isAdmin(username)){
-				dispatch = request.getRequestDispatcher("welcome.jsp?admin=1");
-				dispatch.forward(request, response);
+		if(username.equals("") || pass.equals("")){
+			dispatch = request.getRequestDispatcher("FillFields.html");
+		}else{
+			UserManager um = new UserManager();
+			if(um.isCorrectUsernameAndPassword(username, pass)){
+				User usr =  um.getUser(username);
+				request.getSession().setAttribute("user", usr);
+				dispatch = request.getRequestDispatcher("TableView.jsp");
 			} else {
-				dispatch = request.getRequestDispatcher("welcome.jsp?admin=0");
-				dispatch.forward(request, response);
+				dispatch = request.getRequestDispatcher("Register.html");
 			}
-		} else {
-			dispatch = request.getRequestDispatcher("welcome.jsp?admin=2");
-			dispatch.forward(request, response);
 		}
-		
+		dispatch.forward(request, response);
 	}
-
 }
