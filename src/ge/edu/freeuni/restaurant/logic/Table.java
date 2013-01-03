@@ -8,11 +8,15 @@ public class Table {
 	private int id;
 	private int size;
 	private String description;
+	private boolean busy;
+	private int occupantName;
 	
-	public Table(int id, int size, String description){
+	public Table(int id, int size, String description, boolean busy, int occupantName){
 		this.id = id;
 		this.size = size;
 		this.description = description;
+		this.busy = busy;
+		this.occupantName = occupantName;
 	}
 	
 	public int getId(){
@@ -26,6 +30,14 @@ public class Table {
 	
 	public String getDescription(){
 		return description;
+	}
+	
+	public boolean isBusy(){
+		return busy;
+	}
+	
+	public int getOccupantName(){
+		return occupantName;
 	}
 	
 	/**

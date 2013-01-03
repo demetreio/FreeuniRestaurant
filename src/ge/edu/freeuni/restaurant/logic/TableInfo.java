@@ -19,7 +19,14 @@ public class TableInfo {
 		ArrayList<Table> list = new ArrayList<Table>();
 		try {
 			while(rs.next()){
-				Table t = new Table(rs.getInt(1), rs.getInt(2), rs.getString(3));
+				int k = rs.getInt(4);
+				boolean b;
+				if(k==0){
+					b = false;
+				} else {
+					b = true;
+				}
+				Table t = new Table(rs.getInt(1), rs.getInt(2), rs.getString(3), b, rs.getInt(5));
 				list.add(t);
 			}
 		} catch (SQLException e) {
