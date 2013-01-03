@@ -77,8 +77,4 @@ public class User {
 	public boolean isAdmin(){
 		return admin;
 	}
-	
-	public void makeAdmin(){
-		admin = true;
-	}
 }
