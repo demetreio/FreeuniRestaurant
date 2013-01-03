@@ -19,25 +19,25 @@ public class ReservedTablesInfo implements ReservedTables {
 	@Override
 	public boolean[] getReservation(Table table) throws SQLException {
 		int id = table.getId();
-//		return getReservationInfo(id);
+		return getReservationInfo(id);
 		
 		//Testing
-		boolean [] arr = new boolean[30];
-		for (int i = 0; i < arr.length; i++) {
-			arr[i] = (Math.random()>0.5)?true:false;
-		}
-		return arr;
+//		boolean [] arr = new boolean[30];
+//		for (int i = 0; i < arr.length; i++) {
+//			arr[i] = (Math.random()>0.5)?true:false;
+//		}
+//		return arr;
 	}
 	
 	public boolean[] getReservation(int id) throws SQLException {
-//		return getReservationInfo(id);
+		return getReservationInfo(id);
 		
 		//Testing
-		boolean [] arr = new boolean[30];
-		for (int i = 0; i < arr.length; i++) {
-			arr[i] = (Math.random()>0.5)?true:false;
-		}
-		return arr;
+//		boolean [] arr = new boolean[30];
+//		for (int i = 0; i < arr.length; i++) {
+//			arr[i] = (Math.random()>0.5)?true:false;
+//		}
+//		return arr;
 	}
 
 	/**
