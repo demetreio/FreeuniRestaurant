@@ -40,6 +40,16 @@ public class Table {
 		return occupantName;
 	}
 	
+	public void changeBusy(boolean b){
+		//bazashic unda gaketdes ganaxleba, tu false gadmoeca occupantic unda ganaaxlos bazashi
+		//TODO 
+	}
+	
+	public void setOccupantName(int id){
+		//bazashic unda gaaketos ganaxleba
+		//TODO
+	}
+	
 	/**
 	 * reserves this table for the user. method is sincronised
 	 * so it's impossible for two users to reserve
