@@ -5,6 +5,7 @@ package ge.edu.freeuni.restaurant.logic;
  */
 
 import java.sql.*;
+import java.util.Arrays;
 
 public class DBConnector{
 	private static Object lock  = new Object();
@@ -51,7 +52,6 @@ public class DBConnector{
 	 */
 	public ResultSet getTables() throws SQLException{
 		ResultSet rset;
-		stmt.executeQuery("use 	" + database);
 		rset = stmt.executeQuery("select * from tables");
 		return rset;
 
@@ -62,33 +62,62 @@ public class DBConnector{
 	 * @return the information about the reservation times of the table.
 	 */
 	public ResultSet getReservedInfo(int table_id) throws SQLException{
-		ResultSet rset;
-		rset = stmt.executeQuery("select * from ReservedTables where id = "+table_id);
-		return rset;
-		
+		ResultSet rs;
+		rs = stmt.executeQuery("select * from ReservedTables where id = "+table_id);
+		if(rs.next()){
+			return rs;
+		}
+		return null;
 	}
 	
 	/**
 	 * @param table_id the id of a table we are interested in.
 	 * @param timeIndex index of the time, it's bit string with length = 30; first 0-14 bits are for the first day reservation
 	 * and 15 - 29 are for second day. the restaurant works from 9:00 t 0 24:00 so 9:00 is index 0, 10:00 is 1 and so on.
-	 * @return true if the table reserved succesfully and false if it is allready reserved.
+	 * @return true if the table reserved successfully and false if it is allready reserved.
 	 */
 	
 	public boolean reserveTable(int table_id, int timeIndex) throws SQLException{
 		ResultSet rset;
 		rset = stmt.executeQuery("select * from ReservedTables where id = "+table_id);
 
-		String str =  rset.getString("reserveInfo");
-		if(str.charAt(timeIndex) == '1') return false;
-		char[] arr = str.toCharArray();
-		arr[timeIndex] = 1;
-		String newOne = new String(arr);
-		stmt.executeUpdate("update ReservedTables set reserveInfo = '" + newOne + "' where id =" +table_id);
-		
+		if(rset.next()){
+			String str =  rset.getString("reserveInfo");
+			if(str.charAt(timeIndex) == '1') return false;
+			char[] arr = str.toCharArray();
+			arr[timeIndex] = '1';
+			String newOne = new String(arr);
+			stmt.executeUpdate("update ReservedTables set reserveInfo = '" + newOne + "' where id =" +table_id);
+		}
 		return true;
 	}
 	
+	public boolean reserveTable(int table_id, String timeIndex) throws SQLException{
+			char[] arr = timeIndex.toCharArray();
+			for (int i = 0; i < timeIndex.length(); i++) {
+				if(timeIndex.charAt(i)=='2')arr[i]='1';
+			}
+			String newOne = new String(arr);
+			stmt.executeUpdate("update ReservedTables set reserveInfo = '" + newOne + "' where id =" +table_id);
+		return true;
+	}
+	
+	public void reserveForUser(String userId, int table_id, String timeIndex) throws SQLException{
+		char[] arr = timeIndex.toCharArray();
+		for (int i = 0; i < timeIndex.length(); i++) {
+			if(timeIndex.charAt(i)=='2')arr[i]='2';
+			else arr[i] = '1';
+		}
+		String newOne = new String(arr);
+		ResultSet rset;
+		rset = stmt.executeQuery("select * from user_table where username = '"+userId+"' and id="+table_id);
+
+		if(rset.next()){
+			stmt.executeUpdate("update user_table set reserveInfo = '" + newOne + "' where username='"+userId+"' and id =" +table_id);
+		}else{
+			stmt.executeUpdate("insert into user_table values('"+userId+"',"+table_id+","+newOne+")");
+		}
+	}
 	
 	public boolean isCorrectUsernameAndPassword(String username, String password){
 		try {
@@ -152,5 +181,24 @@ public class DBConnector{
 			e.printStackTrace();
 		}
 		return res;
+	}
+	
+	public User getUser(String username){
+		ResultSet rs;
+		User user = null;
+		try {
+			rs = stmt.executeQuery("select * from User where username = \""+username+"\"");
+			if(rs.next()){
+				String pass = rs.getString(2);
+				String name = rs.getString(3);
+				String surname = rs.getString(4);
+				String info = rs.getString(5);
+				boolean admin = rs.getBoolean(6);
+				user = new User(username, pass, name, surname, info, admin);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return user;
 	}
 }
