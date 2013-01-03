@@ -24,4 +24,8 @@ public class UserManager {
 		return dbc.isAdmin(username);
 		
 	}
+	
+	public User getUser(String username){
+		return dbc.getUser(username);
+	}
 }
