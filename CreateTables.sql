@@ -3,6 +3,6 @@
 
 use mysql;
 
-CREATE TABLE Tables ( id INT NOT NULL AUTO_INCREMENT, size int NOT NULL, description(varchar(100)), PRIMARY KEY (id));
+CREATE TABLE Tables ( id INT NOT NULL AUTO_INCREMENT, size int NOT NULL, description varchar(100), PRIMARY KEY (id));
 -- id aris magidis identifikatori, size არის მაგიდის სიდიდე  
 
