@@ -40,14 +40,23 @@ public class Table {
 		return occupantName;
 	}
 	
-	public void changeBusy(boolean b){
-		//bazashic unda gaketdes ganaxleba, tu false gadmoeca occupantic unda ganaaxlos bazashi
-		//TODO 
+	/**
+	 * magidas monishnavs, rom araa dakavebuli, aseve okupantis saxels washlis.
+	 */
+	public void setTableFree(){
+		this.busy = false;
+		this.occupantName = -2;
+		//TODO occupation cxrilidan unda waishalos am magidis id.
 	}
-	
-	public void setOccupantName(int id){
-		//bazashic unda gaaketos ganaxleba
-		//TODO
+	/**
+	 * gadmoecema okupantis id.
+	 * magidas monishnavs dakavebulad da chawers okupants
+	 * @param id: okupantis id
+	 */
+	public void setTableBusy(int id){
+		this.occupantName = id;
+		this.busy = true;
+		//TODO occupation cxrilshi unda chaematos magidis id, okupantis id.
 	}
 	
 	/**
