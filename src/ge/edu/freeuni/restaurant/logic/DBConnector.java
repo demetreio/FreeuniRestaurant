@@ -201,4 +201,9 @@ public class DBConnector{
 		}
 		return user;
 	}
+	
+	public ResultSet getOccupiedBy(int id){
+		//gadmoecema magidis id da unda daaselectos occupation cxrilidan am id-ze mjdomi
+		return null;
+	}
 }
