@@ -217,4 +217,13 @@ public class DBConnector{
 		}
 		return rs;
 	}
+	
+	//unda chaamatos occupation cxrilshi...
+	public void addIntoOccupation(int id, String name){
+		
+	}
+	//unda washalos occupation cxrilidan mocemuli id
+	public void removeFromOccupation(int id){
+		
+	}
 }
