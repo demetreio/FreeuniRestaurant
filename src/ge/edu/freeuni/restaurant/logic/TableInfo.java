@@ -27,7 +27,7 @@ public class TableInfo {
 					e.printStackTrace();
 				}
 				boolean b;
-				String occupant = "guest";
+				String occupant = "";
 				if(rs2.next()){
 					b = true;
 					occupant = rs.getString(2);
