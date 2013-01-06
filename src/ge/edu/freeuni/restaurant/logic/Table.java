@@ -9,9 +9,9 @@ public class Table {
 	private int size;
 	private String description;
 	private boolean busy;
-	private int occupantName;
+	private String occupantName;
 	
-	public Table(int id, int size, String description, boolean busy, int occupantName){
+	public Table(int id, int size, String description, boolean busy, String occupantName){
 		this.id = id;
 		this.size = size;
 		this.description = description;
@@ -36,7 +36,7 @@ public class Table {
 		return busy;
 	}
 	
-	public int getOccupantName(){
+	public String getOccupantName(){
 		return occupantName;
 	}
 	
@@ -45,7 +45,7 @@ public class Table {
 	 */
 	public void setTableFree(){
 		this.busy = false;
-		this.occupantName = -2;
+		this.occupantName = "";
 		//TODO occupation cxrilidan unda waishalos am magidis id.
 	}
 	/**
@@ -53,8 +53,8 @@ public class Table {
 	 * magidas monishnavs dakavebulad da chawers okupants
 	 * @param id: okupantis id
 	 */
-	public void setTableBusy(int id){
-		this.occupantName = id;
+	public void setTableBusy(String name){
+		this.occupantName = name;
 		this.busy = true;
 		//TODO occupation cxrilshi unda chaematos magidis id, okupantis id.
 	}

@@ -27,10 +27,10 @@ public class TableInfo {
 					e.printStackTrace();
 				}
 				boolean b;
-				int occupant = -2;
+				String occupant = "guest";
 				if(rs2.next()){
 					b = true;
-					occupant = rs.getInt(2);
+					occupant = rs.getString(2);
 				} else {
 					b = false;
 				}
