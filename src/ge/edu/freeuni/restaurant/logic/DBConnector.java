@@ -202,8 +202,19 @@ public class DBConnector{
 		return user;
 	}
 	
+	
+	// es ubralod ragaca ro gadmoecemodes mainc, dasatestad . . .
+	// roca daceren cxrils mere unda shecvalon . ..s
 	public ResultSet getOccupiedBy(int id){
 		//gadmoecema magidis id da unda daaselectos occupation cxrilidan am id-ze mjdomi
-		return null;
+		ResultSet rs = null;
+		
+		try {
+			rs = stmt.executeQuery("select * from testtableuser where tableid = \""+id+"\"");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return rs;
 	}
 }
