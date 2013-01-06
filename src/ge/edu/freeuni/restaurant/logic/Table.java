@@ -46,7 +46,8 @@ public class Table {
 	public void setTableFree(){
 		this.busy = false;
 		this.occupantName = "";
-		//TODO occupation cxrilidan unda waishalos am magidis id.
+		DBConnector db=DBConnector.getInstance();
+		db.removeFromOccupation(id);
 	}
 	/**
 	 * gadmoecema okupantis id.
@@ -56,7 +57,8 @@ public class Table {
 	public void setTableBusy(String name){
 		this.occupantName = name;
 		this.busy = true;
-		//TODO occupation cxrilshi unda chaematos magidis id, okupantis id.
+		DBConnector db=DBConnector.getInstance();
+		db.addIntoOccupation(id, occupantName);
 	}
 	
 	/**
