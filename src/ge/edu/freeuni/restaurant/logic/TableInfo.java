@@ -30,7 +30,7 @@ public class TableInfo {
 				String occupant = "";
 				if(rs2.next()){
 					b = true;
-					occupant = rs.getString(2);
+					occupant = rs2.getString(2);
 				} else {
 					b = false;
 				}
