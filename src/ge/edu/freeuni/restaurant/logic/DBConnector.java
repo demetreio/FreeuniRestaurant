@@ -226,4 +226,15 @@ public class DBConnector{
 	public void removeFromOccupation(int id){
 		
 	}
+	
+	public ResultSet TableJoinOccupation(){
+		ResultSet rs = null;
+		try {
+			rs = stmt.executeQuery("select * from tables inner join occupation");
+			if(rs.next()){}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return rs;
+	}
 }
