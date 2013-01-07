@@ -224,7 +224,6 @@ public class DBConnector{
 			String str = "'";
 			stmt.executeUpdate("insert into occupation values("+id+"," + str + name + str+")");
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -235,7 +234,6 @@ public class DBConnector{
 			String str = "'";
 			stmt.executeUpdate("delete from occupation where table_id="+id);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
