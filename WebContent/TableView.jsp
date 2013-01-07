@@ -13,7 +13,7 @@
 	<%if(session.getAttribute("user") != null){ 
 	usr = (User)session.getAttribute("user");
 	admin = usr.isAdmin();%>
-	<h3>Welcome <%=usr.getName() %></h3>
+	<h3>Welcome <%=usr.getName() %><%if(admin)out.print("(admin)"); %></h3>
 	<%} %>
 	<center>
 		<table border="1">
