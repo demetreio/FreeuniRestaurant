@@ -210,7 +210,7 @@ public class DBConnector{
 		ResultSet rs = null;
 		
 		try {
-			rs = stmt.executeQuery("select * from testtableuser where tableid = \""+id+"\"");
+			rs = stmt.executeQuery("select * from Occupation where table_id = \""+id+"\"");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
