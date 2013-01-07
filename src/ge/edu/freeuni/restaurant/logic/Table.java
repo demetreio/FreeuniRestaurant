@@ -8,11 +8,15 @@ public class Table {
 	private int id;
 	private int size;
 	private String description;
+	private boolean busy;
+	private String occupantName;
 	
-	public Table(int id, int size, String description){
+	public Table(int id, int size, String description, boolean busy, String occupantName){
 		this.id = id;
 		this.size = size;
 		this.description = description;
+		this.busy = busy;
+		this.occupantName = occupantName;
 	}
 	
 	public int getId(){
@@ -26,6 +30,35 @@ public class Table {
 	
 	public String getDescription(){
 		return description;
+	}
+	
+	public boolean isBusy(){
+		return busy;
+	}
+	
+	public String getOccupantName(){
+		return occupantName;
+	}
+	
+	/**
+	 * magidas monishnavs, rom araa dakavebuli, aseve okupantis saxels washlis.
+	 */
+	public void setTableFree(){
+		this.busy = false;
+		this.occupantName = "";
+		DBConnector db=DBConnector.getInstance();
+		db.removeFromOccupation(id);
+	}
+	/**
+	 * gadmoecema okupantis id.
+	 * magidas monishnavs dakavebulad da chawers okupants
+	 * @param id: okupantis id
+	 */
+	public void setTableBusy(String name){
+		this.occupantName = name;
+		this.busy = true;
+		DBConnector db=DBConnector.getInstance();
+		db.addIntoOccupation(id, occupantName);
 	}
 	
 	/**

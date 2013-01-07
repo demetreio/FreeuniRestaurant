@@ -19,7 +19,22 @@ public class TableInfo {
 		ArrayList<Table> list = new ArrayList<Table>();
 		try {
 			while(rs.next()){
-				Table t = new Table(rs.getInt(1), rs.getInt(2), rs.getString(3));
+				ResultSet rs2 = null;
+				try {
+					rs2 = dbc.getOccupiedBy(rs.getInt(1));
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				boolean b;
+				String occupant = "";
+				if(rs2.next()){
+					b = true;
+					occupant = rs2.getString(2);
+				} else {
+					b = false;
+				}
+				Table t = new Table(rs.getInt(1), rs.getInt(2), rs.getString(3), b, occupant);
 				list.add(t);
 			}
 		} catch (SQLException e) {

@@ -12,7 +12,7 @@ public class DBConnector{
 	static String server = "localhost";
 	static String password = ""; //<---------
 	static String account = "root";
-	static String database = "test"; //<---------
+	static String database = "test"; //<--------- 
 	private static  Connection con;
 	private static DBConnector db;
 	static Statement stmt;
@@ -200,5 +200,30 @@ public class DBConnector{
 			e.printStackTrace();
 		}
 		return user;
+	}
+	
+	
+	// es ubralod ragaca ro gadmoecemodes mainc, dasatestad . . .
+	// roca daceren cxrils mere unda shecvalon . ..s
+	public ResultSet getOccupiedBy(int id){
+		//gadmoecema magidis id da unda daaselectos occupation cxrilidan am id-ze mjdomi
+		ResultSet rs = null;
+		
+		try {
+			rs = stmt.executeQuery("select * from Occupation where table_id = \""+id+"\"");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return rs;
+	}
+	
+	//unda chaamatos occupation cxrilshi...
+	public void addIntoOccupation(int id, String name){
+		
+	}
+	//unda washalos occupation cxrilidan mocemuli id
+	public void removeFromOccupation(int id){
+		
 	}
 }
