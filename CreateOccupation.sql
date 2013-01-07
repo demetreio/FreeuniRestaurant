@@ -1,1 +1,1 @@
-CREATE TABLE Occupation ( table_id INT, user_id INT );
+CREATE TABLE Occupation ( table_id INT, username varchar(50) );
