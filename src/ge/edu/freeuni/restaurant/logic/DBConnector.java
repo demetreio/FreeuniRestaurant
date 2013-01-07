@@ -220,11 +220,25 @@ public class DBConnector{
 	
 	//unda chaamatos occupation cxrilshi...
 	public void addIntoOccupation(int id, String name){
-		
+		try {
+			String str = "'";
+			stmt.executeUpdate("insert into occupation values("+id+"," + str + name + str+")");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 	//unda washalos occupation cxrilidan mocemuli id
 	public void removeFromOccupation(int id){
-		
+		try {
+			String str = "'";
+			stmt.executeUpdate("delete from occupation where table_id="+id);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 	
 	public ResultSet TableJoinOccupation(){
