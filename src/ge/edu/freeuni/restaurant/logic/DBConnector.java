@@ -248,4 +248,8 @@ public class DBConnector{
 		}
 		return rs;
 	}
+	public void test(){
+		
+	}
+	
 }
