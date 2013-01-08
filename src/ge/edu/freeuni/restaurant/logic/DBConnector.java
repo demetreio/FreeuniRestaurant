@@ -243,7 +243,6 @@ public class DBConnector{
 		ResultSet rs = null;
 		try {
 			rs = stmt.executeQuery("select * from tables inner join occupation");
-			if(rs.next()){}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
