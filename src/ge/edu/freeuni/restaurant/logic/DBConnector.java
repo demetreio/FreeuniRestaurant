@@ -249,4 +249,8 @@ public class DBConnector{
 		System.out.println();
 		return rs;
 	}
+	public void test(){
+		
+	}
+	
 }
