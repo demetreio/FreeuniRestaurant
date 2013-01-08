@@ -25,35 +25,6 @@ public class TableInfo {
 			Table t = new Table(tableId, tableSize, description, b, occupantId);
 			list.add(t);
 		}
-//		try {
-//			while (rs.next()) {
-//				ResultSet rs2 = null;
-//				try {
-//					rs2 = dbc.getOccupiedBy(rs.getInt(1));
-//				} catch (SQLException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
-//				boolean b = false;
-//				String occupant = "";
-//				try {
-//					if (rs2.next()) {
-//						b = true;
-//						occupant = rs2.getString(2);
-//					}
-//				} catch (SQLException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
-//				Table t = new Table(rs.getInt(1), rs.getInt(2),
-//						rs.getString(3), b, occupant);
-//				list.add(t);
-//			}
-//		} catch (SQLException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-		System.out.println(list.size());
 		return list;
 	}
 }
