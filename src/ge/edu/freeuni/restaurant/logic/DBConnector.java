@@ -246,6 +246,7 @@ public class DBConnector{
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		System.out.println();
 		return rs;
 	}
 }
