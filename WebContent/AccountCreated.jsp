@@ -12,6 +12,6 @@
 	
 	out.println("<h1>" + user + " account has been created ! </h1>");
 %>
-
+<meta http-equiv="Refresh" content="2;url=Login.html">
 </body>
 </html>
