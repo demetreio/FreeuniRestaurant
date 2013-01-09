@@ -14,7 +14,9 @@
 	usr = (User)session.getAttribute("user");
 	admin = usr.isAdmin();%>
 	<h3>Welcome <%=usr.getName() %><%if(admin)out.print("(admin)"); %></h3>
-	<%} %>
+	<%if(admin){ %>
+		<a href="UserManagement.jsp">user management</a>
+	<%} }%>
 	<center>
 		<table border="1">
 			<tr>
@@ -84,7 +86,7 @@
 				var tr = document.getElementsByClassName("tr");
 				var person_name = "<%=usr.getName() %>";
 				<%if(admin){ %>
-					person_name = val;
+				person_name = val;
 				<%} %>
 				var pass_param = ""+person_name;
 				for(var i = 0; i < tr.length; i++){
@@ -95,7 +97,7 @@
 						var col = td[j].style.backgroundColor;
 						pass_param += (col=="red"?"1":col=="green"?0:2);
 					}
-				}	
+				}
 				submitForm(pass_param);
 			}
 		}
