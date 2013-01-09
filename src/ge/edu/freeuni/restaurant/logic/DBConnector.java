@@ -5,6 +5,7 @@ package ge.edu.freeuni.restaurant.logic;
  */
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class DBConnector{
@@ -247,5 +248,39 @@ public class DBConnector{
 			e.printStackTrace();
 		}
 		return rs;
+	}
+	
+	/**
+	 * gadaecema useris saxeli an gvari da abrunebs
+	 * msgavsi saxeli/gvaris userebsis lists
+	 * @param name momxmareblis saxeli/gvari
+	 * @return bazidan amogebul shesabamisi usereebis listi
+	 */
+	public ArrayList<User> filterUsers(String name){
+		ArrayList<User> list = new ArrayList<User>();
+		ResultSet rs = null;
+		String filterBy = name;
+		
+		try {
+			Statement st = con.createStatement();
+			rs = st.executeQuery("select username from user where name like \"%" + filterBy + "%\"" +
+					" or surname like \"%" + filterBy + "%\"");
+			while(rs.next()){
+				String username = rs.getString(1);
+				list.add(getUser(username));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+	
+	public void deleteUser(String username){
+		try {
+			stmt.executeUpdate("delete from user where username = \""+username+"\"");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 }
