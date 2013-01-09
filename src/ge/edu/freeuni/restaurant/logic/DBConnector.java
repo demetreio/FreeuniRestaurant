@@ -6,7 +6,6 @@ package ge.edu.freeuni.restaurant.logic;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class DBConnector{
 	private static Object lock  = new Object();
