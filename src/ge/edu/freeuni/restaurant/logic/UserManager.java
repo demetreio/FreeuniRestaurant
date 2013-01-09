@@ -28,4 +28,8 @@ public class UserManager {
 	public User getUser(String username){
 		return dbc.getUser(username);
 	}
+	
+	public void deleteUser(String username){
+		dbc.deleteUser(username);
+	}
 }
