@@ -11,7 +11,7 @@ public class Menu {
 		ResultSet rs = db.selectFromMenu();
 		ArrayList<Kerdzi> list = new ArrayList<Kerdzi>();
 		while(rs.next()){
-			Kerdzi k = new Kerdzi(rs.getString(1), rs.getDouble(2), rs.getString(3));
+			Kerdzi k = new Kerdzi(rs.getInt(1), rs.getString(2), rs.getDouble(3), rs.getString(4));
 			list.add(k);
 		}
 		return list;
