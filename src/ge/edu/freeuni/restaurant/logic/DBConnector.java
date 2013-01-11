@@ -282,4 +282,9 @@ public class DBConnector{
 			e.printStackTrace();
 		}
 	}
+	
+	//unda daabrunos mteli menu cxrili
+	public ResultSet selectFromMenu(){
+		return null;
+	}
 }
