@@ -9,6 +9,18 @@
 <title>User Management</title>
 </head>
 <body>
+	<script type='text/javascript'>
+	    <%
+	    boolean redirect = true;
+	    if(session.getAttribute("user") != null){ 
+			User usr = (User)session.getAttribute("user");
+			redirect = !usr.isAdmin();
+	    }
+	    if(redirect){
+		%>
+		window.location.replace("TableView.jsp");
+		<%} %>
+	</script>
 	<form action="FilterUsers" method="post">
 		<input type="text" name="fieldi" placeholder="name/surname">
 		<input type="submit" value="search">
