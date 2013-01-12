@@ -84,7 +84,7 @@
 			var val = document.getElementsByTagName("input")[1].value;
 			if(val!=""){
 				var tr = document.getElementsByClassName("tr");
-				var person_name = "<%=usr.getName() %>";
+				var person_name = "<%=usr.getUsername() %>";
 				<%if(admin){ %>
 				person_name = val;
 				<%} %>
@@ -102,7 +102,7 @@
 			}
 		}
 		
-		function submitForm (a) {  
+		function submitForm (a) { 
 			var myForm = document.getElementById("theForm");  
 			  
 			myForm.fieldi.value = a;  
