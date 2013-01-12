@@ -38,7 +38,7 @@ public class Kerdzi {
 
 
 	
-	public void setPrice(double price){
+	public void changePrice(double price){
 		
 		this.price = price;
 	}
