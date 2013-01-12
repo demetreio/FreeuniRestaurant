@@ -287,4 +287,11 @@ public class DBConnector{
 	public ResultSet selectFromMenu(){
 		return null;
 	}
+	
+	public void updatePrice(int id, double price){
+		
+		
+		
+	}
+	
 }
