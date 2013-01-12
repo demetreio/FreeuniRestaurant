@@ -69,6 +69,21 @@ public class DBConnector{
 		}
 		return null;
 	}
+
+	/**
+	 * 
+	 * @param username the name of the user who is logged in
+	 * @return information about the the reserved table by user and reservation time
+	 * @throws SQLException
+	 */
+	public ResultSet getUsersReservedInfo(String username, int table_id) throws SQLException {
+		ResultSet rs;
+		rs = stmt.executeQuery("select * from user_table where username = '"+username+"' and id = '"+table_id+"'");
+		if(rs.next()){
+			return rs;
+		}
+		return null;
+	}
 	
 	/**
 	 * @param table_id the id of a table we are interested in.
