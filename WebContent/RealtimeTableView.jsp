@@ -3,12 +3,11 @@
 <table border="1">
 			<tr>
 				<td align="center" rowspan="2">Table ID</td>
-				<td align="center" rowspan="10">Status</td>
-				<td align="center" rowspan="10">Occupant</td>
+				<td align="center" rowspan="2">Status</td>
+				<td align="center" rowspan="2">Occupant</td>
 			</tr>
 <%
-	//<%if(admin){<jsp:include page="RealtimeTableView.jsp" ></jsp:include><%} 
-	System.out.println("asdddddddddddddddddddddddddddddddddddddddd");
+	out.print("<tr></tr>");
 	TableInfo ti = new TableInfo();
 	ArrayList<Table> tables = ti.getAllTables();
 	Table curTable;
@@ -20,10 +19,10 @@
 		out.print(curTable.getId());
 		out.print("</td>");
 		out.print("<td>");
-		out.print(curTable.isBusy());
+		if(curTable.isBusy())out.print("Busy");
 		out.print("</td>");
 		out.print("<td>");
-		out.print(curTable.getOccupantName());
+		if(curTable.isBusy())out.print(curTable.getOccupantName());
 		out.print("</td>");
 		out.print("</tr>");
 	}

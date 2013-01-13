@@ -18,6 +18,7 @@
 		<a href="UserManagement.jsp">user management</a>
 	<%} }%>
 	<center>
+
 		<table border="1">
 			<tr>
 				<td align="center" rowspan="2">Table ID</td>
@@ -67,6 +68,9 @@
 	<%} %>
 			<input type="submit" value="save">
 		</form>
+	<center>
+		<%if(admin){%><jsp:include page="RealtimeTableView.jsp" ></jsp:include><%}%>
+	</center>
 	<script>
 		function getColor(elem){
 		    var col = elem.style.backgroundColor;
