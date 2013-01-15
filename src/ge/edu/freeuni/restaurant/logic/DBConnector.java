@@ -300,7 +300,14 @@ public class DBConnector{
 	
 	//unda daabrunos mteli menu cxrili
 	public ResultSet selectFromMenu(){
-		return null;
+		ResultSet rset = null;
+		try {
+			rset = stmt.executeQuery("select * from menu");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return rset;
 	}
 	
 	public void updatePrice(int id, double price){
