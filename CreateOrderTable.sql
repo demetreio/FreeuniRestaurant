@@ -1,0 +1,1 @@
+CREATE TABLE shekveta (username varchar(50) NOT NULL,  kerdzi_id INT NOT NULL, quantity INT NOT NULL);
