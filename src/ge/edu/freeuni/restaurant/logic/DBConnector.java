@@ -323,12 +323,16 @@ public class DBConnector{
 	
 	//unda chaamatos menu-shi axali kerdzi. id tavisic unda izrdebodes chamatebisas menu cxrilshi
 	public void insertIntoMenu(String name, double price, String category){
-		
+		 
 	}
 	
 	//menu xrilidan unda washalos mocemuli saxelis kerdzi
 	public void removeFromMenuByName(String name){
-		
+		try {
+			stmt.executeUpdate("delete from menu where name = \""+name+"\"");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
 }
