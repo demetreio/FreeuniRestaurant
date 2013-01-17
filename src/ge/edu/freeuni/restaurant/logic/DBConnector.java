@@ -316,4 +316,19 @@ public class DBConnector{
 		
 	}
 	
+	//unda daaselectos where name=name;
+	public ResultSet selectFromMenuByName(String name){
+		return null;
+	}
+	
+	//unda chaamatos menu-shi axali kerdzi. id tavisic unda izrdebodes chamatebisas menu cxrilshi
+	public void insertIntoMenu(String name, double price, String category){
+		
+	}
+	
+	//menu xrilidan unda washalos mocemuli saxelis kerdzi
+	public void removeFromMenuByName(String name){
+		
+	}
+	
 }
