@@ -10,9 +10,9 @@ import java.util.ArrayList;
 public class DBConnector{
 	private static Object lock  = new Object();
 	static String server = "localhost";
-	static String password = ""; //<---------
+	static String password = "3200909"; //<---------
 	static String account = "root";
-	static String database = "test"; //<--------- 
+	static String database = "test1"; //<--------- 
 	private static  Connection con;
 	private static DBConnector db;
 	static Statement stmt;
@@ -157,7 +157,7 @@ public class DBConnector{
 		}
 		try {
 			stmt.executeUpdate("insert into User values('"+user.getUsername()+"', '" +
-							user.getPassword() + "', '" + user.getName() +"', '" +user.getSurname()+"', '"+
+							user.getPassword() + "', '" + user.getMail() +"', '" + user.getName() +"', '" +user.getSurname()+"', '"+
 							user.getInfo() + "'," + false + ")");	
 			return true;
 		} catch (SQLException e) {
@@ -205,11 +205,12 @@ public class DBConnector{
 			rs = stmt.executeQuery("select * from User where username = \""+username+"\"");
 			if(rs.next()){
 				String pass = rs.getString(2);
-				String name = rs.getString(3);
-				String surname = rs.getString(4);
-				String info = rs.getString(5);
-				boolean admin = rs.getBoolean(6);
-				user = new User(username, pass, name, surname, info, admin);
+				String mail = rs.getString(3);
+				String name = rs.getString(4);
+				String surname = rs.getString(5);
+				String info = rs.getString(6);
+				boolean admin = rs.getBoolean(7);
+				user = new User(username, pass, mail, name, surname, info, admin);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -368,6 +369,16 @@ public class DBConnector{
 		return rs;
 		
 	}
+	
+	/**
+	 * shlis users shekveta cxrilidan useris mixedvit
+	 * @param username
+	 * @throws SQLException
+	 */
+	public void removeFromShekvetaByName(String username) throws SQLException{
+		stmt.executeUpdate("delete  from shekveta where username='"+username+"'");
+	}
+	
 	
 	/**
 	 * es metodi washlis yvela tables tu arsebobs da axlidan sheqmnis, mattvis vinc bazas testavs

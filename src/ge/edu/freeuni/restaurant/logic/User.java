@@ -6,6 +6,8 @@ public class User {
 	
 	private String password;
 	
+	private String mail;
+	
 	private String name;
 	
 	private String surname;
@@ -15,9 +17,10 @@ public class User {
 	private boolean admin;
 	
 	
-	public User(String username, String password, String name, String surname, String info, boolean admin) {
+	public User(String username, String password, String mail, String name, String surname, String info, boolean admin) {
 		this.username = username;
 		this.password = password;
+		this.mail = mail;
 		this.name = name;
 		this.surname = surname;
 		this.info = info;
@@ -70,6 +73,14 @@ public class User {
 	}
 
 
+	public String getMail() {
+		return mail;
+	}
+	
+	public void setMail(String newMail){
+		this.mail = newMail;
+	}
+
 	public void setInfo(String info) {
 		this.info = info;
 	}
@@ -77,4 +88,6 @@ public class User {
 	public boolean isAdmin(){
 		return admin;
 	}
+
+
 }

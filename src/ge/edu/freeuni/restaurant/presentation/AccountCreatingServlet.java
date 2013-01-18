@@ -42,6 +42,7 @@ public class AccountCreatingServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String	username = request.getParameter("username");
 		String	pass = request.getParameter("myPass");
+		String mail = request.getParameter("mail");
 		String	info = request.getParameter("info");
 		String 	name = request.getParameter("name");
 		String	surname =request.getParameter("surname");
@@ -51,7 +52,7 @@ public class AccountCreatingServlet extends HttpServlet {
 			RequestDispatcher dispatch = request.getRequestDispatcher("FillFields.html");
 			dispatch.forward(request, response);
 		} else {
-			User user = new User(username, pass, name, surname, info, false);
+			User user = new User(username, pass, mail, name, surname, info, false);
 			UserManager um = new UserManager();
 			boolean reg = um.registerNewUser(user);
 			if(reg){
