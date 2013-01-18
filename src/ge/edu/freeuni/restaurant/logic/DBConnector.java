@@ -310,7 +310,7 @@ public class DBConnector{
 		return rset;
 	}
 	
-	public void updatePrice(int id, double price){
+	public void updatePrice(String name, double price){
 		
 		
 		
