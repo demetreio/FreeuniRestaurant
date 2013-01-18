@@ -347,4 +347,26 @@ public class DBConnector{
 		}
 	}
 	
+	//shekveta cxrilshi amatebs username_s kerdzis_ids da quantitys
+	public void insertIntoShekveta(String userName, int kerdzi_id, int quantity){
+		try {
+			//System.out.println("insert into shekveta (username, kerdzi_id, quantity) values('"+userName+"',"+kerdzi_id+"," + quantity +")");
+			stmt.executeUpdate("insert into shekveta (username, kerdzi_id, quantity) values('"+userName+"',"+kerdzi_id+"," + quantity +")" );
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	//aketebs selects shekveta cxrilidan username_is mixedvit
+	public ResultSet selectFromShekvetaByUserName(String userName){
+		ResultSet rs = null;
+		try {
+			rs = stmt.executeQuery("select * from shekveta where username ='" +userName+"'");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return rs;
+		
+	}
+	
 }
