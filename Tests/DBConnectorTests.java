@@ -49,7 +49,14 @@ public class DBConnectorTests {
 		
 		}
 
-		
+		 rs = db.selectFromShekvetaByUserName("shaliko");
+		 Assert.assertFalse(rs.next());
+		 
+		 db.insertIntoShekveta("shaliko", 11, 9);
+		 
+		 rs = db.selectFromShekvetaByUserName("shaliko");
+		 Assert.assertTrue(rs.next());
+		 
 	}
 	
 }
