@@ -3,7 +3,7 @@ import java.util.*;
 public class shekveta {
 
 	
-	ArrayList<sameuli> arr;
+	private ArrayList<sameuli> arr;
 	public shekveta(String name, int kerdzi_id, int quantity){
 		arr = new ArrayList<shekveta.sameuli>();
 		sameuli sam = new sameuli(name, kerdzi_id, quantity);
@@ -16,9 +16,14 @@ public class shekveta {
 		arr.add(sam);
 	}
 	
-	public ArrayList<sameuli> getShekveta(){
-		
-		return this.arr;
+
+	
+	private void saveIntoDB(){
+		DBConnector db =  DBConnector.getInstance();
+		for (int i = 0; i < arr.size(); i++) {
+			db.insertIntoShekveta(arr.get(i).getName(),arr.get(i).getId(), arr.get(i).getQuantity());
+			
+		}
 	}
 	
 	private class sameuli{
