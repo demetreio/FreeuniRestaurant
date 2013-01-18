@@ -369,4 +369,30 @@ public class DBConnector{
 		
 	}
 	
+	/**
+	 * es metodi washlis yvela tables tu arsebobs da axlidan sheqmnis, mattvis vinc bazas testavs
+	 * @throws SQLException
+	 */
+	
+	public void setUpTables() throws SQLException{
+		
+		
+		stmt.execute("Drop Table IF EXISTS menu");
+		stmt.execute("Drop Table IF EXISTS occupation");
+		stmt.execute("Drop Table IF EXISTS shekveta");
+		stmt.execute("Drop Table IF EXISTS ReservedTables");
+		stmt.execute("Drop Table IF EXISTS Tables");
+		stmt.execute("Drop Table IF EXISTS USER_TABLE");
+		stmt.execute("Drop Table IF EXISTS USER");
+		
+		stmt.execute("CREATE TABLE MENU (id INT NOT NULL AUTO_INCREMENT, name VARCHAR(100) NOT NULL, price DOUBLE NOT NULL, foodtype VARCHAR(50) NOT NULL, PRIMARY KEY (id))");
+		stmt.execute("CREATE TABLE Occupation ( table_id INT NOT NULL, username varchar(50) NOT NULL)");
+		stmt.execute("CREATE TABLE shekveta (username varchar(50) NOT NULL,  kerdzi_id INT NOT NULL, quantity INT NOT NULL)");
+		stmt.execute("CREATE TABLE ReservedTables ( id INT, reserveInfo VARCHAR(100), PRIMARY KEY (id))");
+		stmt.execute("CREATE TABLE Tables ( id INT NOT NULL AUTO_INCREMENT, size int NOT NULL, description varchar(100), PRIMARY KEY (id))");
+		stmt.execute("CREATE TABLE USER_TABLE ( username varchar(50) NOT NULL, id INT NOT NULL, reserveInfo VARCHAR(100), PRIMARY KEY (username,id))");
+		stmt.execute("CREATE TABLE User (username varchar(50) NOT NULL, password varchar(50) NOT NULL, name varchar(50) NOT NULL,surname varchar(50) NOT NULL, info varchar(50) NOT NULL, admin boolean not null default 0, PRIMARY KEY (username))");
+		
+	}
+	
 }
