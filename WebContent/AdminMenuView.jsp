@@ -2,6 +2,7 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ page import="java.util.*"%>
 <%@ page import="ge.edu.freeuni.restaurant.logic.*"%>
+<%@ page import="ge.edu.freeuni.restaurant.presentation.*"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -54,7 +55,13 @@
 				}
 			%>
 </table>
-
+<form action="EditMenuServlet" method="post">
+		Food Name: <input type="text" name="name"  />
+		Price: <input type="text" name="price"   />
+		Food type: <input type="text" name="saxeoba"   />
+		
+		<input type="submit" name=butt value="Add Food">
+	</form>
 </center>
 </body>
 </html>

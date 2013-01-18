@@ -10,9 +10,9 @@ import java.util.ArrayList;
 public class DBConnector{
 	private static Object lock  = new Object();
 	static String server = "localhost";
-	static String password = ""; //<---------
+	static String password = "3200909"; //<---------
 	static String account = "root";
-	static String database = "test"; //<--------- 
+	static String database = "test1"; //<--------- 
 	private static  Connection con;
 	private static DBConnector db;
 	static Statement stmt;

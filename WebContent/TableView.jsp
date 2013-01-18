@@ -16,8 +16,9 @@
 	<h3>Welcome <%=usr.getName() %><%if(admin)out.print("(admin)"); %></h3>
 	<%if(admin){ %>
 		<a href="UserManagement.jsp">user management</a>
-	<%} }%>
-	<a href="MenuView.jsp">Restaurant Menu</a>
+		<a href="AdminMenuView.jsp">Change Restaurant Menu</a>
+	<%} else {
+		%><a href="MenuView.jsp">Restaurant Menu</a><% }}%>
 	<center>
 		<table border="1">
 			<tr>
