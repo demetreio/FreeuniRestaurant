@@ -20,6 +20,7 @@
 		out.print("</td>");
 		out.print("<td>");
 		if(curTable.isBusy())out.print("Busy");
+		else out.print("Free");
 		out.print("</td>");
 		out.print("<td>");
 		if(curTable.isBusy())out.print(curTable.getOccupantName());

@@ -17,8 +17,8 @@
 	<%if(admin){ %>
 		<a href="UserManagement.jsp">user management</a>
 	<%} }%>
+			<%if(!admin){%><a href="MenuView.jsp">Restaurant Menu</a><%}%>
 	<center>
-
 		<table border="1">
 			<tr>
 				<td align="center" rowspan="2">Table ID</td>

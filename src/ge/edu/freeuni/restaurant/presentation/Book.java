@@ -5,6 +5,7 @@ import ge.edu.freeuni.restaurant.logic.TableReserveManager;
 import java.io.IOException;
 import java.sql.SQLException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -51,5 +52,7 @@ public class Book extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
+		RequestDispatcher dispatch = request.getRequestDispatcher("TableView.jsp");
+		dispatch.forward(request, response);
 	}
 }
