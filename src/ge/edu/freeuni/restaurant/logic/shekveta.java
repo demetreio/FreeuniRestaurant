@@ -16,6 +16,11 @@ public class shekveta {
 		arr.add(sam);
 	}
 	
+	public ArrayList<sameuli> getShekveta(){
+		
+		return this.arr;
+	}
+	
 	private class sameuli{
 		private String name;
 		private int id;
