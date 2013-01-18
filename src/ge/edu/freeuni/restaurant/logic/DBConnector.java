@@ -318,12 +318,24 @@ public class DBConnector{
 	
 	//unda daaselectos where name=name;
 	public ResultSet selectFromMenuByName(String name){
-		return null;
+		
+		ResultSet rs = null;
+		try {
+			rs = stmt.executeQuery("select * from menu where name ='" +name+"'");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return rs;
+		
 	}
 	
 	//unda chaamatos menu-shi axali kerdzi. id tavisic unda izrdebodes chamatebisas menu cxrilshi
 	public void insertIntoMenu(String name, double price, String category){
-		 
+		try {
+			stmt.executeUpdate("insert into menu (name, price, foodtype) values('"+name+"',"+price+",'"+category+"')" );
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	//menu xrilidan unda washalos mocemuli saxelis kerdzi
