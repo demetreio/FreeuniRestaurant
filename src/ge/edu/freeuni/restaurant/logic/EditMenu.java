@@ -24,4 +24,9 @@ public class EditMenu {
 		DBConnector db = DBConnector.getInstance();
 		db.removeFromMenuByName(name);
 	}
+	
+	public void changePrice(String name, double price){
+		DBConnector db = DBConnector.getInstance();
+		db.updatePrice(name, price);
+	}
 }

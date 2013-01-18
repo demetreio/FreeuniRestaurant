@@ -35,15 +35,6 @@ public class Kerdzi {
 		return this.saxeoba;
 	}
 	
-
-
-	
-	public void changePrice(double price){
-		DBConnector db = DBConnector.getInstance();
-		db.updatePrice(this.id, price);
-		
-		this.price = price;
-	}
 	
 
 	
