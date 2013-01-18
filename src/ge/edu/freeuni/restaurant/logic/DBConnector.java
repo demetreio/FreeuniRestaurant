@@ -370,6 +370,16 @@ public class DBConnector{
 	}
 	
 	/**
+	 * shlis users shekveta cxrilidan useris mixedvit
+	 * @param username
+	 * @throws SQLException
+	 */
+	public void removeFromShekvetaByName(String username) throws SQLException{
+		stmt.executeUpdate("delete  from shekveta where username='"+username+"'");
+	}
+	
+	
+	/**
 	 * es metodi washlis yvela tables tu arsebobs da axlidan sheqmnis, mattvis vinc bazas testavs
 	 * @throws SQLException
 	 */
