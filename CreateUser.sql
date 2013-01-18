@@ -3,5 +3,5 @@
 
 use mysql;
 
-CREATE TABLE User (username varchar(50) NOT NULL, password varchar(50) NOT NULL, name varchar(50) NOT NULL,surname varchar(50) NOT NULL, info varchar(50) NOT NULL, admin boolean not null default 0, PRIMARY KEY (username));
+CREATE TABLE User (username varchar(50) NOT NULL, password varchar(50) NOT NULL, mail varchar(50) NOT NULL, name varchar(50) NOT NULL,surname varchar(50) NOT NULL, info varchar(50) NOT NULL, admin boolean not null default 0, PRIMARY KEY (username));
 
