@@ -382,8 +382,18 @@ public class DBConnector{
 	}
 	
 	
+	/**
+	 * Returns all the users from the database about who we have statistics.
+	 * @return The list of all users.
+	 */
 	public ResultSet selectFromUserHistory(){
-		return null;
+		ResultSet rs = null;
+		try {
+			rs = stmt.executeQuery("select * from UserHistory ");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return rs;
 	}
 	
 	
