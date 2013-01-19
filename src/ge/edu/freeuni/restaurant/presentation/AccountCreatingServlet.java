@@ -2,11 +2,14 @@ package ge.edu.freeuni.restaurant.presentation;
 
 
 import ge.edu.freeuni.restaurant.logic.DBConnector;
+import ge.edu.freeuni.restaurant.logic.MailSender;
 import ge.edu.freeuni.restaurant.logic.User;
 import ge.edu.freeuni.restaurant.logic.UserManager;
 
 import java.io.IOException;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.AddressException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -56,6 +59,18 @@ public class AccountCreatingServlet extends HttpServlet {
 			UserManager um = new UserManager();
 			boolean reg = um.registerNewUser(user);
 			if(reg){
+				try {
+					MailSender.sendConfirmationrMail(user.getName(),user.getMail());
+				} catch (AddressException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (MessagingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				RequestDispatcher dispatch = request.getRequestDispatcher("AccountCreated.jsp");
 				dispatch.forward(request, response);
 			} else {
