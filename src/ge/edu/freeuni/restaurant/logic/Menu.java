@@ -24,4 +24,9 @@ public class Menu {
 		list.add(shPitnit);
 		return list;
 	}
+	
+	public String getName(int id){
+		//ResultSet rs = 
+		return "";
+	}
 }
