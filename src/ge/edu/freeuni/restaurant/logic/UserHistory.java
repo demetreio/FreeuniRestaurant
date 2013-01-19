@@ -12,6 +12,7 @@ public class UserHistory {
 		ResultSet rs = db.selectFromUserHistory();
 		while(rs.next()){
 			History h = new History(rs.getString(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getDouble(5));
+			list.add(h);
 		}
 		return list;
 	}
