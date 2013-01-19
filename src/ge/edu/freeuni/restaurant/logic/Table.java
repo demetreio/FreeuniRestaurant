@@ -48,7 +48,6 @@ public class Table {
 		this.occupantName = "";
 		DBConnector db=DBConnector.getInstance();
 		db.removeFromOccupation(id);
-		db.addIntoOccupation(id, "");
 	}
 	/**
 	 * gadmoecema okupantis id.
@@ -59,7 +58,6 @@ public class Table {
 		this.occupantName = name;
 		this.busy = true;
 		DBConnector db=DBConnector.getInstance();
-		db.removeFromOccupation(id);
 		db.addIntoOccupation(id, occupantName);
 	}
 	
