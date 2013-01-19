@@ -13,15 +13,27 @@
 	<table border="1">
 		<tr>
 			<th>Username</th>
-			<th>amount</th>
-			<th>amount</th>
-			<th>amount</th>
-			<th>amount</th>
+			<th>Visits</th>
+			<th>Bookings</th>
+			<th>Not Come</th>
+			<th>Attending Percentage</th>
+			<th>Average Spent Money</th>
 		</tr>
 		<%
-			
+			UserHistory uh = new UserHistory();
+			ArrayList<History> list = uh.getAllUsersHistory();
+			if(list!=null){
+				for(int i=0; i<list.size(); i++){
+					out.print(" <tr> ");
+					out.print("<td> "+list.get(i).getName()+" </td> ");
+					out.print("<td> "+list.get(i).getNumberOfVisits()+" </td> ");
+					out.print("<td> "+list.get(i).getNumberOfBookings()+" </td> ");
+					out.print("<td> "+list.get(i).comingPersentage()+" </td> ");
+					out.print("<td> "+list.get(i).averageMoneySpent()+" </td> ");
+					out.print("</tr>");
+				}
+			}
 		%>
-		<tr> <td> dishi </td> <td> 1 </td> </tr>
 		
 		<%--
 		for(){
