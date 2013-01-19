@@ -382,6 +382,11 @@ public class DBConnector{
 	}
 	
 	
+	public ResultSet selectFromUserHistory(){
+		return null;
+	}
+	
+	
 	/**
 	 * es metodi washlis yvela tables tu arsebobs da axlidan sheqmnis, mattvis vinc bazas testavs
 	 * @throws SQLException
