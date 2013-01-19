@@ -10,9 +10,9 @@ import java.util.ArrayList;
 public class DBConnector{
 	private static Object lock  = new Object();
 	static String server = "localhost";
-	static String password = "sphinx"; //<---------
+	static String password = ""; //<---------
 	static String account = "root";
-	static String database = "test"; //<--------- 
+	static String database = "db1"; //<--------- 
 	private static  Connection con;
 	private static DBConnector db;
 	static Statement stmt;
@@ -36,7 +36,7 @@ public class DBConnector{
 			 con = DriverManager.getConnection("jdbc:mysql://" + server, account, password);
 			 stmt = con.createStatement();
 			 stmt.executeQuery("USE " + database);
-				
+			System.out.println("done");
 
 		}
 		catch (ClassNotFoundException e) {
@@ -379,6 +379,32 @@ public class DBConnector{
 	 */
 	public void removeFromShekvetaByName(String username) throws SQLException{
 		stmt.executeUpdate("delete  from shekveta where username='"+username+"'");
+	}
+	
+	
+	/**
+	 * Returns all the users from the database about who we have statistics.
+	 * @return The list of all users.
+	 */
+	public ResultSet selectFromUserHistory(){
+		ResultSet rs = null;
+		try {
+			rs = stmt.executeQuery("select * from UserHistory ");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return rs;
+	}
+	
+	
+	public ResultSet selectNameByIdFromMenu(int id){
+		ResultSet rs = null;
+		try {
+			rs = stmt.executeQuery("select name from menu where id='"+id+"'");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return rs;
 	}
 	
 	

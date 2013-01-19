@@ -24,4 +24,14 @@ public class Menu {
 //		list.add(shPitnit);
 		return list;
 	}
+	
+	public String getName(int id) throws SQLException{
+		DBConnector db = DBConnector.getInstance();
+		ResultSet rs = db.selectNameByIdFromMenu(id);
+		String str = "";
+		if(rs.next()){
+			str = rs.getString(1);
+		}
+		return str;
+	}
 }

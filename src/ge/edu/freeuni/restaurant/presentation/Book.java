@@ -6,6 +6,7 @@ import ge.edu.freeuni.restaurant.logic.TableReserveManager;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Arrays;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
@@ -48,6 +49,7 @@ public class Book extends HttpServlet {
 		String name = res[0];
 		for (int i = 0; i <= res.length/2; i+=2) {
 			int tableId = Integer.parseInt(res[i+1]);
+			System.out.println(Arrays.toString(res)+" "+i);
 			String resInfo = res[i+2];
 			try {
 				trm.reserveTable(tableId, resInfo);

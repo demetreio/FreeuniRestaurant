@@ -17,6 +17,7 @@
 	<%if(admin){ %>
 		<a href="UserManagement.jsp">user management</a>
 		<a href="AdminMenuView.jsp">Change Restaurant Menu</a>
+		<a href="UserHistoryView.jsp">Users History</a>
 	<%} else {
 		%><a href="MenuView.jsp">Restaurant Menu</a><% }}%>
 	<center>
