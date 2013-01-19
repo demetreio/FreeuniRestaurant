@@ -1,10 +1,14 @@
 package ge.edu.freeuni.restaurant.presentation;
 
+import ge.edu.freeuni.restaurant.logic.DBConnector;
+import ge.edu.freeuni.restaurant.logic.MailSender;
 import ge.edu.freeuni.restaurant.logic.TableReserveManager;
 
 import java.io.IOException;
 import java.sql.SQLException;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.AddressException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -47,8 +51,19 @@ public class Book extends HttpServlet {
 			String resInfo = res[i+2];
 			try {
 				trm.reserveTable(tableId, resInfo);
-				if(resInfo.contains("2"))trm.reserveForUser(name, tableId, resInfo);
+				DBConnector db= DBConnector.getInstance();
+				
+				if(resInfo.contains("2")){
+					trm.reserveForUser(name, tableId, resInfo);
+					MailSender.sendTableReservationConfirmationrMail(name, db.getUser(name).getMail());
+				}
 			} catch (SQLException e) {
+				e.printStackTrace();
+			} catch (AddressException e) {
+				e.printStackTrace();
+			} catch (MessagingException e) {
+				e.printStackTrace();
+			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 		}
