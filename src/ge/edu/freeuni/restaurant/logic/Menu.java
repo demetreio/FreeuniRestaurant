@@ -25,8 +25,13 @@ public class Menu {
 		return list;
 	}
 	
-	public String getName(int id){
-		//ResultSet rs = 
-		return "";
+	public String getName(int id) throws SQLException{
+		DBConnector db = DBConnector.getInstance();
+		ResultSet rs = db.selectNameByIdFromMenu(id);
+		String str = "";
+		if(rs.next()){
+			str = rs.getString(1);
+		}
+		return str;
 	}
 }
