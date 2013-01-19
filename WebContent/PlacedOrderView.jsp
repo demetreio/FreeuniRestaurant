@@ -2,18 +2,22 @@
     pageEncoding="ISO-8859-1"%>
 <%@ page import="ge.edu.freeuni.restaurant.logic.*"%>
 <%@ page import="java.util.*"%>
+<%@ page import="java.util.*"%>
+
+<center>
+<div border="1">
     <h1 style="color: green;">Your order:</h1>
     
-    <%! 
-	private User usr;
-	private String usrname;
-	private shekveta sh;
+    <%!
+		private String usrname;
+    	private ArrayList<shekveta.ShekvetisErteuli> dishes;
 	%>
 	<%
-	if(session.getAttribute("user") != null)
-		usr = (User)session.getAttribute("user");
-		usrname = usr.getUsername();
-		sh = null;
+		if(session.getAttribute("ordersByUser") != null){ 
+			usrname = (String)session.getAttribute("ordersByUser");
+		shekveta sh = shekveta.readAndCreate(usrname);
+		dishes = sh.getDishes();
+		}
 	%>
 	
 	<table border="1">
@@ -21,14 +25,14 @@
 			<th>Dish name</th>
 			<th>amount</th>
 		</tr>
-		<%--
-		for(){
+		<%
+		for(shekveta.ShekvetisErteuli dish : dishes){
 			out.print("<tr>");
-			out.print("<td>"+k.getName()+"</td>");
-			out.print("<td>"+k.getPrice()+"</td>");
-			out.print("<td>"+k.getSaxeoba()+"</td>");
-			out.print("<td><input type=\"number\" name=\"dish#"+ k.getId() +"\" min=\"0\" max=\"50\" value=\"0\"></td>");
+			out.print("<td>"+ (new Menu()).getName(dish.getId()) +"</td>");
+			out.print("<td>"+dish.getQuantity()+"</td>");
 			out.print("</tr>");
 		}
-		--%>
-	</center>
+		%>
+	</table>
+</div>
+</center>

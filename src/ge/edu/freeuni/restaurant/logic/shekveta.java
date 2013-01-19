@@ -4,25 +4,25 @@ import java.util.*;
 public class shekveta {
 
 	
-	private ArrayList<sameuli> arr;
+	private ArrayList<ShekvetisErteuli> arr;
 	private String name;
 	public shekveta(String name){
 		this.name = name;
-		arr = new ArrayList<shekveta.sameuli>();		
+		arr = new ArrayList<shekveta.ShekvetisErteuli>();		
 	}
 	
 	public void addShekveta(int kerdzi_id, int quantity){
 		if(quantity > 0){
-			sameuli sam = new sameuli(name, kerdzi_id, quantity);
+			ShekvetisErteuli sam = new ShekvetisErteuli(name, kerdzi_id, quantity);
 			arr.add(sam);
 		}
 	}
 	
-	public ArrayList<sameuli> getDishes(){
+	public ArrayList<ShekvetisErteuli> getDishes(){
 		return arr;
 	}
 	
-	private static shekveta readAndCreate(String name) throws SQLException{
+	public static shekveta readAndCreate(String name) throws SQLException{
 		DBConnector db = DBConnector.getInstance();
 		ResultSet rs = db.selectFromShekvetaByUserName(name);
 		
@@ -33,7 +33,6 @@ public class shekveta {
 			int id = Integer.parseInt(rs.getString("kerdzi_id"));
 			int quantity = Integer.parseInt(rs.getString("quantity"));
 			shek.addShekveta(id, quantity);
-			
 		}
 		return shek;
 	}
@@ -51,11 +50,11 @@ public class shekveta {
 		}
 	}
 	
-	private class sameuli{
+	public class ShekvetisErteuli{
 		private String name;
 		private int id;
 		private int quantity;
-		public sameuli(String name, int kerdzi_id, int quantity){
+		public ShekvetisErteuli(String name, int kerdzi_id, int quantity){
 			this.name = name;
 			this.id = kerdzi_id;
 			this.quantity = quantity;
