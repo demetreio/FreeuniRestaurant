@@ -314,8 +314,11 @@ public class DBConnector{
 	}
 	
 	public void updatePrice(String name, double price){
-		
-		
+		try {
+			stmt.executeUpdate("update menu set price = "+price+" where name = \""+name+"\"");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		
 	}
 	
