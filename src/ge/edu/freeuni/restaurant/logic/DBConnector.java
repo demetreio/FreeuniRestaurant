@@ -407,6 +407,9 @@ public class DBConnector{
 		return rs;
 	}
 	
+	public void updateResultsInUserHistory(String userName, int visits, int bookings, int notCome, double moneySpent){
+		
+	}
 	
 	/**
 	 * es metodi washlis yvela tables tu arsebobs da axlidan sheqmnis, mattvis vinc bazas testavs

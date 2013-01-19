@@ -16,4 +16,11 @@ public class UserHistory {
 		}
 		return list;
 	}
+	
+	public void changeUserHistory(String userName, int isbooked, int came, double moneySpent){
+		DBConnector db = DBConnector.getInstance();
+		int notCome = 0;
+		if(isbooked == 1 && came == 0) notCome = 1;
+		db.updateResultsInUserHistory(userName, came, isbooked, notCome, moneySpent);
+	}
 }
