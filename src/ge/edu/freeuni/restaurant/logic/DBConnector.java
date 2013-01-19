@@ -408,7 +408,14 @@ public class DBConnector{
 	}
 	
 	public void updateResultsInUserHistory(String userName, int visits, int bookings, int notCome, double moneySpent){
-		
+		try {
+			stmt.executeUpdate("update userhistory " +
+					" set visits = visits + "+visits+", bookings = bookings + "+bookings+", notcome = notcome + " +
+							" "+notCome+", totalmoney = totalmoney + "+moneySpent +" " +
+									" where username = '"+userName+"'");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	/**
