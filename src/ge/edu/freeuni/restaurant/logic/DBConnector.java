@@ -397,6 +397,17 @@ public class DBConnector{
 	}
 	
 	
+	public ResultSet selectNameByIdFromMenu(int id){
+		ResultSet rs = null;
+		try {
+			rs = stmt.executeQuery("select name from menu where id='"+id+"'");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return rs;
+	}
+	
+	
 	/**
 	 * es metodi washlis yvela tables tu arsebobs da axlidan sheqmnis, mattvis vinc bazas testavs
 	 * @throws SQLException
