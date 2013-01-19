@@ -1,4 +1,5 @@
 package ge.edu.freeuni.restaurant.logic;
+import java.sql.*;
 import java.util.*;
 public class shekveta {
 
@@ -15,6 +16,22 @@ public class shekveta {
 			sameuli sam = new sameuli(name, kerdzi_id, quantity);
 			arr.add(sam);
 		}
+	}
+	
+	private static shekveta readAndCreate(String name) throws SQLException{
+		DBConnector db = DBConnector.getInstance();
+		ResultSet rs = db.selectFromShekvetaByUserName(name);
+		
+		shekveta shek = new shekveta(name);
+		
+		while(rs.next()){
+			
+			int id = Integer.parseInt(rs.getString("kerdzi_id"));
+			int quantity = Integer.parseInt(rs.getString("quantity"));
+			shek.addShekveta(id, quantity);
+			
+		}
+		return shek;
 	}
 	
 	public int getSize(){
