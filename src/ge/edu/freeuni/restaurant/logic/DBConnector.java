@@ -10,9 +10,9 @@ import java.util.ArrayList;
 public class DBConnector{
 	private static Object lock  = new Object();
 	static String server = "localhost";
-	static String password = "sphinx"; //<---------
+	static String password = ""; //<---------
 	static String account = "root";
-	static String database = "test"; //<--------- 
+	static String database = "db1"; //<--------- 
 	private static  Connection con;
 	private static DBConnector db;
 	static Statement stmt;
@@ -36,7 +36,7 @@ public class DBConnector{
 			 con = DriverManager.getConnection("jdbc:mysql://" + server, account, password);
 			 stmt = con.createStatement();
 			 stmt.executeQuery("USE " + database);
-				
+			System.out.println("done");
 
 		}
 		catch (ClassNotFoundException e) {
