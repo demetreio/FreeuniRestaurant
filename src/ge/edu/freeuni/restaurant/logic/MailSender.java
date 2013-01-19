@@ -87,17 +87,55 @@ public class MailSender {
 		    }
 		    message.setSubject("Reminder about reservation");
 		    message.setText("Hello "+userName+", we are glad to inform you, that you " +
-		    		"have reserved a table in our" +
-		    		" Restaurant.");	    
+		    		"are registered in our " +
+		    		" Restaurant database");	    
 		    Transport transport = session.getTransport("smtp");
 		    transport.connect(host, from, pass);
 		    transport.sendMessage(message, message.getAllRecipients());
 		    transport.close();			
 	}
 	
+	public static synchronized void sendTableReservationConfirmationrMail(String userName, String emailAddress) throws AddressException, MessagingException, InterruptedException{
+		
+		  java.util.Properties props = System.getProperties();
+		    props.put("mail.smtp.starttls.enable", "true"); // added this line
+		    props.put("mail.smtp.host", host);
+		    props.put("mail.smtp.user", from);
+		    props.put("mail.smtp.password", pass);
+		    props.put("mail.smtp.port", "587");
+		    props.put("mail.smtp.auth", "true");
+
+		    String[] to = {emailAddress}; // added this line
+
+		    Session session = Session.getDefaultInstance(props, null);
+		    MimeMessage message = new MimeMessage(session);
+		    message.setFrom(new InternetAddress(from));
+
+		    InternetAddress[] toAddress = new InternetAddress[to.length];
+
+		    // To get the array of addresses
+		    for( int i=0; i < to.length; i++ ) { // changed from a while loop
+		        toAddress[i] = new InternetAddress(to[i]);
+		    }
+		    System.out.println(Message.RecipientType.TO);
+
+		    for( int i=0; i < toAddress.length; i++) { // changed from a while loop
+		        message.addRecipient(Message.RecipientType.TO, toAddress[i]);
+		    }
+		    message.setSubject("Reminder about reservation");
+		    message.setText("Hello "+userName+", we are glad to inform you, that you " +
+		    		"have succsesfuly " +
+		    		" Reserved table");	    
+		    Transport transport = session.getTransport("smtp");
+		    transport.connect(host, from, pass);
+		    transport.sendMessage(message, message.getAllRecipients());
+		    transport.close();			
+	}
+	
+	
 
 }
-
+/*
 
 class MyThread extends Thread{	
 	
@@ -173,4 +211,4 @@ class MyThread extends Thread{
 		    transport.close();	
 	}
 }
-
+*/
