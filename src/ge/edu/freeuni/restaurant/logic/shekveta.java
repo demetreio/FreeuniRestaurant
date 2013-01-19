@@ -18,6 +18,10 @@ public class shekveta {
 		}
 	}
 	
+	public ArrayList<sameuli> getDishes(){
+		return arr;
+	}
+	
 	private static shekveta readAndCreate(String name) throws SQLException{
 		DBConnector db = DBConnector.getInstance();
 		ResultSet rs = db.selectFromShekvetaByUserName(name);
