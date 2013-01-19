@@ -1,6 +1,9 @@
 package ge.edu.freeuni.restaurant.presentation;
 
 import ge.edu.freeuni.restaurant.logic.TableReserveManager;
+import ge.edu.freeuni.restaurant.logic.User;
+import ge.edu.freeuni.restaurant.logic.UserManager;
+import ge.edu.freeuni.restaurant.logic.shekveta;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -13,46 +16,41 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class Book
+ * Servlet implementation class PlaceOrderServlet
  */
-@WebServlet("/Book")
-public class Book extends HttpServlet {
+@WebServlet("/PlaceOrderServlet")
+public class PlaceOrderServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Book() {
+    public PlaceOrderServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		TableReserveManager trm = new TableReserveManager();
-		String param = request.getParameter("fieldi");
-		String[] res = param.split(",");
-		String name = res[0];
-		for (int i = 0; i <= res.length/2; i+=2) {
-			int tableId = Integer.parseInt(res[i+1]);
-			String resInfo = res[i+2];
-			try {
-				trm.reserveTable(tableId, resInfo);
-				if(resInfo.contains("2"))trm.reserveForUser(name, tableId, resInfo);
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+		String username = request.getParameter("username");
+		int menuSize = Integer.parseInt(request.getParameter("menuSize"));
+		shekveta sh = new shekveta(username);
+		
+		int amount;
+		for (int i = 1; i <= menuSize; i++) {
+			amount = Integer.parseInt(request.getParameter("dish#"+i));
+			sh.addShekveta(i, amount);
 		}
-		RequestDispatcher dispatch = request.getRequestDispatcher("OrderingView.jsp");
+		System.out.println(sh.getSize());
+		sh.saveIntoDB();
+		RequestDispatcher dispatch = request.getRequestDispatcher("TableView.jsp");
 		dispatch.forward(request, response);
 	}
 }
