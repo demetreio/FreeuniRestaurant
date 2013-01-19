@@ -94,13 +94,13 @@
 				person_name = val;
 				<%} %>
 				var pass_param = ""+person_name;
-				for(var i = 0; i < tr.length; i++){
+				for(var i = 0; i < tr.length<%if(admin)out.println("/2"); %>; i++){
 					var id = tr[i]["id"];
 					var td = tr[i].getElementsByTagName("td");
 					pass_param += ","+id+",";
 					for(var j = 3; j < td.length; j++){
 						var col = td[j].style.backgroundColor;
-						pass_param += (col=="red"?"1":col=="green"?0:2);
+						pass_param += (col=="red"?"1":col=="green"?"0":"2");
 					}
 				}
 				submitForm(pass_param);
