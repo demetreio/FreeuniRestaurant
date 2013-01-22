@@ -9,7 +9,6 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.*;
-import com.sun.xml.internal.fastinfoset.sax.Properties;
 
 public class MailSender {
 
@@ -85,7 +84,7 @@ public class MailSender {
 		    for( int i=0; i < toAddress.length; i++) { // changed from a while loop
 		        message.addRecipient(Message.RecipientType.TO, toAddress[i]);
 		    }
-		    message.setSubject("Reminder about reservation");
+		    message.setSubject("Reminder about registration");
 		    message.setText("Hello "+userName+", we are glad to inform you, that you " +
 		    		"are registered in our " +
 		    		" Restaurant database");	    
