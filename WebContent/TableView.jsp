@@ -17,10 +17,15 @@
 	<%if(admin){ %>
 		<a href="UserManagement.jsp">user management</a>
 		<a href="AdminMenuView.jsp">Change Restaurant Menu</a>
-		<a href="UserHistoryView.jsp">Users History</a>
 	<%} else {
 		%><a href="MenuView.jsp">Restaurant Menu</a><% }}%>
 	<center>
+	
+	<%-- achvenebs useris mier shekvetil menius --%>
+	<% session.setAttribute("ordersByUser", usr.getUsername());%>
+	<jsp:include page="PlacedOrderView.jsp" ></jsp:include>
+	<br>
+	<P></P>
 		<table border="1">
 			<tr>
 				<td align="center" rowspan="2">Table ID</td>
@@ -61,6 +66,7 @@
 			%>
 		</table>
 	</center>
+
 	<form id="theForm" method="post" action="Book">  
 		<input type="hidden" name="fieldi"/>  
 	</form>
@@ -95,13 +101,13 @@
 				person_name = val;
 				<%} %>
 				var pass_param = ""+person_name;
-				for(var i = 0; i < tr.length<%if(admin)out.println("/2"); %>; i++){
+				for(var i = 0; i < tr.length; i++){
 					var id = tr[i]["id"];
 					var td = tr[i].getElementsByTagName("td");
 					pass_param += ","+id+",";
 					for(var j = 3; j < td.length; j++){
 						var col = td[j].style.backgroundColor;
-						pass_param += (col=="red"?"1":col=="green"?"0":"2");
+						pass_param += (col=="red"?"1":col=="green"?0:2);
 					}
 				}
 				submitForm(pass_param);

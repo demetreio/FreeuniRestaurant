@@ -1,13 +1,10 @@
 package ge.edu.freeuni.restaurant.presentation;
 
-
 import ge.edu.freeuni.restaurant.logic.DBConnector;
 import ge.edu.freeuni.restaurant.logic.MailSender;
 import ge.edu.freeuni.restaurant.logic.User;
 import ge.edu.freeuni.restaurant.logic.UserManager;
-
 import java.io.IOException;
-
 import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
 import javax.servlet.RequestDispatcher;

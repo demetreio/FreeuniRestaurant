@@ -2,7 +2,7 @@
     pageEncoding="ISO-8859-1"%>
 <%@ page import="ge.edu.freeuni.restaurant.logic.*"%>
 <%@ page import="java.util.*"%>
-    <h1 style="color: green;">Your order:</h1>
+    <center><h1 style="color: green;">Here Are All The Users' Statistics</h1> </center>
     
     <%! 
 	private User usr;
@@ -10,31 +10,31 @@
 	private shekveta sh;
 	%>
 	
+	<center>
 	<table border="1">
 		<tr>
 			<th>Username</th>
 			<th>Visits</th>
 			<th>Bookings</th>
-			<th>Not Come</th>
 			<th>Attending Percentage</th>
 			<th>Average Spent Money</th>
-		</tr>
+		</tr> 
 		<%
 			UserHistory uh = new UserHistory();
 			ArrayList<History> list = uh.getAllUsersHistory();
 			if(list!=null){
 				for(int i=0; i<list.size(); i++){
-					out.print(" <tr> ");
+					out.print("<tr> ");
 					out.print("<td> "+list.get(i).getName()+" </td> ");
 					out.print("<td> "+list.get(i).getNumberOfVisits()+" </td> ");
 					out.print("<td> "+list.get(i).getNumberOfBookings()+" </td> ");
-					out.print("<td> "+list.get(i).comingPersentage()+" </td> ");
+					out.print("<td> "+((100*list.get(i).comingPersentage())+"%")+" </td> ");
 					out.print("<td> "+list.get(i).averageMoneySpent()+" </td> ");
 					out.print("</tr>");
 				}
 			}
 		%>
-		
+		</center>
 		<%--
 		for(){
 			out.print("<tr>");
@@ -45,33 +45,5 @@
 			out.print("</tr>");
 		}
 		--%>
-	</center>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<%--
-out.print("<tr class=\"tr\" id=\"");
-						out.print(curTable.getId()+"\">");
-						out.print("<td>");
-						out.print(curTable.getId());
-						out.print("</td>");
-						out.print("<td>");
-						out.print(curTable.getDescription());
-						out.print("</td>");
-						out.print("<td>");
-						out.print(curTable.getSize());
-						out.print("</td>");
---%>						
 						

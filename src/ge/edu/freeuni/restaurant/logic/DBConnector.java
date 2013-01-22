@@ -314,8 +314,11 @@ public class DBConnector{
 	}
 	
 	public void updatePrice(String name, double price){
-		
-		
+		try {
+			stmt.executeUpdate("update menu set price = "+price+" where name = \""+name+"\"");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		
 	}
 	
@@ -407,6 +410,16 @@ public class DBConnector{
 		return rs;
 	}
 	
+	public void updateResultsInUserHistory(String userName, int visits, int bookings, int notCome, double moneySpent){
+		try {
+			stmt.executeUpdate("update userhistory " +
+					" set visits = visits + "+visits+", bookings = bookings + "+bookings+", notcome = notcome + " +
+							" "+notCome+", totalmoney = totalmoney + "+moneySpent +" " +
+									" where username = '"+userName+"'");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	/**
 	 * es metodi washlis yvela tables tu arsebobs da axlidan sheqmnis, mattvis vinc bazas testavs
