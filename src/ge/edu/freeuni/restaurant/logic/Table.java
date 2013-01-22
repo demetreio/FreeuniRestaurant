@@ -41,27 +41,6 @@ public class Table {
 	}
 	
 	/**
-	 * magidas monishnavs, rom araa dakavebuli, aseve okupantis saxels washlis.
-	 */
-	public void setTableFree(){
-		this.busy = false;
-		this.occupantName = "";
-		DBConnector db=DBConnector.getInstance();
-		db.removeFromOccupation(id);
-	}
-	/**
-	 * gadmoecema okupantis id.
-	 * magidas monishnavs dakavebulad da chawers okupants
-	 * @param id: okupantis id
-	 */
-	public void setTableBusy(String name){
-		this.occupantName = name;
-		this.busy = true;
-		DBConnector db=DBConnector.getInstance();
-		db.addIntoOccupation(id, occupantName);
-	}
-	
-	/**
 	 * reserves this table for the user. method is sincronised
 	 * so it's impossible for two users to reserve
 	 * one table
