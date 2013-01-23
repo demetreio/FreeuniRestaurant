@@ -46,17 +46,15 @@ public class AdminServlet extends HttpServlet {
 		RequestDispatcher dispatch;
 		if (act.equals("Stand up")) {
 		    //stand up button was pressed
-			System.out.println("stand up was pressed");
 			real.setTableFree(Integer.parseInt(request.getParameter("hidden")));
-			System.out.println((Integer.parseInt(request.getParameter("hidden"))));
-			//dispatch = request.getRequestDispatcher("TableView.jsp");
+			dispatch = request.getRequestDispatcher("TableView.jsp");
+
 		} 
 		else{
 			real.setTableBusy(Integer.parseInt(request.getParameter("hidden")),request.getParameter("users"));
-			System.out.println((Integer.parseInt(request.getParameter("hidden"))));
-			System.out.println("order");
-		} 
+			dispatch = request.getRequestDispatcher("TableView.jsp");
+		}
+		dispatch.forward(request,response);
 	}
-
 }
 
