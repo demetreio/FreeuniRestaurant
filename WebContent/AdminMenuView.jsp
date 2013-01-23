@@ -34,7 +34,7 @@
 	</tr>
 	<%
 				Menu menu = new Menu();
-					ArrayList<Kerdzi> kerdzebe = menu.getMenu();
+					ArrayList<Kerdzi> kerdzebe = menu.getMenu();	
 					Kerdzi curKerdzi;
 					for (int i = 0; i < kerdzebe.size(); i++) {
 						curKerdzi = kerdzebe.get(i);

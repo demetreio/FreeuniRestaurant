@@ -10,11 +10,12 @@ public class Menu {
 		DBConnector db = DBConnector.getInstance();
 		ResultSet rs = db.selectFromMenu();
 		ArrayList<Kerdzi> list = new ArrayList<Kerdzi>();
-		while(rs.next()){
-			Kerdzi k = new Kerdzi(rs.getInt(1), rs.getString(2), rs.getDouble(3), rs.getString(4));
-			list.add(k);
+		if(rs!=null) {
+			while(rs.next()){
+				Kerdzi k = new Kerdzi(rs.getInt(1), rs.getString(2), rs.getDouble(3), rs.getString(4));
+				list.add(k);
+			}
 		}
-		
 //		Kerdzi shNigvzit = new Kerdzi(1, "shaurma nigvzit", 6, "shaurma");
 //		Kerdzi shSokoti = new Kerdzi(2, "shaurma sokoti", 5, "samarxvo");
 //		Kerdzi shPitnit = new Kerdzi(3, "shaurma pitnit", 3, "shaurma");
