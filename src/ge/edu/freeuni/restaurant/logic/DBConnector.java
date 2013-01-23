@@ -211,6 +211,17 @@ public class DBConnector{
 		}
 		return res;
 	}
+	public ArrayList<String> getAllUsers() throws SQLException{
+		ResultSet set ;
+		ArrayList<String> users = new ArrayList<String>();
+		set =  stmt.executeQuery("Select username from user where admin = 0");
+		while(set.next()){
+			users.add(set.getString("username"));
+		}
+		return users;
+	}
+
+
 	
 	public User getUser(String username){
 		ResultSet rs;
