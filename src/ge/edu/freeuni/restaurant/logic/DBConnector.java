@@ -91,7 +91,8 @@ public class DBConnector{
 	 */
 	public ResultSet getUsersReservedInfo(String username, int table_id) throws SQLException {
 		ResultSet rs;
-		rs = stmt.executeQuery("select * from user_table where username = '"+username+"' and id = '"+table_id+"'");
+		System.out.println("select * from user_table where username = '"+username+"' and id = "+table_id);
+		rs = stmt.executeQuery("select * from user_table where username = '"+username+"' and id = "+table_id);
 		if(rs.next()){
 			return rs;
 		}
@@ -486,18 +487,28 @@ public class DBConnector{
 	 */
 	public void deleteReservation(int table_id, int time_index, String username) throws SQLException {
 		ResultSet rs = getUsersReservedInfo(username, table_id);
-		rs.next();
-		String str = rs.getString(3);
+		String str = rs.getString("reserveInfo");
 		char [] ch= str.toCharArray();
 		ch[time_index] = '1';
 		str = new String(ch);
-		try {
-			stmt.executeUpdate("update USER_TABLE " +
-					" set reserveInfo =  '"+str+"' "+
+		stmt.executeUpdate("update USER_TABLE set reserveInfo =  '"+str+"' "+
 									" where username = '"+username+"' and id = "+table_id);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		
+	}
+	
+	/**
+	 * Deletes the reservation info from reservedTables table.
+	 * @param table_id the id of the table
+	 * @param time_index the index of the time
+	 * @throws SQLException
+	 */
+	public void deleteReservationFromReservedTables(int table_id, int time_index) throws SQLException {
+		ResultSet rs = getReservedInfo(table_id);
+		String str = rs.getString("reserveInfo");
+		char[] ch = str.toCharArray();
+		ch[time_index] = '0';
+		str = new String(ch);
+		stmt.executeUpdate("update reservedtables set reserveInfo = '"+str+"' where id = "+table_id);
 	}
 	
 	/**
@@ -513,6 +524,11 @@ public class DBConnector{
 			e.printStackTrace();
 		}
 		return rs;
+	}
+	
+	public boolean isOccupiedTable(int table_id) throws SQLException{
+		ResultSet rs = stmt.executeQuery("select * from occupation where id = "+table_id);
+		return rs.next();
 	}
 	
 }

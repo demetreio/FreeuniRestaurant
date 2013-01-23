@@ -27,8 +27,9 @@ public class UserWithTableInfo {
 	}
 	
 	public void updateUsersBookedTablesIfLate() throws SQLException, ParseException {
+		DBConnector db = DBConnector.getInstance();
 		for(int i=0; i<reserveInfo.length()/2; i++){
-			if(reserveInfo.charAt(i)=='2'){
+			if(reserveInfo.charAt(i)=='2' && !db.isOccupiedTable(table_id)){
 				Date date = dateForIndex(i, curdate);
 				updateIfLate(i, date);
 			}
@@ -58,6 +59,7 @@ public class UserWithTableInfo {
 		if(sysdate.compareTo(dateForIndex(timeIndex, curdate))>=0){ // user is late
 			DBConnector db = DBConnector.getInstance();
 			db.deleteReservation(table_id, timeIndex, username);
+			db.deleteReservationFromReservedTables(table_id, timeIndex);
 			UserHistory uh = new UserHistory();
 			uh.changeUserHistory(username, 1, 0, 0);
 		}
