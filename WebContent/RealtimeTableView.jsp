@@ -1,6 +1,7 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page import="ge.edu.freeuni.restaurant.logic.*"%>
 <table border="1">
+	<form action="AdminServlet" method="post">
 			<tr>
 				<td align="center" rowspan="2">Table ID</td>
 				<td align="center" rowspan="2">Status</td>
@@ -25,7 +26,18 @@
 		out.print("<td>");
 		if(curTable.isBusy())out.print(curTable.getOccupantName());
 		out.print("</td>");
+		if(curTable.isBusy()){
+			out.print("<td>");
+			out.print("<input type=\"submit\" name=butt value=\"Stand up\">");
+			out.print("</td>");	
+		}
+		else{
+			out.print("<td>");
+			out.print("<input type=\"submit\" name=butt value=\"Ordr \">");
+			out.print("</td>");		
+		}
 		out.print("</tr>");
+		out.print("</form>");
 	}
 %>	
 </table>
