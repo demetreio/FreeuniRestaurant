@@ -12,7 +12,7 @@ public class DBConnector{
 	static String server = "localhost";
 	static String password = ""; //<---------
 	static String account = "root";
-	static String database = "test1"; //<--------- 
+	static String database = "test"; //<--------- 
 	private static  Connection con;
 	private static DBConnector db;
 	static Statement stmt;
@@ -36,7 +36,7 @@ public class DBConnector{
 			 con = DriverManager.getConnection("jdbc:mysql://" + server, account, password);
 			 stmt = con.createStatement();
 			 stmt.executeQuery("USE " + database);
-				
+			System.out.println("done");
 
 		}
 		catch (ClassNotFoundException e) {
@@ -296,6 +296,7 @@ public class DBConnector{
 	public void deleteUser(String username){
 		try {
 			stmt.executeUpdate("delete from user where username = \""+username+"\"");
+			stmt.executeUpdate("delete from user_table where username = \""+username+"\"");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -314,8 +315,11 @@ public class DBConnector{
 	}
 	
 	public void updatePrice(int id, double price){
-		
-		
+		try {
+			stmt.executeUpdate("update menu set price = "+price+" where id = "+id);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		
 	}
 	
@@ -383,6 +387,42 @@ public class DBConnector{
 	
 	
 	/**
+	 * Returns all the users from the database about who we have statistics.
+	 * @return The list of all users.
+	 */
+	public ResultSet selectFromUserHistory(){
+		ResultSet rs = null;
+		try {
+			rs = stmt.executeQuery("select * from UserHistory ");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return rs;
+	}
+	
+	
+	public ResultSet selectNameByIdFromMenu(int id){
+		ResultSet rs = null;
+		try {
+			rs = stmt.executeQuery("select name from menu where id='"+id+"'");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return rs;
+	}
+	
+	public void updateResultsInUserHistory(String userName, int visits, int bookings, int notCome, double moneySpent){
+		try {
+			stmt.executeUpdate("update userhistory " +
+					" set visits = visits + "+visits+", bookings = bookings + "+bookings+", notcome = notcome + " +
+							" "+notCome+", totalmoney = totalmoney + "+moneySpent +" " +
+									" where username = '"+userName+"'");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
 	 * es metodi washlis yvela tables tu arsebobs da axlidan sheqmnis, mattvis vinc bazas testavs
 	 * @throws SQLException
 	 */
@@ -425,5 +465,6 @@ public class DBConnector{
 			return false;
 		}
 	}
+
 	
 }
