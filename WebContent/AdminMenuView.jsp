@@ -21,6 +21,7 @@
 <a href="UserManagement.jsp">user management</a>
 <%} }%>
 <center>
+<form action="UpdatePriceServlet" method="post">
 <table border="1">
 	<tr>
 		<td align="center" rowspan="2">Kerdzis ID</td>
@@ -45,23 +46,27 @@
 						out.print("<td>");
 						out.print(curKerdzi.getName());
 						out.print("</td>");
-						out.print("<td>");
-						out.print(curKerdzi.getPrice());
+						out.print("<td><input type=\"text\" name=\"price" + curKerdzi.getId()+ "\" value=\"" + curKerdzi.getPrice() + "\"");
 						out.print("</td>");
-						out.print("<td>");
-						out.print(curKerdzi.getSaxeoba());
+						out.print("<td>" + curKerdzi.getSaxeoba());
 						out.print("</td>");
 						out.print("</tr>");
 				}
 			%>
 </table>
-<form action="EditMenuServlet" method="post">
+			<input type="submit" name="update" value="Update Menu">
+</form>
+<form action="AddFoodServlet" method="post">
 		Food Name: <input type="text" name="name"  />
 		Price: <input type="text" name="price"   />
 		Food type: <input type="text" name="saxeoba"   />
 		
 		<input type="submit" name=butt value="Add Food">
-	</form>
+</form>
+<form action="RemoveFoodServlet" method="post">
+		Food ID you want to remove: <input type="text" name="id"  />
+		<input type="submit" name=butt value="Remove Food">
+</form>
 </center>
 </body>
 </html>

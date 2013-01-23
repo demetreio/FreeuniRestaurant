@@ -20,13 +20,25 @@ public class EditMenu {
 		db.insertIntoMenu(name, price, category);
 	}
 	
-	public void removeFromDbKerdzi(String name){
+	public void removeFromDbKerdzi(int id){
 		DBConnector db = DBConnector.getInstance();
-		db.removeFromMenuByName(name);
+		db.removeFromMenuByName(id);
 	}
 	
-	public void changePrice(String name, double price){
+	public void changePrice(int id, double price){
 		DBConnector db = DBConnector.getInstance();
-		db.updatePrice(name, price);
+		db.updatePrice(id, price);
+	}
+
+	/**
+	 * TODO Put here a description of what this method does.
+	 *
+	 * @param foodId
+	 * @return
+	 */
+	public boolean existFood(int foodId) {
+		DBConnector db = DBConnector.getInstance();
+		return db.existFood(foodId);
 	}
 }
+
