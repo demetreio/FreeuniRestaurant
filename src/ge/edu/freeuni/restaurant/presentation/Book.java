@@ -3,6 +3,7 @@ package ge.edu.freeuni.restaurant.presentation;
 import ge.edu.freeuni.restaurant.logic.DBConnector;
 import ge.edu.freeuni.restaurant.logic.MailSender;
 import ge.edu.freeuni.restaurant.logic.TableReserveManager;
+import ge.edu.freeuni.restaurant.logic.UserManager;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -47,29 +48,35 @@ public class Book extends HttpServlet {
 		String param = request.getParameter("fieldi");
 		String[] res = param.split(",");
 		String name = res[0];
-		for (int i = 0; i <= res.length/2; i+=2) {
-			int tableId = Integer.parseInt(res[i+1]);
-			System.out.println(Arrays.toString(res)+" "+i);
-			String resInfo = res[i+2];
-			try {
-				trm.reserveTable(tableId, resInfo);
-				DBConnector db= DBConnector.getInstance();
-				
-				if(resInfo.contains("2")){
-					trm.reserveForUser(name, tableId, resInfo);
-					MailSender.sendTableReservationConfirmationrMail(name, db.getUser(name).getMail());
+		UserManager um = new UserManager();
+		RequestDispatcher dispatch;
+		if(um.userExists(name)){
+			for (int i = 0; i <= res.length/2; i+=2) {
+				int tableId = Integer.parseInt(res[i+1]);
+				System.out.println(Arrays.toString(res)+" "+i);
+				String resInfo = res[i+2];
+				try {
+					trm.reserveTable(tableId, resInfo);
+					DBConnector db= DBConnector.getInstance();
+					
+					if(resInfo.contains("2")){
+						trm.reserveForUser(name, tableId, resInfo);
+						MailSender.sendTableReservationConfirmationrMail(name, db.getUser(name).getMail());
+					}
+				} catch (SQLException e) {
+					e.printStackTrace();
+				} catch (AddressException e) {
+					e.printStackTrace();
+				} catch (MessagingException e) {
+					e.printStackTrace();
+				} catch (InterruptedException e) {
+					e.printStackTrace();
 				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			} catch (AddressException e) {
-				e.printStackTrace();
-			} catch (MessagingException e) {
-				e.printStackTrace();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
 			}
+			dispatch = request.getRequestDispatcher("OrderingView.jsp");
+		}else {
+			dispatch = request.getRequestDispatcher("InvalidUsername.html");
 		}
-		RequestDispatcher dispatch = request.getRequestDispatcher("OrderingView.jsp");
 		dispatch.forward(request, response);
 	}
 }
