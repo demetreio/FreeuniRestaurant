@@ -42,11 +42,14 @@
 				
 			</tr>
 			<%
-				TableInfo ti = new TableInfo();
-					ArrayList<ge.edu.freeuni.restaurant.logic.Table> tables = ti.getAllTables();
-					ge.edu.freeuni.restaurant.logic.Table curTable;
-					for (int i = 0; i < tables.size(); i++) {
-						curTable = tables.get(i);
+			UserTableCheck utc = new UserTableCheck();
+			utc.checkAndUpdateDatabase();
+			
+			TableInfo ti = new TableInfo();
+			ArrayList<ge.edu.freeuni.restaurant.logic.Table> tables = ti.getAllTables();
+			ge.edu.freeuni.restaurant.logic.Table curTable;
+			for (int i = 0; i < tables.size(); i++) {
+			curTable = tables.get(i);
 						out.print("<tr class=\"tr\" id=\"");
 						out.print(curTable.getId()+"\">");
 						out.print("<td>");

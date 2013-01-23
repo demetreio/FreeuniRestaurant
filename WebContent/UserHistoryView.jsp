@@ -29,8 +29,7 @@
 					out.print("<td> "+list.get(i).getNumberOfVisits()+" </td> ");
 					out.print("<td> "+list.get(i).getNumberOfBookings()+" </td> ");
 					out.print("<td> "+((100*list.get(i).comingPersentage())+"%")+" </td> ");
-					out.print("<td> "+list.get(i).averageMoneySpent()+" </td> ");
-					out.print("</tr>");
+					out.print("<td> "+list.get(i).averageMoneySpent()+" </td> ");					out.print("</tr>");
 				}
 			}
 		%>
