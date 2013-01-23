@@ -1,11 +1,19 @@
+
 package ge.edu.freeuni.restaurant.presentation;
 
+import ge.edu.freeuni.restaurant.logic.RealTimeEdit;
+
 import java.io.IOException;
+import java.util.Enumeration;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.apache.catalina.connector.Request;
 
 /**
  * Servlet implementation class AdminServlet
@@ -34,16 +42,21 @@ public class AdminServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String act = request.getParameter("butt");
-		if(act!=null){
-			System.out.println();
-		}
+		RealTimeEdit real = new RealTimeEdit();
+		RequestDispatcher dispatch;
 		if (act.equals("Stand up")) {
 		    //stand up button was pressed
 			System.out.println("stand up was pressed");
+			real.setTableFree(Integer.parseInt(request.getParameter("hidden")));
+			System.out.println((Integer.parseInt(request.getParameter("hidden"))));
+			//dispatch = request.getRequestDispatcher("TableView.jsp");
 		} 
-		else{ 
+		else{
+			real.setTableBusy(Integer.parseInt(request.getParameter("hidden")),request.getParameter("users"));
+			System.out.println((Integer.parseInt(request.getParameter("hidden"))));
 			System.out.println("order");
 		} 
 	}
 
 }
+

@@ -32,4 +32,18 @@ public class UserManager {
 	public void deleteUser(String username){
 		dbc.deleteUser(username);
 	}
+	
+	/**
+	 * momxmarebeli tu ar arsebobs, dbc.getUser(username) sheqmnis
+	 * User obieqts, romelic null aris da ar gauketebs inicializebas.
+	 * @param username
+	 * @return
+	 */
+	public boolean userExists(String username){
+		User usr = dbc.getUser(username);
+		if(usr == null){
+			return false;
+		}
+		return true;
+	}
 }
