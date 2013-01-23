@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class DBConnector{
 	private static Object lock  = new Object();
 	static String server = "localhost";
-	static String password = ""; //<---------
+	static String password = "nika"; //<---------
 	static String account = "root";
 	static String database = "test"; //<--------- 
 	private static  Connection con;

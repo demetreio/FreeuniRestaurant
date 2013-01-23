@@ -35,8 +35,7 @@
 			out.print("<td>");
 			out.print("<input type=\"submit\" name=butt value=\"Stand up\">");
 			out.print("</td>");	
-		}
-		else{
+		} else {
 			ArrayList <String> arr = User.getUsers();
 			out.print("<td>");
 			out.print("<input type=\"submit\" name=butt value=\"Order \">");
