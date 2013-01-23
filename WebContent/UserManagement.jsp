@@ -33,9 +33,9 @@
 			out.println("<h1>Your search returned no result</h1>");
 		}else{
 			out.println("<table border=\"1\">");
-			out.println("<tr><th>Name</th><th>Surname</th><th>Info</th></tr>");
+			out.println("<tr><th>Username</th><th>Name</th><th>Surname</th><th>Mail</th><th>Info</th></tr>");
 			for(User a:list){
-				out.println("<tr id=\""+a.getUsername()+"\"><td>"+a.getName()+"</td><td>"+a.getSurname()+"</td><td>"+a.getInfo()+"</td></tr>");
+				out.println("<tr id=\""+a.getUsername()+"\"><td>"+a.getUsername()+"</td><td>"+a.getName()+"</td><td>"+a.getSurname()+"</td><td>"+a.getMail()+"</td><td>"+a.getInfo()+"</td></tr>");
 			}
 			out.println("</table>");
 		}
