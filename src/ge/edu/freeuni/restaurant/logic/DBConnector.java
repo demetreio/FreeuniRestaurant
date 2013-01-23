@@ -485,7 +485,19 @@ public class DBConnector{
 	 * @throws SQLException
 	 */
 	public void deleteReservation(int table_id, int time_index, String username) throws SQLException {
-		
+		ResultSet rs = getUsersReservedInfo(username, table_id);
+		rs.next();
+		String str = rs.getString(3);
+		char [] ch= str.toCharArray();
+		ch[time_index] = '1';
+		str = new String(ch);
+		try {
+			stmt.executeUpdate("update USER_TABLE " +
+					" set reserveInfo =  '"+str+"' "+
+									" where username = '"+username+"' and id = "+table_id);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	/**
@@ -494,7 +506,13 @@ public class DBConnector{
 	 * @throws SQLException
 	 */
 	public ResultSet getAllRowsFromUserTable() throws SQLException {
-		return null; //STUB
+		ResultSet rs = null;
+		try {
+			rs = stmt.executeQuery("select * from USER_TABLE ");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return rs;
 	}
 	
 }
