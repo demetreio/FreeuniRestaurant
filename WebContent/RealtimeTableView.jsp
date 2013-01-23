@@ -13,7 +13,7 @@
 	Table curTable;
 	for (int i = 0; i < tables.size(); i++) {
 		curTable = tables.get(i);
-		out.print("<tr class=\"tr\" id=\"");
+		out.print("<tr id=\"");
 		out.print(curTable.getId()+"\">");
 		out.print("<td>");
 		out.print(curTable.getId());
