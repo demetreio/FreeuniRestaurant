@@ -1,5 +1,9 @@
 package ge.edu.freeuni.restaurant.logic;
 
+import java.lang.reflect.Array;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
 public class User {
 	
 	private String username;
@@ -16,6 +20,8 @@ public class User {
 	
 	private boolean admin;
 	
+	private static DBConnector dbc;
+	
 	
 	public User(String username, String password, String mail, String name, String surname, String info, boolean admin) {
 		this.username = username;
@@ -27,6 +33,19 @@ public class User {
 		this.admin = admin;
 	}
 	
+	public static ArrayList<String> getUsers(){
+		dbc = DBConnector.getInstance();
+		ArrayList<String> usernames;
+		try {
+			usernames = dbc.getAllUsers();
+			return usernames;
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+			return null;
+		}
+		
+	}
 
 	public String getUsername() {
 		return username;
