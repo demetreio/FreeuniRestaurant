@@ -1,6 +1,7 @@
 import ge.edu.freeuni.restaurant.logic.DBConnector;
 
 import java.sql.*;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -23,7 +24,7 @@ public class DBConnectorTests {
 	
 	//shekveta cxrilshi insert operaciis da select operaciebis datestva
 	@Test
-	public void testOne() throws ClassNotFoundException, SQLException {
+	public void testshekvetaInsertAndUpdate() throws ClassNotFoundException, SQLException {
 		db.insertIntoShekveta("dzamuka", 1, 3);
 		ResultSet rs = db.selectFromShekvetaByUserName("dzamuka");
 		while(rs.next()){
@@ -57,6 +58,30 @@ public class DBConnectorTests {
 		 rs = db.selectFromShekvetaByUserName("shaliko");
 		 Assert.assertTrue(rs.next());
 		 
+	}
+	
+	@Test
+	public void removeFromShekvetaTest() throws SQLException{
+		db.insertIntoShekveta("raime", 10, 31);
+		db.insertIntoShekveta("ixvi", 11, 31);
+		db.insertIntoShekveta("raime", 12, 31);
+		db.insertIntoShekveta("kata", 13, 31);
+		db.insertIntoShekveta("raime", 13, 31);
+		db.removeFromShekvetaByName("raime");
+		
+		 ResultSet rs = db.selectFromShekvetaByUserName("raime");
+		 Assert.assertFalse(rs.next());
+		 
+		 db.insertIntoShekveta("raime", 10, 31);
+			db.insertIntoShekveta("ixvi", 11, 31);
+			db.insertIntoShekveta("raime", 12, 31);
+			db.insertIntoShekveta("kata", 13, 31);
+			db.insertIntoShekveta("raime", 13, 31);
+			db.removeFromShekvetaByName("kata");
+			 
+			 rs = db.selectFromShekvetaByUserName("raime");
+			 Assert.assertTrue(rs.next());
+			 
 	}
 	
 }
