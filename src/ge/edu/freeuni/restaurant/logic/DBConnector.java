@@ -296,6 +296,7 @@ public class DBConnector{
 	public void deleteUser(String username){
 		try {
 			stmt.executeUpdate("delete from user where username = \""+username+"\"");
+			stmt.executeUpdate("delete from user_table where username = \""+username+"\"");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
