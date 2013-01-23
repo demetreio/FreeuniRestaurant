@@ -12,7 +12,7 @@ public class DBConnector{
 	static String server = "localhost";
 	static String password = ""; //<---------
 	static String account = "root";
-	static String database = "test"; //<--------- 
+	static String database = "test1"; //<--------- 
 	private static  Connection con;
 	private static DBConnector db;
 	static Statement stmt;
@@ -36,7 +36,7 @@ public class DBConnector{
 			 con = DriverManager.getConnection("jdbc:mysql://" + server, account, password);
 			 stmt = con.createStatement();
 			 stmt.executeQuery("USE " + database);
-			System.out.println("done");
+				
 
 		}
 		catch (ClassNotFoundException e) {
@@ -296,7 +296,6 @@ public class DBConnector{
 	public void deleteUser(String username){
 		try {
 			stmt.executeUpdate("delete from user where username = \""+username+"\"");
-			stmt.executeUpdate("delete from user_table where username = \""+username+"\"");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -314,12 +313,9 @@ public class DBConnector{
 		return rset;
 	}
 	
-	public void updatePrice(String name, double price){
-		try {
-			stmt.executeUpdate("update menu set price = "+price+" where name = \""+name+"\"");
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+	public void updatePrice(int id, double price){
+		
+		
 		
 	}
 	
@@ -346,9 +342,9 @@ public class DBConnector{
 	}
 	
 	//menu xrilidan unda washalos mocemuli saxelis kerdzi
-	public void removeFromMenuByName(String name){
+	public void removeFromMenuByName(int id){
 		try {
-			stmt.executeUpdate("delete from menu where name = \""+name+"\"");
+			stmt.executeUpdate("delete from menu where id = "+id);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -387,42 +383,6 @@ public class DBConnector{
 	
 	
 	/**
-	 * Returns all the users from the database about who we have statistics.
-	 * @return The list of all users.
-	 */
-	public ResultSet selectFromUserHistory(){
-		ResultSet rs = null;
-		try {
-			rs = stmt.executeQuery("select * from UserHistory ");
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return rs;
-	}
-	
-	
-	public ResultSet selectNameByIdFromMenu(int id){
-		ResultSet rs = null;
-		try {
-			rs = stmt.executeQuery("select name from menu where id='"+id+"'");
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return rs;
-	}
-	
-	public void updateResultsInUserHistory(String userName, int visits, int bookings, int notCome, double moneySpent){
-		try {
-			stmt.executeUpdate("update userhistory " +
-					" set visits = visits + "+visits+", bookings = bookings + "+bookings+", notcome = notcome + " +
-							" "+notCome+", totalmoney = totalmoney + "+moneySpent +" " +
-									" where username = '"+userName+"'");
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	/**
 	 * es metodi washlis yvela tables tu arsebobs da axlidan sheqmnis, mattvis vinc bazas testavs
 	 * @throws SQLException
 	 */
@@ -446,6 +406,24 @@ public class DBConnector{
 		stmt.execute("CREATE TABLE USER_TABLE ( username varchar(50) NOT NULL, id INT NOT NULL, reserveInfo VARCHAR(100), PRIMARY KEY (username,id))");
 		stmt.execute("CREATE TABLE User (username varchar(50) NOT NULL, password varchar(50) NOT NULL, name varchar(50) NOT NULL,surname varchar(50) NOT NULL, info varchar(50) NOT NULL, admin boolean not null default 0, PRIMARY KEY (username))");
 		
+	}
+
+	/**
+	 * Returns true if this food exists in menu
+	 * else false.
+	 * @param foodID
+	 * @return
+	 */
+	public boolean existFood(int foodId) {
+		ResultSet rset;
+		try {
+			rset = stmt.executeQuery("select * from menu where id = " + foodId);
+			rset.last();
+			return rset.getRow() > 0;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 	
 }
