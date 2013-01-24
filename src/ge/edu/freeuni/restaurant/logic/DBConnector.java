@@ -12,7 +12,7 @@ public class DBConnector{
 	static String server = "localhost";
 	static String password = ""; //<---------
 	static String account = "root";
-	static String database = "test"; //<--------- 
+	static String database = "db1"; //<--------- 
 	private static  Connection con;
 	private static DBConnector db;
 	static Statement stmt;
@@ -536,5 +536,15 @@ public class DBConnector{
 		ResultSet rs = stmt.executeQuery("select * from occupation where table_id = "+table_id);
 		return rs.next();
 	}
+	
+	/**
+	 * This method inserts new row to the UserHistory table in the database. Is invoked when the new user registers.
+	 * @param username the new username
+	 * @throws SQLException
+	 */
+	public void initializeUserHistoryTable(String username) throws SQLException {
+		stmt.executeUpdate("insert into userhistory values ('"+username+"', 0, 0, 0, 0)");
+	}
+	
 	
 }

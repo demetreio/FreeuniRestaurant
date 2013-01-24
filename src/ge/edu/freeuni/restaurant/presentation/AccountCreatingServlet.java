@@ -5,6 +5,8 @@ import ge.edu.freeuni.restaurant.logic.MailSender;
 import ge.edu.freeuni.restaurant.logic.User;
 import ge.edu.freeuni.restaurant.logic.UserManager;
 import java.io.IOException;
+import java.sql.SQLException;
+
 import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
 import javax.servlet.RequestDispatcher;
@@ -69,6 +71,12 @@ public class AccountCreatingServlet extends HttpServlet {
 					e.printStackTrace();
 				}
 				RequestDispatcher dispatch = request.getRequestDispatcher("AccountCreated.jsp");
+				try{
+					um.insertIntoUserHistoryTable(username);
+				}
+				catch(SQLException ex){
+					ex.printStackTrace();
+				}
 				dispatch.forward(request, response);
 			} else {
 				RequestDispatcher dispatch = request.getRequestDispatcher("username-in-use.jsp");

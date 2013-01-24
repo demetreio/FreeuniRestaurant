@@ -1,5 +1,7 @@
 package ge.edu.freeuni.restaurant.logic;
 
+import java.sql.SQLException;
+
 
 /**
  * TODO Put here a description of what this class does.
@@ -22,7 +24,10 @@ public class UserManager {
 	}
 	public boolean isAdmin(String username){
 		return dbc.isAdmin(username);
-		
+	}
+	
+	public void insertIntoUserHistoryTable(String username) throws SQLException {
+		dbc.initializeUserHistoryTable(username);
 	}
 	
 	public User getUser(String username){
