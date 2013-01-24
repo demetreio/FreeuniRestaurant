@@ -44,9 +44,7 @@ public class shekveta {
 	public void saveIntoDB(String tables, String times){
 		if(getSize()>0){
 			DBConnector db =  DBConnector.getInstance();
-			System.out.println(tables+"   ----   "+times);
 			String [] tbls = tables.split(",");
-			System.out.println(tbls.length+" --- tbls.length");
 			String [] timePerTable = times.split("/");
 			for(int m = 0; m < tbls.length; m++){
 				int tableId = Integer.parseInt(tbls[m]);
@@ -54,7 +52,6 @@ public class shekveta {
 				if(timePerTable[m].isEmpty())continue;
 				String [] resTimes = timePerTable[m].split(",");
 				for(int n = 0; n < resTimes.length; n++){
-					System.out.println(resTimes[n]+"  ---- resTimes[n]");
 					int t = Integer.parseInt(resTimes[n]);
 					for (int i = 0; i < arr.size(); i++) {
 						db.insertIntoShekveta(arr.get(i).getName(), tableId, t, arr.get(i).getId(), arr.get(i).getQuantity());		
