@@ -33,13 +33,19 @@
 		out.print("</td>");
 		if(curTable.isBusy()){
 			out.print("<td>");
+	//		out.print("<input type=\"submit\" name=butt value=\"Stand up\">");
+	//		out.print("<input type=\"text\" name=tf value=\"Stand\">");
+			out.print("<form id='myform' >");
+			out.print("<input type=\"textbox\" id=\"field\"/>");
 			out.print("<input type=\"submit\" name=butt value=\"Stand up\">");
-			out.print("</td>");	
+			out.print("</form>");
+			out.print("</td>");
 		} else {
 			ArrayList <String> arr = User.getUsers();
 			out.print("<td>");
 			out.print("<input type=\"submit\" name=butt value=\"Order \">");
 			out.print(" <select name = \"users\"> <option value=\"guest\" </option> ");
+			
 			for(int j = 0;j<arr.size();j++){
 					out.print("<option> "+ arr.get(j) +"</option>");
 			}

@@ -29,7 +29,7 @@ public class UserWithTableInfo {
 	public void updateUsersBookedTablesIfLate() throws SQLException, ParseException {
 		DBConnector db = DBConnector.getInstance();
 		for(int i=0; i<reserveInfo.length()/2; i++){
-			if(reserveInfo.charAt(i)=='2' && !db.isOccupiedTable(table_id)){
+			if(reserveInfo.charAt(i)=='2'){
 				Date date = dateForIndex(i, curdate);
 				updateIfLate(i, date);
 			}

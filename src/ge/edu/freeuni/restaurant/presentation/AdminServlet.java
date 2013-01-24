@@ -51,6 +51,7 @@ public class AdminServlet extends HttpServlet {
 
 		} 
 		else{
+			
 			real.setTableBusy(Integer.parseInt(request.getParameter("hidden")),request.getParameter("users"));
 			dispatch = request.getRequestDispatcher("TableView.jsp");
 		}

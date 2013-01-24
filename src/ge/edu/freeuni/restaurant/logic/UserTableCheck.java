@@ -36,7 +36,7 @@ public class UserTableCheck {
 	private void doUpdates(ArrayList<String> userNames, ArrayList<Integer> ids, ArrayList<String> reservedInfos, int ind) throws ParseException, SQLException{
 		String userName = userNames.get(ind), reserveInfo = reservedInfos.get(ind);
 		int tableId = ids.get(ind);
-		System.out.println("daerxa "+userName+" "+tableId+" "+reserveInfo);
+		//System.out.println("daerxa "+userName+" "+tableId+" "+reserveInfo);
 		UserWithTableInfo userInfo = new UserWithTableInfo(userName, tableId, reserveInfo);
 		userInfo.updateUsersBookedTablesIfLate();
 	}
