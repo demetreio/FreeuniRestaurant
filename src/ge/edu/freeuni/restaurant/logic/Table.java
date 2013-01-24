@@ -51,7 +51,7 @@ public class Table {
 	 * @return false if cannot reserve, true if reservation was succesful
 	 * @throws SQLException 
 	 */
-	public synchronized boolean reserveTable(int timeIndex) throws SQLException{
+	public synchronized boolean reserveTable(String timeIndex) throws SQLException{
 		DBConnector db=DBConnector.getInstance();
 		return db.reserveTable(this.id, timeIndex);
 	}
