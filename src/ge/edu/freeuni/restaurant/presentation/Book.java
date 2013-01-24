@@ -8,6 +8,7 @@ import ge.edu.freeuni.restaurant.logic.UserManager;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Arrays;
+import java.util.*;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
@@ -51,11 +52,21 @@ public class Book extends HttpServlet {
 		String name = res[0];
 		UserManager um = new UserManager();
 		RequestDispatcher dispatch;
+		String reservedTables = "";
+		String reservedTimes = "";
 		if(um.userExists(name)){
 			for (int i = 0; i <= res.length/2; i+=2) {
 				int tableId = Integer.parseInt(res[i+1]);
+				reservedTables += tableId+",";
 				String resInfo = res[i+2];
 				try {
+					for(int j=0; j<resInfo.length(); j++){
+						if(resInfo.charAt(j) == '2'){
+							reservedTimes += j+",";
+						}
+					}
+					reservedTimes += "/";
+					
 					trm.reserveTable(tableId, resInfo);
 					DBConnector db= DBConnector.getInstance();
 					
@@ -73,6 +84,8 @@ public class Book extends HttpServlet {
 					e.printStackTrace();
 				}
 			}
+			request.setAttribute("reservedTables", reservedTables);
+			request.setAttribute("reservedTimes", reservedTimes);
 			request.setAttribute("reservingForUser", name);
 			dispatch = request.getRequestDispatcher("OrderingView.jsp");
 		}else {
