@@ -1,5 +1,7 @@
 package ge.edu.freeuni.restaurant.logic;
 
+import java.util.*;
+
 public class Kerdzi {
 	
 	private int id; 
@@ -7,7 +9,7 @@ public class Kerdzi {
 	private double price;
 	private String saxeoba;
 	
-	public Kerdzi(int id, String name, double price, String saxeoba){
+	public Kerdzi(int id, String name, double price, String saxeoba, ArrayList<Ingredienti> array ){
 		this.id = id;
 		this.name = name; 
 		this.price = price;
