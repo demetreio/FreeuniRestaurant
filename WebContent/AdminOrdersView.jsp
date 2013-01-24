@@ -13,6 +13,7 @@
 		Boolean isAdmin = false;
 		User user;
 		%>
+		
 		<%
 		if(session.getAttribute("user") != null){ 
 			user = (User)session.getAttribute("user");
@@ -24,13 +25,27 @@
 		userName = request.getParameter("user");
 		if(isAdmin){
 		%>
-		<h1 style="color: green;">Orders By <%= userName%>></h1>
-		<% session.setAttribute("ordersByUser", userName);%>
-		<jsp:include page="PlacedOrderView.jsp" ></jsp:include>
-		<%}else{ %>
-		<h1>
-		katis k chertiam sabachiam :)
-		</h1>
-		<%}%>
+			<h1 style="color: green;">Orders By <%= userName %></h1>
+			<%session.setAttribute("ordersByUser", userName);%>
+			
+			<jsp:include page="PlacedOrderView.jsp" ></jsp:include>
+			
+			
+			<form action="UserWasServed" method="post">
+				<h1 style="color: green;">If user was served</h1>
+				<p>
+					<input type="hidden" value="<%= userName %>" name="user">
+					Please push the button "already served", and the orders will be deleted
+					<br>
+					<input type="submit" value="Already served">
+				</p>
+			</form>
+		<%
+		}else{ 
+		out.print("	<h1>");
+		out.print("	katis k chertiam sabachiam :)");
+		out.print("	</h1>");
+		}
+		%>
 </body>
 </html>

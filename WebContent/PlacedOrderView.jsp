@@ -6,7 +6,7 @@
 
 <center>
 <div border="1">
-    <h1 style="color: green;">Your order:</h1>
+    <h1 style="color: green;">Placed orders:</h1>
     
     <%!
 		private String usrname;
