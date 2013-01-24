@@ -95,7 +95,6 @@ public class DBConnector{
 	 */
 	public ResultSet getUsersReservedInfo(String username, int table_id) throws SQLException {
 		ResultSet rs;
-		System.out.println("select * from user_table where username = '"+username+"' and id = "+table_id);
 		rs = stmt.executeQuery("select * from user_table where username = '"+username+"' and id = "+table_id);
 		if(rs.next()){
 			return rs;
