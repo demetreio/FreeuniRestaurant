@@ -15,10 +15,14 @@
 	private String usrname;
 	private Menu menu;
 	private ArrayList<Kerdzi> mu;
+	private String reservedTables;
+	private String reservedTimes;
 	%>
 	<%
 	menu = new Menu();
 	mu = menu.getMenu();
+	reservedTables = (String)request.getAttribute("reservedTables");
+	reservedTimes = (String)request.getAttribute("reservedTimes");
 	if(request.getAttribute("reservingForUser") != null)
 		usrname = (String)request.getAttribute("reservingForUser");
 	%>
@@ -28,6 +32,8 @@
 		
 		<input type="hidden" name=username  value="<%= usrname %>"/>
 		<input type="hidden" name=menuSize  value="<%= mu.size() %>"/>
+		<input type="hidden" name=orderTables  value="<%= reservedTables %>"/>
+		<input type="hidden" name=orderTimes  value="<%= reservedTimes %>"/>
 
 		<table border="1">
 			<tr>
