@@ -555,8 +555,29 @@ public class DBConnector{
 		stmt.executeUpdate("insert into userhistory values ('"+username+"', 0, 0, 0, 0)");
 	}
 	
-	public ResultSet selectFromIngredients(int kerdzisId){
-		return null;
+	public void insertIntoIngredients(int product_id, int ingredient_id, String unit, Double quant){
+		try {
+			//System.out.println("insert into shekveta (username, kerdzi_id, quantity) values('"+userName+"',"+kerdzi_id+"," + quantity +")");
+			stmt.executeUpdate("insert into ingredients (product_id, ingredient_id, unit, quant) values("+product_id+","+ingredient_id+",'" + unit +"',"+quant+")");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void insertIntoIngsNames(int ingredient_id, String ingredient_name){
+		try {
+			//System.out.println("insert into shekveta (username, kerdzi_id, quantity) values('"+userName+"',"+kerdzi_id+"," + quantity +")");
+			stmt.executeUpdate("insert into ingsNames (ingredient_id, ingredient_name) values("+ingredient_id+",'"+ingredient_name+"')");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public ResultSet selectFromIngredients(int kerdzisId) throws SQLException{
+		System.out.println("select ingredient_name, quant, unit from ingsNames, ingredients where product_id ="+kerdzisId+" and ingredients.ingredient_id = ingsNames.ingredient_id");
+		ResultSet rs = stmt.executeQuery("select ingredient_name, quant, unit from ingsNames, ingredients where product_id ="+kerdzisId+" and ingredients.ingredient_id = ingsNames.ingredient_id");
+		
+		return rs;
 	}
 	
 }
