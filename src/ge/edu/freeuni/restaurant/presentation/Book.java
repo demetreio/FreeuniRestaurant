@@ -66,10 +66,8 @@ public class Book extends HttpServlet {
 						}
 					}
 					reservedTimes += "/";
-					
 					trm.reserveTable(tableId, resInfo);
-					DBConnector db= DBConnector.getInstance();
-					
+					DBConnector db= DBConnector.getInstance();	
 					if(resInfo.contains("2")){
 						trm.reserveForUser(name, tableId, resInfo);
 						MailSender.sendTableReservationConfirmationrMail(name, db.getUser(name).getMail());
