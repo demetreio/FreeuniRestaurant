@@ -12,7 +12,7 @@ public class Menu {
 		ArrayList<Kerdzi> list = new ArrayList<Kerdzi>();
 		if(rs!=null) {
 			while(rs.next()){
-				Kerdzi k = new Kerdzi(rs.getInt(1), rs.getString(2), rs.getDouble(3), rs.getString(4), null);
+				Kerdzi k = new Kerdzi(rs.getInt(1), rs.getString(2), rs.getDouble(3), rs.getString(4));
 				list.add(k);
 			}
 		}
@@ -34,5 +34,9 @@ public class Menu {
 			str = rs.getString(1);
 		}
 		return str;
+	}
+	
+	public ArrayList<Ingredienti> getIngredientsOf(String name){
+		return null;
 	}
 }

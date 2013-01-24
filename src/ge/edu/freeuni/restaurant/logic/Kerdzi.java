@@ -9,7 +9,7 @@ public class Kerdzi {
 	private double price;
 	private String saxeoba;
 	
-	public Kerdzi(int id, String name, double price, String saxeoba, ArrayList<Ingredienti> array ){
+	public Kerdzi(int id, String name, double price, String saxeoba){
 		this.id = id;
 		this.name = name; 
 		this.price = price;
