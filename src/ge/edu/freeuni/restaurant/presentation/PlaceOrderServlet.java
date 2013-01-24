@@ -48,7 +48,6 @@ public class PlaceOrderServlet extends HttpServlet {
 			amount = Integer.parseInt(request.getParameter("dish#"+i));
 			sh.addShekveta(i, amount);
 		}
-		System.out.println(sh.getSize());
 		sh.saveIntoDB();
 		RequestDispatcher dispatch = request.getRequestDispatcher("TableView.jsp");
 		dispatch.forward(request, response);
