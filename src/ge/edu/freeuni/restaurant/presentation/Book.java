@@ -53,7 +53,6 @@ public class Book extends HttpServlet {
 		if(um.userExists(name)){
 			for (int i = 0; i <= res.length/2; i+=2) {
 				int tableId = Integer.parseInt(res[i+1]);
-				System.out.println(Arrays.toString(res)+" "+i);
 				String resInfo = res[i+2];
 				try {
 					trm.reserveTable(tableId, resInfo);
