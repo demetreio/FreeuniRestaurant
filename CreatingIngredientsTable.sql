@@ -2,4 +2,4 @@
 
 Create table ingredients (product_id int not null,ingredient_id int not null,unit varchar(300),quant double);
 
-Create table ingsNames (ingredient_id int,ingredient_name varchar(400),PRIMARY KEY (ingredient_id));
+Create table ingsNames (ingredient_id int AUTO_INCREMENT ,ingredient_name varchar(400),PRIMARY KEY (ingredient_id));
