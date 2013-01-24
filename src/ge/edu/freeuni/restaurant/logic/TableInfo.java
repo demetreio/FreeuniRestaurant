@@ -29,14 +29,8 @@ public class TableInfo {
 			}
 		}else {
 		
-			// joinis gaormageba rom ar chaiyaros xcrilshi, masivis daxmarebit
-			// mxolod ertxel chavardeba magida
-			int[] arr = new int[1000];
 			while(rs.next()){
 				int tableId = rs.getInt(1);
-				if(arr[tableId]!=1){
-					arr[tableId] = 1;
-				}else continue;
 				int tableSize = rs.getInt(2);
 				String description = rs.getString(3);
 				int tableId1 = rs.getInt(4);
