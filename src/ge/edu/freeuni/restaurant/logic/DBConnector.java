@@ -99,6 +99,15 @@ public class DBConnector{
 		return null;
 	}
 	
+	public boolean wasReserved(String userName, int table_id, int index) throws SQLException{
+		ResultSet rs = getUsersReservedInfo(userName, table_id);
+		if(rs != null){
+			String str = rs.getString("reserveInfo");
+			if(str.charAt(index) != '1') return true;
+		}
+		return false;
+	}
+	
 	/**
 	 * @param table_id the id of a table we are interested in.
 	 * @param timeIndex index of the time, it's bit string with length = 30; first 0-14 bits are for the first day reservation
@@ -545,6 +554,5 @@ public class DBConnector{
 	public void initializeUserHistoryTable(String username) throws SQLException {
 		stmt.executeUpdate("insert into userhistory values ('"+username+"', 0, 0, 0, 0)");
 	}
-	
 	
 }
