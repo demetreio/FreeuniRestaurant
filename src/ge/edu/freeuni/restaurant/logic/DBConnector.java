@@ -277,7 +277,7 @@ public class DBConnector{
 	public ResultSet TableJoinOccupation(){
 		ResultSet rs = null;
 		try {
-			rs = stmt.executeQuery("select * from tables inner join occupation");
+			rs = stmt.executeQuery("select * from tables left join occupation on tables.id = occupation.table_id");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
