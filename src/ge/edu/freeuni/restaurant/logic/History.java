@@ -1,5 +1,7 @@
 package ge.edu.freeuni.restaurant.logic;
 
+import java.text.DecimalFormat;
+
 public class History {
 	private String userName;
 	private int visits;
@@ -29,7 +31,9 @@ public class History {
 	
 	public double comingPersentage(){
 		if(bookings==0) return -1;
-		return ((double)bookings - notCome)/bookings;
+		double d = ((double)bookings - notCome)/bookings;
+		DecimalFormat df = new DecimalFormat("#.##");
+		return Double.parseDouble(df.format(d))*100;
 	}
 	
 	public double averageMoneySpent(){
