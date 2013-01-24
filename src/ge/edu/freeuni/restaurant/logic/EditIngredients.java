@@ -14,9 +14,14 @@ public class EditIngredients {
 		db.changeQuantityIntoIngredients(kerdzisId, ingredientName, newQuantity);
 	}
 	
-	public void addIngredient(int kerdzisId, String ingredientName, double quantity, String unit) throws SQLException {
+	public void addIngredient(int kerdzisId, String ingredientName, double quantity, String unit){
 		DBConnector db = DBConnector.getInstance();
-		db.insertIntoIngredients(kerdzisId, ingredientName, quantity, unit);
+		try {
+			db.insertIntoIngredients(kerdzisId, ingredientName, quantity, unit);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 }
