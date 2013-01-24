@@ -38,6 +38,8 @@ public class History {
 	
 	public double averageMoneySpent(){
 		if(visits==0) return -1;
-		return ((double) totalMoneySpent)/visits;
+		double d = ((double) totalMoneySpent)/visits;
+		DecimalFormat df = new DecimalFormat("#.##");
+		return Double.parseDouble(df.format(d));
 	}
 }
