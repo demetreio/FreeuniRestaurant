@@ -45,7 +45,7 @@ public class shekveta {
 		if(getSize()>0){
 			DBConnector db =  DBConnector.getInstance();
 			for (int i = 0; i < arr.size(); i++) {
-				db.insertIntoShekveta(arr.get(i).getName(),arr.get(i).getId(), arr.get(i).getQuantity());		
+				db.insertIntoShekveta(arr.get(i).getName(), arr.get(i).getId(), arr.get(i).getQuantity());		
 			}
 		}
 	}

@@ -72,6 +72,7 @@ public class Book extends HttpServlet {
 					e.printStackTrace();
 				}
 			}
+			request.setAttribute("reservingForUser", name);
 			dispatch = request.getRequestDispatcher("OrderingView.jsp");
 		}else {
 			dispatch = request.getRequestDispatcher("InvalidUsername.html");
