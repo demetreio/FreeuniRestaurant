@@ -7,6 +7,7 @@ import ge.edu.freeuni.restaurant.logic.shekveta;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -41,6 +42,8 @@ public class PlaceOrderServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String username = request.getParameter("username");
 		int menuSize = Integer.parseInt(request.getParameter("menuSize"));
+		String reservedTables = request.getParameter("orderTables");
+		String reservedTimes = request.getParameter("orderTimes");
 		shekveta sh = new shekveta(username);
 		
 		int amount;
@@ -48,7 +51,7 @@ public class PlaceOrderServlet extends HttpServlet {
 			amount = Integer.parseInt(request.getParameter("dish#"+i));
 			sh.addShekveta(i, amount);
 		}
-		sh.saveIntoDB();
+		sh.saveIntoDB(reservedTables, reservedTimes);
 		RequestDispatcher dispatch = request.getRequestDispatcher("TableView.jsp");
 		dispatch.forward(request, response);
 	}
