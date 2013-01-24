@@ -1,7 +1,11 @@
 
 package ge.edu.freeuni.restaurant.presentation;
 
+import ge.edu.freeuni.restaurant.logic.DBConnector;
 import ge.edu.freeuni.restaurant.logic.RealTimeEdit;
+import ge.edu.freeuni.restaurant.logic.User;
+import ge.edu.freeuni.restaurant.logic.UserHistory;
+import ge.edu.freeuni.restaurant.logic.UserTableCheck;
 
 import java.io.IOException;
 import java.util.Enumeration;
@@ -44,14 +48,27 @@ public class AdminServlet extends HttpServlet {
 		String act = request.getParameter("butt");
 		RealTimeEdit real = new RealTimeEdit();
 		RequestDispatcher dispatch;
+		String username = request.getParameter("users");
+		int table_id = Integer.parseInt(request.getParameter("table"));
 		if (act.equals("Stand up")) {
+			username = request.getParameter("user");
 		    //stand up button was pressed
 			real.setTableFree(Integer.parseInt(request.getParameter("hidden")));
 			dispatch = request.getRequestDispatcher("TableView.jsp");
-
+			String moneySpent = request.getParameter("money");
+			System.out.println("spent money: "+moneySpent);
+			double spent = Double.parseDouble(moneySpent);
+			UserHistory uh = new UserHistory();
+			int isBooked = new UserTableCheck().isBookedByUserOnCurrentTime(username, table_id)? 1: 0;
+			uh.changeUserHistory(username, isBooked, 1, spent);
 		} 
 		else{
-			
+			UserTableCheck utc = new UserTableCheck();
+			boolean isBooked = utc.isBookedByUserOnCurrentTime(username, table_id);
+			System.out.println("booked: "+isBooked);
+			if(isBooked){
+				utc.markCameUser(username, table_id);
+			}
 			real.setTableBusy(Integer.parseInt(request.getParameter("hidden")),request.getParameter("users"));
 			dispatch = request.getRequestDispatcher("TableView.jsp");
 		}

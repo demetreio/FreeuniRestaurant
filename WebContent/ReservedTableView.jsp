@@ -1,4 +1,4 @@
-<%@ page import="ge.edu.freeuni.restaurant.logic.*"%>
+ <%@ page import="ge.edu.freeuni.restaurant.logic.*"%>
 <%@ page import="java.util.ArrayList;"%>
 
 <%

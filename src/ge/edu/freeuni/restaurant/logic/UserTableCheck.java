@@ -19,6 +19,34 @@ public class UserTableCheck {
 		}
 	}
 	
+	public void markCameUser(String username, int table_id){
+		DBConnector db = DBConnector.getInstance();
+		try{
+			db.markCameUser(username, table_id);
+		}
+		catch(SQLException ex){
+			
+		}
+		catch(ParseException ex){
+			
+		}
+	}
+	
+	public boolean isBookedByUserOnCurrentTime(String username, int table_id){
+		DBConnector db = DBConnector.getInstance();
+		try{
+			return db.isBookedByUserOnCurrentTime(username, table_id);
+		}
+		catch(SQLException ex){
+			ex.printStackTrace();
+			return false;
+		}
+		catch(ParseException ex){
+			ex.printStackTrace();
+			return false;
+		}
+	}
+	
 	public void checkAndUpdateDatabase() throws SQLException, ParseException {
 		ArrayList<String> usernames = new ArrayList<String>(), reserveInfos = new ArrayList<String>();
 		ArrayList<Integer> ids = new ArrayList<Integer>();

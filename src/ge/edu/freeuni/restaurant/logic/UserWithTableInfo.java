@@ -16,7 +16,6 @@ public class UserWithTableInfo {
 	//	 System.out.println(x);
 	}
 	
-	
 	public UserWithTableInfo(String username, int table_id, String reserveInfo) throws SQLException, ParseException{
 		this.username = username;
 		this.table_id = table_id;
@@ -27,7 +26,6 @@ public class UserWithTableInfo {
 	}
 	
 	public void updateUsersBookedTablesIfLate() throws SQLException, ParseException {
-		DBConnector db = DBConnector.getInstance();
 		for(int i=0; i<reserveInfo.length()/2; i++){
 			if(reserveInfo.charAt(i)=='2'){
 				Date date = dateForIndex(i, curdate);
@@ -57,6 +55,7 @@ public class UserWithTableInfo {
 	
 	private void updateIfLate(int timeIndex, Date date) throws ParseException, SQLException {
 		if(sysdate.compareTo(dateForIndex(timeIndex, curdate))>=0){ // user is late
+			System.out.println("aq vart");
 			DBConnector db = DBConnector.getInstance();
 			db.deleteReservation(table_id, timeIndex, username);
 			db.deleteReservationFromReservedTables(table_id, timeIndex);

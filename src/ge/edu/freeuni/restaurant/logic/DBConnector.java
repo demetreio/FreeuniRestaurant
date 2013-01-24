@@ -5,7 +5,11 @@ package ge.edu.freeuni.restaurant.logic;
  */
 
 import java.sql.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Locale;
+import java.util.StringTokenizer;
 
 public class DBConnector{
 	private static Object lock  = new Object();
@@ -620,6 +624,53 @@ public class DBConnector{
 			int id = Integer.parseInt(rs.getString("ingredient_id"));
 			insertIntoIngredientshelper(kerdzisId, id, unit, quantity);
 		}
+	}
+	
+	
+	/**
+	 * 
+	 * @param username the username we are interested in
+	 * @return 
+	 * @throws SQLException
+	 */
+	public boolean isBookedByUserOnCurrentTime(String username, int table_id) throws SQLException, ParseException {
+		int index = getTimeIndexForCurrentTime();
+		if(index==-1) return false;
+		ResultSet rset = stmt.executeQuery("select * from user_table where username='"+username+"' and id="+table_id);
+		System.out.println("select * from user_table where username='"+username+"' and id ="+table_id+" 11111");
+		rset.next();
+		String reserveInfo = rset.getString("reserveInfo");
+		return reserveInfo.charAt(index)!='1';
+	}
+	
+	private int getTimeIndexForCurrentTime() throws SQLException, ParseException {
+		String curdate = getCurrentDate();
+		java.util.Date d = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss", Locale.ENGLISH).parse(curdate);
+		StringTokenizer st = new StringTokenizer(d.toString());
+		System.out.println(d.toString());
+		for(int i=0; i<3; i++) st.nextToken();
+		String hms = st.nextToken();
+		String hour = hms.substring(0, 2);
+		int h = Integer.parseInt(hour);
+		if(9<=h && h<=23) return h-9;
+		return -1;
+	}
+	
+	/**
+	 * Marks in the user_table database that the user has came.
+	 * @param username the username
+	 * @throws SQLException
+	 */
+	public void markCameUser(String username, int table_id) throws SQLException, ParseException {
+		int timeIndex = getTimeIndexForCurrentTime();
+		if(timeIndex==-1) return;
+		ResultSet rset = stmt.executeQuery("select * from user_table where username = '"+username+"' and id="+table_id);
+		rset.next();
+		String str = rset.getString("reserveInfo");
+		char[] ch = str.toCharArray();
+		ch[timeIndex] = '3';
+		str = new String(ch);
+		stmt.executeUpdate("update user_table set reserveInfo = '"+str+"' where username = '"+username+"' and id="+table_id);
 	}
 	
 }

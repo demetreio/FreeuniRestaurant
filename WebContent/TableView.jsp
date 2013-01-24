@@ -17,7 +17,7 @@
 	<%if(admin){ %>
 		<a href="UserManagement.jsp">user management</a>
 		<a href="AdminMenuView.jsp">Change Restaurant Menu</a>
-		<a href="UserHistoryView.jsp">View User Stai</a>
+		<a href="UserHistoryView.jsp">View User Statistics</a>
 	<%} else {
 		%><a href="MenuView.jsp">Restaurant Menu</a><% }}%>
 	<center>
@@ -63,7 +63,8 @@
 						out.print(curTable.getSize());
 						out.print("</td>");
 			%>		<%-- es nawili pasuxs agebs "dajavshnuli/ardajavshnulis" chvenebaze --%>
-					<jsp:include page="ReservedTableView.jsp" ><jsp:param name="tableId" value="<%=curTable.getId()%>" /></jsp:include>
+					<jsp:include page="ReservedTableView.jsp" ><jsp:param name="tableId" value="<%=curTable.getId()%>" />
+					<jsp:param name="user" value="<%=usr%>" /></jsp:include>
 			<%
 					out.print("</tr>");
 				}

@@ -13,12 +13,16 @@
 	TableInfo ti = new TableInfo();
 	ArrayList<Table> tables = ti.getAllTables();
 	Table curTable;
+	String username = ((User)session.getAttribute("user")).getName();
 	for (int i = 0; i < tables.size(); i++) {
 		curTable = tables.get(i);
 		out.print("<form action=\"AdminServlet\" method=\"post\">");
 		out.print("<input type=\"hidden\" name= \"hidden\" value = \"");
 		out.print(curTable.getId());
 		out.print("\">");
+		if(curTable.isBusy()) username = curTable.getOccupantName();
+		out.print("<input type=\"hidden\" name=user value="+username+">");
+		out.print("<input type=\"hidden\" name=table value="+curTable.getId()+">");
 		out.print("<tr id=\"");
 		out.print(curTable.getId()+"\">");
 		out.print("<td>");
@@ -36,7 +40,7 @@
 	//		out.print("<input type=\"submit\" name=butt value=\"Stand up\">");
 	//		out.print("<input type=\"text\" name=tf value=\"Stand\">");
 			out.print("<form id='myform' >");
-			out.print("<input type=\"textbox\" id=\"field\"/>");
+			out.print("<input type=\"textbox\" name=money id=\"field\"/>");
 			out.print("<input type=\"submit\" name=butt value=\"Stand up\">");
 			out.print("</form>");
 			out.print("</td>");

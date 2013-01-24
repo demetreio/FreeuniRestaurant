@@ -46,6 +46,7 @@ public class Book extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		TableReserveManager trm = new TableReserveManager();
 		String param = request.getParameter("fieldi");
+		System.out.println("ageraa "+param);
 		String[] res = param.split(",");
 		String name = res[0];
 		UserManager um = new UserManager();
