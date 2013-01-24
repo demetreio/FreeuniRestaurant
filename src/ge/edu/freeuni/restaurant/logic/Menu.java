@@ -36,7 +36,16 @@ public class Menu {
 		return str;
 	}
 	
-	public ArrayList<Ingredienti> getIngredientsOf(int id){
-		return null;
+	public ArrayList<Ingredienti> getIngredientsOf(int id) throws SQLException{
+		DBConnector db = DBConnector.getInstance();
+		ResultSet rs = db.selectFromIngredients(id);
+		ArrayList<Ingredienti> list = new ArrayList<Ingredienti>();
+		if(rs != null){
+			while(rs.next()){
+				Ingredienti i = new Ingredienti(id, rs.getString(1), rs.getDouble(2), rs.getString(3));
+				list.add(i);
+			}
+		}
+		return list;
 	}
 }
