@@ -326,7 +326,7 @@ public class DBConnector{
 		try {
 			stmt.executeUpdate("delete from user where username = \""+username+"\"");
 			stmt.executeUpdate("delete from user_table where username = \""+username+"\"");
-			stmt.executeUpdate("delete from shekveta where username = \""+username+"\"");
+			stmt.executeUpdate("delete from orders where username = \""+username+"\"");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -388,7 +388,7 @@ public class DBConnector{
 	public void insertIntoShekveta(String userName, int tableId, int time, int kerdzi_id, int quantity){
 		try {
 			//System.out.println("insert into shekveta (username, kerdzi_id, quantity) values('"+userName+"',"+kerdzi_id+"," + quantity +")");
-			stmt.executeUpdate("insert into orders (username, table_id, reserve-time, kerdzi_id, quantity) values('"+userName+"',"+tableId+"," + time +"',"+kerdzi_id+"," + quantity +")" );
+			stmt.executeUpdate("insert into orders (username, table_id, reserve_time, kerdzi_id, quantity) values('"+userName+"',"+tableId+"," + time +","+kerdzi_id+"," + quantity +")" );
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
