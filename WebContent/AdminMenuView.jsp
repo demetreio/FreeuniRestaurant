@@ -100,8 +100,6 @@
 					Kerdzi curKerdzi;
 					for (int i = 0; i < kerdzebe.size(); i++) {
 						curKerdzi = kerdzebe.get(i);
-						out.print(curKerdzi.getId());
-						out.print("\">");
 						out.print("<tr class=\"tr\" id=\"");
 						out.print(curKerdzi.getId()+"\">");
 						out.print("<td>");
