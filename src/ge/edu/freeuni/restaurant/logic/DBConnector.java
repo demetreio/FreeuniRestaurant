@@ -106,21 +106,6 @@ public class DBConnector{
 	 * @return true if the table reserved successfully and false if it is allready reserved.
 	 */
 	
-	public boolean reserveTable(int table_id, int timeIndex) throws SQLException{
-		ResultSet rset;
-		rset = stmt.executeQuery("select * from ReservedTables where id = "+table_id);
-
-		if(rset.next()){
-			String str =  rset.getString("reserveInfo");
-			if(str.charAt(timeIndex) == '1') return false;
-			char[] arr = str.toCharArray();
-			arr[timeIndex] = '1';
-			String newOne = new String(arr);
-			stmt.executeUpdate("update ReservedTables set reserveInfo = '" + newOne + "' where id =" +table_id);
-		}
-		return true;
-	}
-	
 	public boolean reserveTable(int table_id, String timeIndex) throws SQLException{
 			char[] arr = timeIndex.toCharArray();
 			for (int i = 0; i < timeIndex.length(); i++) {
@@ -133,17 +118,26 @@ public class DBConnector{
 	
 	public void reserveForUser(String userId, int table_id, String timeIndex) throws SQLException{
 		char[] arr = timeIndex.toCharArray();
-		for (int i = 0; i < timeIndex.length(); i++) {
-			if(timeIndex.charAt(i)=='2')arr[i]='2';
-			else arr[i] = '1';
-		}
-		String newOne = new String(arr);
+		String newOne = "";
 		ResultSet rset;
 		rset = stmt.executeQuery("select * from user_table where username = '"+userId+"' and id="+table_id);
 
 		if(rset.next()){
+			String userReserveInfo = rset.getString(3);
+			arr = userReserveInfo.toCharArray();
+			for (int i = 0; i < timeIndex.length(); i++) {
+				if(timeIndex.charAt(i)=='2'){
+					arr[i] = '2';
+				}
+			}
+			newOne = new String(arr);
 			stmt.executeUpdate("update user_table set reserveInfo = '" + newOne + "' where username='"+userId+"' and id =" +table_id);
 		}else{
+			for (int i = 0; i < timeIndex.length(); i++) {
+				if(timeIndex.charAt(i)=='2')arr[i]='2';
+				else arr[i] = '1';
+			}
+			newOne = new String(arr);
 			stmt.executeUpdate("insert into user_table values('"+userId+"',"+table_id+","+newOne+")");
 		}
 	}
