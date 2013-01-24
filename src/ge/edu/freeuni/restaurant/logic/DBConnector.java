@@ -555,4 +555,8 @@ public class DBConnector{
 		stmt.executeUpdate("insert into userhistory values ('"+username+"', 0, 0, 0, 0)");
 	}
 	
+	public ResultSet selectFromIngredients(int kerdzisId){
+		return null;
+	}
+	
 }
