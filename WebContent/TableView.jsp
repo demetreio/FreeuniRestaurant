@@ -113,7 +113,6 @@
 					for(var j = 3; j < td.length; j++){
 						var col = td[j].style.backgroundColor;
 						pass_param += (col=="blue"?"2":col=="green"?0:1);
-					//	pass_param += (col=="red"?"1":col=="green"?0:2);
 					}
 				}
 				submitForm(pass_param);
