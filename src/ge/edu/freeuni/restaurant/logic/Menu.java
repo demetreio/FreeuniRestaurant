@@ -36,7 +36,7 @@ public class Menu {
 		return str;
 	}
 	
-	public ArrayList<Ingredienti> getIngredientsOf(String name){
+	public ArrayList<Ingredienti> getIngredientsOf(int id){
 		return null;
 	}
 }
