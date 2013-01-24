@@ -539,7 +539,7 @@ public class DBConnector{
 	}
 	
 	public boolean isOccupiedTable(int table_id) throws SQLException{
-		ResultSet rs = stmt.executeQuery("select * from occupation where id = "+table_id);
+		ResultSet rs = stmt.executeQuery("select * from occupation where table_id = "+table_id);
 		return rs.next();
 	}
 	
