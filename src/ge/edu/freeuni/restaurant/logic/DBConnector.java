@@ -580,4 +580,16 @@ public class DBConnector{
 		return rs;
 	}
 	
+	public void deleteFromIngredients(int kerdzisId, String ingredientName){
+		
+	}
+	
+	public void changeQuantityIntoIngredients(int kerdzisId, String ingredientName, double newQuantity){
+		
+	}
+	
+	public void insertIntoIngredients(int kerdzisId, String ingredientName, double quantity, String unit){
+		//tu ingredienti araa bazashi, mashin chaematos (id tavisit unda ezrdebodes), da mere chaamatos kerdztan ertad...
+	}
+	
 }
