@@ -100,8 +100,6 @@
 					Kerdzi curKerdzi;
 					for (int i = 0; i < kerdzebe.size(); i++) {
 						curKerdzi = kerdzebe.get(i);
-						out.print("<form action=\"AdminServlet\" method=\"post\">");
-						out.print("<input type=\"hidden\" name= \"hidden\" value = \"");
 						out.print(curKerdzi.getId());
 						out.print("\">");
 						out.print("<tr class=\"tr\" id=\"");
@@ -117,7 +115,7 @@
 						out.print("<td>" + curKerdzi.getSaxeoba());
 						out.print("</td>");
 						out.print("<td>");
-						out.print("<input type=\"submit\" name=butt value=\"View \">");
+						out.print("<a href=\"viewIngrendients.jsp?id=" + curKerdzi.getId()+ "\"> view Ingredients</a> ");
 						out.print("</td>");
 						out.print("</tr>");
 						out.print("</form>");
