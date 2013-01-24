@@ -19,9 +19,8 @@
 	<%
 	menu = new Menu();
 	mu = menu.getMenu();
-	if(session.getAttribute("user") != null)
-		usr = (User)session.getAttribute("user");
-		usrname = usr.getUsername();
+	if(request.getAttribute("reservingForUser") != null)
+		usrname = (String)request.getAttribute("reservingForUser");
 	%>
 	<center>
 	<form action="PlaceOrderServlet" method="post">
