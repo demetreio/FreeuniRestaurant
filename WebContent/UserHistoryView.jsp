@@ -28,8 +28,10 @@
 					out.print("<td> "+list.get(i).getName()+" </td> ");
 					out.print("<td> "+list.get(i).getNumberOfVisits()+" </td> ");
 					out.print("<td> "+list.get(i).getNumberOfBookings()+" </td> ");
-					out.print("<td> "+((100*list.get(i).comingPersentage())+"%")+" </td> ");
-					out.print("<td> "+list.get(i).averageMoneySpent()+" </td> ");					out.print("</tr>");
+					String perc = list.get(i).comingPersentage()==-1? "NA": ""+list.get(i).comingPersentage()+"%";
+					out.print("<td> "+(perc)+" </td> ");
+					String avg = list.get(i).averageMoneySpent()==-1? "NA": ""+list.get(i).averageMoneySpent();
+					out.print("<td> "+avg+" </td> ");					out.print("</tr>");
 				}
 			}
 		%>
