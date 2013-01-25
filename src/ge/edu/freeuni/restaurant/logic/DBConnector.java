@@ -17,7 +17,7 @@ public class DBConnector{
 	static String server = "localhost";
 	static String password = ""; //<---------
 	static String account = "root";
-	static String database = "db1"; //<--------- 
+	static String database = "test"; //<--------- 
 	private static  Connection con;
 	private static DBConnector db;
 	static Statement stmt;
@@ -652,8 +652,8 @@ public class DBConnector{
 		int index = getTimeIndexForCurrentTime();
 		if(index==-1) return false;
 		ResultSet rset = stmt.executeQuery("select * from user_table where username='"+username+"' and id="+table_id);
-		System.out.println("select * from user_table where username='"+username+"' and id ="+table_id+" 11111");
-		rset.next();
+	//	System.out.println("select * from user_table where username='"+username+"' and id ="+table_id+" 11111");
+		if(!rset.next()) return false;
 		String reserveInfo = rset.getString("reserveInfo");
 		return reserveInfo.charAt(index)!='1';
 	}
@@ -662,7 +662,6 @@ public class DBConnector{
 		String curdate = getCurrentDate();
 		java.util.Date d = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss", Locale.ENGLISH).parse(curdate);
 		StringTokenizer st = new StringTokenizer(d.toString());
-		System.out.println(d.toString());
 		for(int i=0; i<3; i++) st.nextToken();
 		String hms = st.nextToken();
 		String hour = hms.substring(0, 2);
@@ -714,6 +713,19 @@ public class DBConnector{
 		cal.setTime(d);
 		cal.add(Calendar.SECOND, toAdd);
 		return cal.getTime();
+	}
+	
+	/**
+	 * Returns whether the time_index is already past.
+	 * @param time_index the time_index
+	 * @return whether the time_index is already past.
+	 * @throws SQLException
+	 * @throws ParseException
+	 */
+	public boolean timeIndexIsPast(int time_index) throws SQLException, ParseException {
+		int cur_time_index = getTimeIndexForCurrentTime();
+		if(cur_time_index == -1) return false;
+		return time_index <= cur_time_index;
 	}
 	
 }

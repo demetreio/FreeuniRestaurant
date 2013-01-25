@@ -56,16 +56,21 @@ public class AdminServlet extends HttpServlet {
 			real.setTableFree(Integer.parseInt(request.getParameter("hidden")));
 			dispatch = request.getRequestDispatcher("TableView.jsp");
 			String moneySpent = request.getParameter("money");
-			System.out.println("spent money: "+moneySpent);
-			double spent = Double.parseDouble(moneySpent);
-			UserHistory uh = new UserHistory();
-			int isBooked = new UserTableCheck().isBookedByUserOnCurrentTime(username, table_id)? 1: 0;
-			uh.changeUserHistory(username, isBooked, 1, spent);
+//			System.out.println("spent money: "+moneySpent);
+			try{
+				double spent = Double.parseDouble(moneySpent);
+				UserHistory uh = new UserHistory();
+				int isBooked = new UserTableCheck().isBookedByUserOnCurrentTime(username, table_id)? 1: 0;
+				uh.changeUserHistory(username, isBooked, 1, spent);
+			}
+			catch(NumberFormatException nfex){
+			//	System.out.println("daerxa bandas");
+			}
 		} 
 		else{
 			UserTableCheck utc = new UserTableCheck();
 			boolean isBooked = utc.isBookedByUserOnCurrentTime(username, table_id);
-			System.out.println("booked: "+isBooked);
+//			System.out.println("booked: "+isBooked);
 			if(isBooked){
 				utc.markCameUser(username, table_id);
 			}
