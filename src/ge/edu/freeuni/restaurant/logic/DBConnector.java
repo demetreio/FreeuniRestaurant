@@ -17,7 +17,7 @@ public class DBConnector{
 	static String server = "localhost";
 	static String password = ""; //<---------
 	static String account = "root";
-	static String database = "test"; //<--------- 
+	static String database = "db1"; //<--------- 
 	private static  Connection con;
 	private static DBConnector db;
 	static Statement stmt;
