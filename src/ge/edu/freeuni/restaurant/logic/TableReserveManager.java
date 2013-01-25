@@ -1,6 +1,7 @@
 package ge.edu.freeuni.restaurant.logic;
 
 import java.sql.SQLException;
+import java.text.ParseException;
 
 /**
  * Calls table reserve methods from database.
@@ -20,7 +21,18 @@ public class TableReserveManager {
 		
 	}
 	
-	public void reserveForUser(String userId, int table_id, String timeIndex) throws SQLException{
+	public void reserveForUser(String userId, int table_id, String timeIndex) throws SQLException, ParseException{
 		dbc.reserveForUser(userId, table_id, timeIndex);
+	}
+	
+	public void mailReminder(String username, String timeIndex) throws SQLException, ParseException{
+		for(int i = 0;i<timeIndex.length();i++){
+			if(timeIndex.charAt(i) == '2'){
+				java.util.Date d = dbc.getDateBeforeTimeIndex(i);
+				UserManager um = new UserManager();
+				MyThread mt = new MyThread(d, username, um.getUser(username).getMail());
+				mt.start();
+			}
+		}
 	}
 }
