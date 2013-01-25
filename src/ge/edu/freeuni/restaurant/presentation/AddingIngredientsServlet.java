@@ -43,7 +43,7 @@ public class AddingIngredientsServlet extends HttpServlet {
 		int prod_id;
 		if(butt.equals("Delete")){
 			String name = request.getParameter("hiddel");
-			prod_id = Integer.parseInt(request.getParameter("hidden"));
+			prod_id = Integer.parseInt(request.getParameter("hidid"));
 			EditIngredients ingr = new EditIngredients();
 			ingr.deleteEngredient(prod_id, name);
 		}

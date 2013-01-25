@@ -51,6 +51,9 @@ for(int i = 0;i<ingred.size();i++){
 	out.print("<input type=\"hidden\" name= \"hiddel\" value = \"");
 	out.print(curr.getName());
 	out.print("\">");
+	out.print("<input type=\"hidden\" name= \"hidid\" value = \"");
+	out.print(curr.getKerdzisId());
+	out.print("\">");
 	out.print("</form>");
 	out.print("</td>");
 	out.print("</tr>");
