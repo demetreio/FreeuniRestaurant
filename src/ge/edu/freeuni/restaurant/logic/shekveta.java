@@ -27,7 +27,7 @@ public class shekveta {
 	 * Returns the arraylist of usernames of all the users with at least one order.
 	 * @return the arraylist of usernames
 	 */
-	public ArrayList<String> usersWithSomeOrders(){
+	public static ArrayList<String> usersWithSomeOrders(){
 		ArrayList<String> list = new ArrayList<String>();
 		DBConnector db = DBConnector.getInstance();
 		try{

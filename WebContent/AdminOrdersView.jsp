@@ -23,7 +23,7 @@
 				isAdmin = true;
 			}
 		}
-		userName = user.getUsername();//("user");
+		//userName = user.getUsername();//("user");
 		if(isAdmin){
 			ArrayList<String> usersWithOrders = shekveta.usersWithSomeOrders();
 			for(int i=0; i<usersWithOrders.size(); i++){
