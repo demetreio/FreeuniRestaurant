@@ -19,6 +19,12 @@
 </tr>
 
 <%
+/* if(request.getAttribute(arg0)){
+	
+}
+else{
+	int prod_id =Integer.parseInt(request.getParameter("id")); 	
+} */
 int prod_id =Integer.parseInt(request.getParameter("id")); 
 Menu dish = new Menu();
 out.print(Integer.parseInt(request.getParameter("id")));
@@ -35,6 +41,9 @@ for(int i = 0;i<ingred.size();i++){
 	out.print("</td>");
 	out.print("<td>");
 	out.print(curr.getQuantity());
+	out.print("</td>");
+	out.print("<td>");
+	out.print("	<input type=\"submit\" name=butt value=\"delete\">");
 	out.print("</td>");
 	out.print("</tr>");
 }

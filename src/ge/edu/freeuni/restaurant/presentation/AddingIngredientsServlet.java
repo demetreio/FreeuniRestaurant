@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class AddingIngredientsServlet
@@ -45,9 +46,10 @@ public class AddingIngredientsServlet extends HttpServlet {
 		System.out.println(prod_id);
 		ingr.addIngredient(prod_id, name, quant, unit);
 		RequestDispatcher dispatch;
+		HttpSession session = request.getSession();
+		session.setAttribute("id",prod_id);
 		dispatch = request.getRequestDispatcher("viewIngrendients.jsp");
 		dispatch.forward(request,response);
-		
 	}
 
 }
