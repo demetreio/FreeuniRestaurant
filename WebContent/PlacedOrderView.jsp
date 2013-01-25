@@ -22,16 +22,20 @@
 	
 	<table border="1">
 		<tr>
+		
+			<th>Table ID</th>
 			<th>Dish name</th>
-			<th>amount</th>
+			<th>Amount</th>
+			<th>Order Time</th>
 		</tr>
 		<%
-		for(shekveta.ShekvetisErteuli dish : dishes){
-			out.print("<tr>");
-			out.print("<td>"+ (new Menu()).getName(dish.getId()) +"</td>");
-			out.print("<td>"+dish.getQuantity()+"</td>");
-			out.print("</tr>");
-		}
+			
+			for(shekveta.ShekvetisErteuli dish : dishes){
+				out.print("<tr>");
+				out.print("<td>"+ (new Menu()).getName(dish.getId()) +"</td>");
+				out.print("<td>"+dish.getQuantity()+"</td>");
+				out.print("</tr>");
+			}
 		%>
 	</table>
 </div>

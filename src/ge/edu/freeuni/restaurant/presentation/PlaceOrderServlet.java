@@ -51,13 +51,11 @@ public class PlaceOrderServlet extends HttpServlet {
 		try {
 			menu = m.getMenu();
 		} catch (SQLException exception) {
-			// TODO Auto-generated catch-block stub.
 			exception.printStackTrace();
 		}
 		int amount;
 		for (int i = 0; i < menu.size(); i++) {
 			amount = Integer.parseInt(request.getParameter("dish#"+menu.get(i).getId()));
-			System.out.println(amount);
 			sh.addShekveta(menu.get(i).getId(), amount);
 		}
 		sh.saveIntoDB(reservedTables, reservedTimes);
