@@ -23,7 +23,25 @@ public class shekveta {
 		return arr;
 	}
 	
+	/**
+	 * Returns the arraylist of usernames of all the users with at least one order.
+	 * @return the arraylist of usernames
+	 */
+	public ArrayList<String> usersWithSomeOrders(){
+		ArrayList<String> list = new ArrayList<String>();
+		DBConnector db = DBConnector.getInstance();
+		try{
+			ArrayList<String> allusers = db.getAllUsers();
+			for(int i=0; i<allusers.size(); i++) if(db.isAnythingOrderedByUser(allusers.get(i))) list.add(allusers.get(i));
+		}
+		catch(SQLException sqlex){
+			sqlex.printStackTrace();
+		}
+		return list;
+	}
+	
 	public static shekveta readAndCreate(String name) throws SQLException{
+		System.out.println("aq vart ra");
 		DBConnector db = DBConnector.getInstance();
 		ResultSet rs = db.selectFromShekvetaByUserName(name);
 		
@@ -42,32 +60,27 @@ public class shekveta {
 		return arr.size();
 	}
 	
-	public ArrayList<Integer> getOrderTableId() throws NumberFormatException, SQLException{
+	public int getOrderTableId() throws NumberFormatException, SQLException{
 		DBConnector db = DBConnector.getInstance();
-		ArrayList<Integer> ids = new ArrayList<Integer>();
-
 		ResultSet rs = db.selectFromShekvetaByUserName(name);
 		int id = 0;
 		while(rs.next()){
 			
 			id = Integer.parseInt(rs.getString("table_id"));
-			ids.add(id);
 		}
-		return ids;
+		return id;
 		
 	}
 	
-	public ArrayList<String> getOrderTime() throws NumberFormatException, SQLException{
+	public String getOrderTime() throws NumberFormatException, SQLException{
 		DBConnector db = DBConnector.getInstance();
-		ArrayList<String> times = new ArrayList<String>();
 		ResultSet rs = db.selectFromShekvetaByUserName(name);
 		String time = "";
 		while(rs.next()){
 			
 			time = rs.getString("reserve_time");
-			times.add(time);
 		}
-		return times;
+		return time;
 	}
 
 	public void saveIntoDB(String tables, String times){

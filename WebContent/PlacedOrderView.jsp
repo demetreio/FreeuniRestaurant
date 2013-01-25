@@ -11,15 +11,12 @@
     <%!
 		private String usrname;
     	private ArrayList<shekveta.ShekvetisErteuli> dishes;
-    	private shekveta sh;
 	%>
 	<%
 		if(session.getAttribute("ordersByUser") != null){ 
 			usrname = (String)session.getAttribute("ordersByUser");
-			
-			sh = shekveta.readAndCreate(usrname);
-			dishes = sh.getDishes();
-	
+		shekveta sh = shekveta.readAndCreate(usrname);
+		dishes = sh.getDishes();
 		}
 	%>
 	
@@ -32,17 +29,13 @@
 			<th>Order Time</th>
 		</tr>
 		<%
-			ArrayList<String> times = sh.getOrderTime();
-			ArrayList<Integer> ids = sh.getOrderTableId();
-			int i = 0;
+
+			
 			for(shekveta.ShekvetisErteuli dish : dishes){
 				out.print("<tr>");
-				out.print("<td>"+ ids.get(i) + "</td>");
 				out.print("<td>"+ (new Menu()).getName(dish.getId()) +"</td>");
 				out.print("<td>"+dish.getQuantity()+"</td>");
-				out.print("<td>"+ times.get(i) + "</td>");
 				out.print("</tr>");
-				i++;
 			}
 		%>
 	</table>

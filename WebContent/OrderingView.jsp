@@ -53,6 +53,10 @@
 			}
 			%>
 		</table>
+		
+		<% session.setAttribute("ordersByUser", usrname); %>
+		<jsp:include page="PlacedOrderView.jsp"/>
+		
 		<input type="submit" value="Place Order">
 		
 	</form>

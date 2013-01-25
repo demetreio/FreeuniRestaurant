@@ -59,6 +59,7 @@
 				}
 			%>
 </table>
+			<jsp:include page="AdminOrdersView.jsp"/>
 			<input type="submit" name="update" value="Update Menu">
 </form>
 <form action="AddFoodServlet" method="post">

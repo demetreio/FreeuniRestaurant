@@ -439,12 +439,23 @@ public class DBConnector{
 	}
 	
 	/**
+	 * Returns whether the user has ordered anything.
+	 * @param userName the user name.
+	 * @return whether he has ordered anything.
+	 * @throws SQLException
+	 */
+	public boolean isAnythingOrderedByUser(String userName) throws SQLException {
+		ResultSet rset = selectFromShekvetaByUserName(userName);
+		return rset.next();
+	}
+	
+	/**
 	 * shlis users shekveta cxrilidan useris mixedvit
 	 * @param username
 	 * @throws SQLException
 	 */
 	public void removeFromShekvetaByName(String username) throws SQLException{
-		stmt.executeUpdate("delete  from shekveta where username='"+username+"'");
+		stmt.executeUpdate("delete  from orders where username='"+username+"'");
 	}
 	
 	
