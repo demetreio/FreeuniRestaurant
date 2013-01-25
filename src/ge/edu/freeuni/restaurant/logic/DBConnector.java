@@ -17,7 +17,7 @@ public class DBConnector{
 	static String server = "localhost";
 	static String password = ""; //<---------
 	static String account = "root";
-	static String database = "test"; //<--------- 
+	static String database = "db1"; //<--------- 
 	private static  Connection con;
 	private static DBConnector db;
 	static Statement stmt;
@@ -41,6 +41,13 @@ public class DBConnector{
 		rset.next();
 		String str = rset.getString(1);
 		return str;
+	}
+	
+	public Date getCurrentDateAsADate() throws SQLException, ParseException {
+		ResultSet rset = stmt.executeQuery("select sysdate()");
+		rset.next();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
+		return (Date) (sdf.parse(rset.getString(1)));
 	}
 	
 	/**
@@ -679,6 +686,34 @@ public class DBConnector{
 		ch[timeIndex] = '3';
 		str = new String(ch);
 		stmt.executeUpdate("update user_table set reserveInfo = '"+str+"' where username = '"+username+"' and id="+table_id);
+	}
+	
+	/**
+	 * Returns the date 30 minutes before the reservation time.
+	 * @param time_index the index of the time on which the table is being booked
+	 * @return the Date which is 30 minutes before the reservation time.
+	 * @throws SQLException
+	 * @throws ParseException
+	 */
+	public java.util.Date getDateBeforeTimeIndex(int time_index) throws SQLException, ParseException {
+		String curdate = getCurrentDate();
+		java.util.Date d = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss", Locale.ENGLISH).parse(curdate);
+		StringTokenizer st = new StringTokenizer(d.toString());
+		for(int i=0; i<3; i++) st.nextToken();
+		String hms = st.nextToken();
+		int h = Integer.parseInt(hms.substring(0, 2)), m = Integer.parseInt(hms.substring(3, 5)), s = 
+				Integer.parseInt(hms.substring(6, 8));
+		int seconds = 3600*h + 60*m + s;
+		int hour_for_index = 9+(time_index%15);
+		int secondsForTime = 3600*hour_for_index-1800;
+		int toAdd = secondsForTime - seconds;
+		if(time_index>=15){ // second day
+			toAdd += 24*3600;
+		}
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(d);
+		cal.add(Calendar.SECOND, toAdd);
+		return cal.getTime();
 	}
 	
 }
