@@ -337,7 +337,7 @@ public class DBConnector{
 	public ResultSet selectFromMenu(){
 		ResultSet rset = null;
 		try {
-			rset = stmt.executeQuery("select * from menu where menudate='"+currentDate()+"'");
+			rset = stmt.executeQuery("select * from menu;");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -347,7 +347,7 @@ public class DBConnector{
 	
 	public void updatePrice(int id, double price){
 		try {
-			stmt.executeUpdate("update menu set price = "+price+" where id = "+id+" and menudate = \""+currentDate()+"\"");
+			stmt.executeUpdate("update menu set price = "+price+" where id = "+id);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -369,13 +369,10 @@ public class DBConnector{
 	public boolean existFood(int foodId) {
 		ResultSet rset;
 		try {
-			System.out.println("AEEE");
-			rset = stmt.executeQuery("select * from menu where id = " + foodId + " and menudate=\""+currentDate()+"\"");
-			if(rset==null)System.out.println("eeee");
+			rset = stmt.executeQuery("select * from menu where id = " + foodId);
 			rset.last();
 			return rset.getRow() > 0;
 		} catch (SQLException e) {
-			
 			e.printStackTrace();
 			return false;
 		}
@@ -383,10 +380,9 @@ public class DBConnector{
 	
 	//unda daaselectos where name=name;
 	public ResultSet selectFromMenuByName(String name){
-		
 		ResultSet rs = null;
 		try {
-			rs = stmt.executeQuery("select * from menu where name ='" +name+"'" + " and menudate ='"+currentDate()+"'");
+			rs = stmt.executeQuery("select * from menu where name ='" +name+"'");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -398,7 +394,7 @@ public class DBConnector{
 	public void insertIntoMenu(String name, double price, String category){
 		try {
 			String a = currentDate();
-			stmt.executeUpdate("insert into menu (name, price, foodtype, menudate) values('"+name+"','"+price+"','"+category+"','"+a+"')" );
+			stmt.executeUpdate("insert into menu (name, price, foodtype) values('"+name+"','"+price+"','"+category+"')");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -407,7 +403,7 @@ public class DBConnector{
 	//menu xrilidan unda washalos mocemuli saxelis kerdzi
 	public void removeFromMenuByName(int id){
 		try {
-			stmt.executeUpdate("delete from menu where id = "+id+" and menudate=\""+currentDate()+"\"");
+			stmt.executeUpdate("delete from menu where id = "+id);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

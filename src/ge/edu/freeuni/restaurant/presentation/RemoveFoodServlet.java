@@ -42,7 +42,6 @@ public class RemoveFoodServlet extends HttpServlet {
 		EditMenu em = new EditMenu();
 		int foodId = Integer.parseInt(request.getParameter("id"));
 		if(em.existFood(foodId)) {
-			System.out.println("OEEE");
 			em.removeFromDbKerdzi(foodId);
 		}
 		RequestDispatcher dispatch = request.getRequestDispatcher("AdminMenuView.jsp");
