@@ -7,7 +7,7 @@ import ge.edu.freeuni.restaurant.logic.UserManager;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.Arrays;
+import java.text.ParseException;
 import java.util.*;
 
 import javax.mail.MessagingException;
@@ -69,7 +69,12 @@ public class Book extends HttpServlet {
 					trm.reserveTable(tableId, resInfo);
 					DBConnector db= DBConnector.getInstance();	
 					if(resInfo.contains("2")){
-						trm.reserveForUser(name, tableId, resInfo);
+						try {
+							trm.reserveForUser(name, tableId, resInfo);
+							trm.mailReminder(name, resInfo);
+						} catch (ParseException e) {
+							e.printStackTrace();
+						}
 						MailSender.sendTableReservationConfirmationrMail(name, db.getUser(name).getMail());
 					}
 				} catch (SQLException e) {
