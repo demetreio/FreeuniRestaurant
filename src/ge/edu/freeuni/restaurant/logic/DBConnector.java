@@ -14,7 +14,7 @@ import java.util.StringTokenizer;
 public class DBConnector{
 	private static Object lock  = new Object();
 	static String server = "localhost";
-	static String password = "nika"; //<---------
+	static String password = ""; //<---------
 	static String account = "root";
 	static String database = "test"; //<--------- 
 	private static  Connection con;

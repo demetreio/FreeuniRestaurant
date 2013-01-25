@@ -39,5 +39,19 @@ for(int i = 0;i<ingred.size();i++){
 }
 %>
 </table>
+
+	<form action="AddingIngredientServlet" method="post">
+		<p></p>
+		<input type="text" name=ingredient_name  placeholder="Ingredient name" />
+		<br>
+		<input type="text" name=unit   placeholder="Unit" />
+		<br>
+		<input type="text" name=quantity   placeholder="Quontity" />
+		<br>
+		<input type="submit" name=butt value="Add">
+		<br>
+		<input type ="hidden" name ="hidden" value="<%request.getParameter("id"); %>" />
+	</form>
+
 </body>
 </html>
