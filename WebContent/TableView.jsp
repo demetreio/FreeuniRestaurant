@@ -71,16 +71,19 @@
 			%>
 		</table>
 	</center>
-
 	<form id="theForm" method="post" action="Book">  
 		<input type="hidden" name="fieldi"/>  
 	</form>
-		<form action="javascript:forward()">
-	<%if(admin){ %>
+	<form action="javascript:forward()">
+		<%if(admin){ %>
 			<input type="text">
-	<%} %>
-			<input type="submit" value="save">
+		<%} %>
+		<input type="submit" value="Save">
+		<form action="javascript:forward2()">
+			<input type="submit" value="Cancel">
 		</form>
+	</form>
+	
 	<center>
 		<%if(admin){%><jsp:include page="RealtimeTableView.jsp" ></jsp:include><%}%>
 	</center>
