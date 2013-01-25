@@ -1,5 +1,7 @@
 package ge.edu.freeuni.restaurant.presentation;
 
+import ge.edu.freeuni.restaurant.logic.Kerdzi;
+import ge.edu.freeuni.restaurant.logic.Menu;
 import ge.edu.freeuni.restaurant.logic.TableReserveManager;
 import ge.edu.freeuni.restaurant.logic.User;
 import ge.edu.freeuni.restaurant.logic.UserManager;
@@ -41,15 +43,22 @@ public class PlaceOrderServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String username = request.getParameter("username");
-		int menuSize = Integer.parseInt(request.getParameter("menuSize"));
+		Menu m = new Menu();
 		String reservedTables = request.getParameter("orderTables");
 		String reservedTimes = request.getParameter("orderTimes");
 		shekveta sh = new shekveta(username);
-		
+		ArrayList<Kerdzi> menu = null;
+		try {
+			menu = m.getMenu();
+		} catch (SQLException exception) {
+			// TODO Auto-generated catch-block stub.
+			exception.printStackTrace();
+		}
 		int amount;
-		for (int i = 1; i <= menuSize; i++) {
-			amount = Integer.parseInt(request.getParameter("dish#"+i));
-			sh.addShekveta(i, amount);
+		for (int i = 0; i < menu.size(); i++) {
+			amount = Integer.parseInt(request.getParameter("dish#"+menu.get(i).getId()));
+			System.out.println(amount);
+			sh.addShekveta(menu.get(i).getId(), amount);
 		}
 		sh.saveIntoDB(reservedTables, reservedTimes);
 		RequestDispatcher dispatch = request.getRequestDispatcher("TableView.jsp");
