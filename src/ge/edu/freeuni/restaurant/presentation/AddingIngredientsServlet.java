@@ -43,7 +43,6 @@ public class AddingIngredientsServlet extends HttpServlet {
 		String name = request.getParameter("ingredient_name");
 		int prod_id = Integer.parseInt(request.getParameter("hidden"));
 		EditIngredients ingr = new EditIngredients();
-		System.out.println(prod_id);
 		ingr.addIngredient(prod_id, name, quant, unit);
 		RequestDispatcher dispatch;
 		HttpSession session = request.getSession();
