@@ -3,6 +3,8 @@ package ge.edu.freeuni.restaurant.presentation;
 import ge.edu.freeuni.restaurant.logic.EditIngredients;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -42,6 +44,9 @@ public class AddingIngredientsServlet extends HttpServlet {
 		EditIngredients ingr = new EditIngredients();
 		System.out.println(prod_id);
 		ingr.addIngredient(prod_id, name, quant, unit);
+		RequestDispatcher dispatch;
+		dispatch = request.getRequestDispatcher("viewIngrendients.jsp");
+		dispatch.forward(request,response);
 		
 	}
 

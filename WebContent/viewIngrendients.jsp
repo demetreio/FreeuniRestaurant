@@ -19,6 +19,7 @@
 </tr>
 
 <%
+int prod_id =Integer.parseInt(request.getParameter("id")); 
 Menu dish = new Menu();
 out.print(Integer.parseInt(request.getParameter("id")));
 ArrayList <Ingredienti> ingred = dish.getIngredientsOf(Integer.parseInt(request.getParameter("id")));
@@ -40,7 +41,7 @@ for(int i = 0;i<ingred.size();i++){
 %>
 </table>
 
-	<form action="AddingIngredientServlet" method="post">
+	<form action="AddingIngredientsServlet" method="post">
 		<p></p>
 		<input type="text" name=ingredient_name  placeholder="Ingredient name" />
 		<br>
@@ -50,7 +51,12 @@ for(int i = 0;i<ingred.size();i++){
 		<br>
 		<input type="submit" name=butt value="Add">
 		<br>
-		<input type ="hidden" name ="hidden" value="<%request.getParameter("id"); %>" />
+		<%
+		out.print("<input type =\"hidden\" name =\"hidden\" value=\""); 
+		out.print(prod_id);
+		out.print("\">");
+		%>
+		
 	</form>
 
 </body>
