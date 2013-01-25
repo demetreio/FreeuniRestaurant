@@ -46,7 +46,12 @@ for(int i = 0;i<ingred.size();i++){
 	out.print(curr.getQuantity());
 	out.print("</td>");
 	out.print("<td>");
-	out.print("	<input type=\"submit\" name=butt value=\"delete\">");
+	out.print("<form action=\"AddingIngredientsServlet\" method=\"post\">");
+	out.print("<input type=\"submit\" name=butt value=\"Delete\">");
+	out.print("<input type=\"hidden\" name= \"hiddel\" value = \"");
+	out.print(curr.getName());
+	out.print("\">");
+	out.print("</form>");
 	out.print("</td>");
 	out.print("</tr>");
 }

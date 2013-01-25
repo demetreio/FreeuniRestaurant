@@ -38,13 +38,23 @@ public class AddingIngredientsServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		double quant = Double.parseDouble(request.getParameter("quantity"));
-		String unit = request.getParameter("unit");
-		String name = request.getParameter("ingredient_name");
-		int prod_id = Integer.parseInt(request.getParameter("hidden"));
-		EditIngredients ingr = new EditIngredients();
-		ingr.addIngredient(prod_id, name, quant, unit);
 		RequestDispatcher dispatch;
+		String butt = request.getParameter("butt");
+		int prod_id;
+		if(butt.equals("Delete")){
+			String name = request.getParameter("hiddel");
+			prod_id = Integer.parseInt(request.getParameter("hidden"));
+			EditIngredients ingr = new EditIngredients();
+			ingr.deleteEngredient(prod_id, name);
+		}
+		else{
+			double quant = Double.parseDouble(request.getParameter("quantity"));
+			String unit = request.getParameter("unit");
+			String name = request.getParameter("ingredient_name");
+			prod_id = Integer.parseInt(request.getParameter("hidden"));
+			EditIngredients ingr = new EditIngredients();
+			ingr.addIngredient(prod_id, name, quant, unit);
+		}
 		HttpSession session = request.getSession();
 		session.setAttribute("id",prod_id);
 		dispatch = request.getRequestDispatcher("viewIngrendients.jsp");

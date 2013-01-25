@@ -4,9 +4,14 @@ import java.sql.SQLException;
 
 public class EditIngredients {
 	
-	public void deleteEngredient(int kerdzisId, String ingredientName) throws SQLException{
+	public void deleteEngredient(int kerdzisId, String ingredientName) {
 		DBConnector db = DBConnector.getInstance();
-		db.deleteFromIngredients(kerdzisId, ingredientName);
+		try {
+			db.deleteFromIngredients(kerdzisId, ingredientName);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public void changeQuantity(int kerdzisId, String ingredientName, double newQuantity) throws SQLException {
