@@ -1,5 +1,6 @@
 package ge.edu.freeuni.restaurant.logic;
 import java.sql.*;
+import java.sql.Date;
 import java.util.*;
 public class shekveta {
 
@@ -41,6 +42,29 @@ public class shekveta {
 		return arr.size();
 	}
 	
+	public int getOrderTableId() throws NumberFormatException, SQLException{
+		DBConnector db = DBConnector.getInstance();
+		ResultSet rs = db.selectFromShekvetaByUserName(name);
+		int id = 0;
+		while(rs.next()){
+			
+			id = Integer.parseInt(rs.getString("table_id"));
+		}
+		return id;
+		
+	}
+	
+	public String getOrderTime() throws NumberFormatException, SQLException{
+		DBConnector db = DBConnector.getInstance();
+		ResultSet rs = db.selectFromShekvetaByUserName(name);
+		String time = "";
+		while(rs.next()){
+			
+			time = rs.getString("reserve_time");
+		}
+		return time;
+	}
+
 	public void saveIntoDB(String tables, String times){
 		if(getSize()>0){
 			DBConnector db =  DBConnector.getInstance();
