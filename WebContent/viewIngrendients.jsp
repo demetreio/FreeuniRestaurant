@@ -1,3 +1,4 @@
+<%@page import="javax.mail.Session"%>
 <%@page import="ge.edu.freeuni.restaurant.logic.Ingredienti"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="ge.edu.freeuni.restaurant.logic.Menu"%>
@@ -19,16 +20,18 @@
 </tr>
 
 <%
-/* if(request.getAttribute(arg0)){
-	
+HttpSession ses = request.getSession();
+int prod_id;
+if(ses.getAttribute("id")==null){
+	System.out.println("aq var");
+	prod_id =Integer.parseInt(request.getParameter("id"));
 }
 else{
-	int prod_id =Integer.parseInt(request.getParameter("id")); 	
-} */
-int prod_id =Integer.parseInt(request.getParameter("id")); 
+	Object obj = ses.getAttribute("id");
+	prod_id = (Integer)obj;
+} 
 Menu dish = new Menu();
-out.print(Integer.parseInt(request.getParameter("id")));
-ArrayList <Ingredienti> ingred = dish.getIngredientsOf(Integer.parseInt(request.getParameter("id")));
+ArrayList <Ingredienti> ingred = dish.getIngredientsOf(prod_id);
 Ingredienti curr;
 for(int i = 0;i<ingred.size();i++){
 	curr = ingred.get(i);

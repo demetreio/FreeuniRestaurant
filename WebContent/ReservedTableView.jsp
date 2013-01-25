@@ -15,8 +15,12 @@
 	}
 	
 	boolean[] b = rti.getReservation(id);
+	CurrentTime curTime = new CurrentTime();
 	for (int i = 0; i < b.length; i++) {
-		if(times[i]){
+		if(curTime.timeIndexIsPast(i)){
+			out.print("<td style=\"background-color: black\"></td>");
+		}
+		else if(times[i]){
 			out.print("<td style=\"background-color: yellow\"></td>");
 		}else{
 			out.print("<td onClick=\"getColor(this)\" style=\"background-color:"+(b[i]?"red":"green")+"\"></td>");
