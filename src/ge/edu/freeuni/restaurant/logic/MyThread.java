@@ -21,7 +21,8 @@ class MyThread extends Thread{
 		try {
 			long wait = time.getTime();
 			System.out.println(wait);
-			this.sleep(Calendar.getInstance().getTimeInMillis() - wait);
+			long asd = wait - Calendar.getInstance().getTimeInMillis();
+			this.sleep(asd);
 			MailSender.sendRemainderMail(time, userName, emailAddress);
 		} catch (AddressException e) {
 			// TODO Auto-generated catch block
