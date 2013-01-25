@@ -8,6 +8,7 @@ import java.sql.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Locale;
 import java.util.StringTokenizer;
 
@@ -336,7 +337,7 @@ public class DBConnector{
 	public ResultSet selectFromMenu(){
 		ResultSet rset = null;
 		try {
-			rset = stmt.executeQuery("select * from menu");
+			rset = stmt.executeQuery("select * from menu where menudate='"+currentDate()+"'");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -346,11 +347,38 @@ public class DBConnector{
 	
 	public void updatePrice(int id, double price){
 		try {
-			stmt.executeUpdate("update menu set price = "+price+" where id = "+id);
+			stmt.executeUpdate("update menu set price = "+price+" where id = "+id+" and menudate = \""+currentDate()+"\"");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		
+	}
+	
+	public String currentDate() {
+		Calendar cl = Calendar.getInstance();
+		SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd");
+		return f.format(cl.getTime());
+	}
+	
+	/**
+	 * Returns true if this food exists in menu
+	 * else false.
+	 * @param foodID
+	 * @return
+	 */
+	public boolean existFood(int foodId) {
+		ResultSet rset;
+		try {
+			System.out.println("AEEE");
+			rset = stmt.executeQuery("select * from menu where id = " + foodId + " and menudate=\""+currentDate()+"\"");
+			if(rset==null)System.out.println("eeee");
+			rset.last();
+			return rset.getRow() > 0;
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+			return false;
+		}
 	}
 	
 	//unda daaselectos where name=name;
@@ -358,7 +386,7 @@ public class DBConnector{
 		
 		ResultSet rs = null;
 		try {
-			rs = stmt.executeQuery("select * from menu where name ='" +name+"'");
+			rs = stmt.executeQuery("select * from menu where name ='" +name+"'" + " and menudate ='"+currentDate()+"'");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -369,7 +397,8 @@ public class DBConnector{
 	//unda chaamatos menu-shi axali kerdzi. id tavisic unda izrdebodes chamatebisas menu cxrilshi
 	public void insertIntoMenu(String name, double price, String category){
 		try {
-			stmt.executeUpdate("insert into menu (name, price, foodtype) values('"+name+"',"+price+",'"+category+"')" );
+			String a = currentDate();
+			stmt.executeUpdate("insert into menu (name, price, foodtype, menudate) values('"+name+"','"+price+"','"+category+"','"+a+"')" );
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -378,7 +407,7 @@ public class DBConnector{
 	//menu xrilidan unda washalos mocemuli saxelis kerdzi
 	public void removeFromMenuByName(int id){
 		try {
-			stmt.executeUpdate("delete from menu where id = "+id);
+			stmt.executeUpdate("delete from menu where id = "+id+" and menudate=\""+currentDate()+"\"");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -478,23 +507,7 @@ public class DBConnector{
 		
 	}
 
-	/**
-	 * Returns true if this food exists in menu
-	 * else false.
-	 * @param foodID
-	 * @return
-	 */
-	public boolean existFood(int foodId) {
-		ResultSet rset;
-		try {
-			rset = stmt.executeQuery("select * from menu where id = " + foodId);
-			rset.last();
-			return rset.getRow() > 0;
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return false;
-		}
-	}
+
 	
 	/**
 	 * Deletes reservation for the user and given table id with given time index.

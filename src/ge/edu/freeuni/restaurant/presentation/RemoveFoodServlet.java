@@ -41,7 +41,10 @@ public class RemoveFoodServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		EditMenu em = new EditMenu();
 		int foodId = Integer.parseInt(request.getParameter("id"));
-		if(em.existFood(foodId))em.removeFromDbKerdzi(foodId);
+		if(em.existFood(foodId)) {
+			System.out.println("OEEE");
+			em.removeFromDbKerdzi(foodId);
+		}
 		RequestDispatcher dispatch = request.getRequestDispatcher("AdminMenuView.jsp");
 		dispatch.forward(request, response);
 	}
