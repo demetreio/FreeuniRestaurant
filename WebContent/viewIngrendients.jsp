@@ -78,6 +78,11 @@ for(int i = 0;i<ingred.size();i++){
 		%>
 		
 	</form>
+	<form action="BackServlet" method="post">
+	<input type="submit" name=back value="back">
+	
+	</form>
+	
 
 </body>
 </html>
