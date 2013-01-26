@@ -19,6 +19,19 @@ public class Menu {
 		return list;
 	}
 	
+	public ArrayList<Kerdzi> getMenuByDate(String date) throws SQLException{
+		DBConnector db = DBConnector.getInstance();
+		ResultSet rs = db.selectFromMenu(date);
+		ArrayList<Kerdzi> list = new ArrayList<Kerdzi>();
+		if(rs!=null) {
+			while(rs.next()){
+				Kerdzi k = new Kerdzi(rs.getInt(1), rs.getString(2), rs.getDouble(3), rs.getString(4));
+				list.add(k);
+			}
+		}
+		return list;
+	}
+	
 	public String getName(int id) throws SQLException{
 		DBConnector db = DBConnector.getInstance();
 		ResultSet rs = db.selectNameByIdFromMenu(id);
@@ -41,4 +54,5 @@ public class Menu {
 		}
 		return list;
 	}
+	
 }

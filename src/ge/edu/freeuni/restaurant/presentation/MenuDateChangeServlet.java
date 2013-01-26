@@ -46,6 +46,7 @@ public class MenuDateChangeServlet extends HttpServlet {
 		if(day<10) date+= "0"+day;
 		else date+=""+day;
 		
+		request.getSession().removeAttribute("date");
 		request.getSession().setAttribute("date", date);
 		
 		RequestDispatcher dispatch = request.getRequestDispatcher("MenuView.jsp");

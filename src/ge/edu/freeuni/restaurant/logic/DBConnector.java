@@ -351,6 +351,16 @@ public class DBConnector{
 		return rset;
 	}
 	
+	public ResultSet selectFromMenu(String date){
+		ResultSet rset = null;
+		try {
+			rset = stmt.executeQuery("select id,name,price,foodtype from menu,menuDates where menuID='"+date+"' and foodID=id;");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return rset;
+	}
+	
 	public void updatePrice(int id, double price){
 		try {
 			stmt.executeUpdate("update menu,menuDates set price="+price+" where menuID='"+currentDate()+"' and foodID=id and id="+id);

@@ -1,3 +1,4 @@
+<%@page import="java.text.SimpleDateFormat"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ page import="java.util.*"%>
@@ -19,6 +20,11 @@
 		<a href="AdminMenuView.jsp">Change Restaurant Menu</a>
 		<a href="UserHistoryView.jsp">View User Statistics</a>
 	<%} else {
+		Calendar cl = Calendar.getInstance();
+		SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd");
+		String date = f.format(cl.getTime());
+		session.setAttribute("date", date);
+		
 		%><a href="MenuView.jsp">Restaurant Menu</a><% }}%>
 	<center>
 	
