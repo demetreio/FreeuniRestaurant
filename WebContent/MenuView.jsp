@@ -22,12 +22,28 @@
 
 <form action="MenuDateChangeServlet" method="post">
 
+<%
+String date = (String)session.getAttribute("date");
+int year = Integer.parseInt(date.substring(0, 4));
+int month;
+if(date.charAt(5)=='0') month = Integer.parseInt(date.charAt(6) + "");
+else month = Integer.parseInt(date.substring(5,7));
+int day;
+if(date.charAt(8)=='0') day = Integer.parseInt(date.charAt(9)+"");
+else day = Integer.parseInt(date.substring(8,10));
+
+%>
+
 <center>
 
 <select name="day">
 
 <% for(int count=1; count<=31; count++){ %>
-    <option><%=count%></option>  
+     <% if(count==day) {%>
+    <option selected="selected"><%=count%></option>  
+    <% } else { %>
+    <option><%=count%></option>
+    <% }%> 
 <%} %>
 
 </select> 
@@ -35,15 +51,24 @@
 <select name="month">
 
 <% for(int count=1; count<=12; count++){ %>
-    <option><%=count%></option>  
+    <% if(count==month) {%>
+    <option selected="selected"><%=count%></option>  
+    <% } else { %>
+    <option><%=count%></option>
+    <% }%>  
 <%} %>
 
 </select>
 
 <select name="year">
 
-<option>2012</option>
-<option>2013</option>
+<% for(int count=2012; count<=2013; count++){ %>
+    <% if(count==year) {%>
+    <option selected="selected"><%=count%></option>  
+    <% } else { %>
+    <option><%=count%></option>
+    <% }%>  
+<%} %>
 
 </select>
 
@@ -66,7 +91,7 @@
 	</tr>
 	<%
 				Menu menu = new Menu();
-					ArrayList<Kerdzi> kerdzebe = menu.getMenu();
+					ArrayList<Kerdzi> kerdzebe = menu.getMenuByDate(date);
 					Kerdzi curKerdzi;
 					for (int i = 0; i < kerdzebe.size(); i++) {
 						curKerdzi = kerdzebe.get(i);

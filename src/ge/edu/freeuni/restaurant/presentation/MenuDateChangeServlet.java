@@ -40,9 +40,9 @@ public class MenuDateChangeServlet extends HttpServlet {
 		int year = Integer.parseInt(request.getParameter("year"));
 		int month = Integer.parseInt(request.getParameter("month"));
 		
-		date+=year + "";
-		if(month<10) date+= "0"+month;
-		else date+=""+month;
+		date+=year + "-";
+		if(month<10) date+= "0"+month+"-";
+		else date+=""+month+"-";
 		if(day<10) date+= "0"+day;
 		else date+=""+day;
 		
