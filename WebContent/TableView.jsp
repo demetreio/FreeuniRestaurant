@@ -13,17 +13,20 @@
 	<%! private boolean admin = false; private User usr;%>
 	<%if(session.getAttribute("user") != null){ 
 	usr = (User)session.getAttribute("user");
-	admin = usr.isAdmin();%>
+	admin = usr.isAdmin();
+	Calendar cl = Calendar.getInstance();
+	SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd");
+	String date = f.format(cl.getTime());
+	session.setAttribute("date", date);
+	%>
 	<h3>Welcome <%=usr.getName() %><%if(admin)out.print("(admin)"); %></h3>
 	<%if(admin){ %>
 		<a href="UserManagement.jsp">user management</a>
 		<a href="AdminMenuView.jsp">Change Restaurant Menu</a>
+		<a href="MenuView.jsp">Menu Archive</a>
 		<a href="UserHistoryView.jsp">View User Statistics</a>
 	<%} else {
-		Calendar cl = Calendar.getInstance();
-		SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd");
-		String date = f.format(cl.getTime());
-		session.setAttribute("date", date);
+		
 		
 		%><a href="MenuView.jsp">Restaurant Menu</a><% }}%>
 	<center>

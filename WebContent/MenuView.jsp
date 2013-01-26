@@ -14,11 +14,8 @@
 	usr = (User)session.getAttribute("user");
 	admin = usr.isAdmin();%>
 <h3>Welcome <%=usr.getName() %>
-<%if(admin)out.print("(admin)"); %>
+<%if(admin)out.print("(admin)");} %>
 </h3>
-<%if(admin){ %>
-<a href="UserManagement.jsp">user management</a>
-<%} }%>
 
 <form action="MenuDateChangeServlet" method="post">
 
