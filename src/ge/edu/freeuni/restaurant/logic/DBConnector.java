@@ -15,7 +15,7 @@ import java.util.StringTokenizer;
 public class DBConnector{
 	private static Object lock  = new Object();
 	static String server = "localhost";
-	static String password = ""; //<---------
+	static String password = "nika"; //<---------
 	static String account = "root";
 	static String database = "test"; //<--------- 
 	private static  Connection con;
@@ -344,9 +344,8 @@ public class DBConnector{
 	public ResultSet selectFromMenu(){
 		ResultSet rset = null;
 		try {
-			rset = stmt.executeQuery("select * from menu;");
+			rset = stmt.executeQuery("select id,name,price,foodtype from menu,menuDates where menuID='"+currentDate()+"' and foodID=id;");
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return rset;
@@ -354,11 +353,10 @@ public class DBConnector{
 	
 	public void updatePrice(int id, double price){
 		try {
-			stmt.executeUpdate("update menu set price = "+price+" where id = "+id);
+			stmt.executeUpdate("update menu,menuDates set price="+price+" where menuID='"+currentDate()+"' and foodID=id and id="+id);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
 	}
 	
 	public String currentDate() {
@@ -376,7 +374,7 @@ public class DBConnector{
 	public boolean existFood(int foodId) {
 		ResultSet rset;
 		try {
-			rset = stmt.executeQuery("select * from menu where id = " + foodId);
+			rset = stmt.executeQuery("select id,name,price,foodtype from menuDates, menu where menuID='"+currentDate()+"' and foodID="+foodId+" and foodID=id");
 			rset.last();
 			return rset.getRow() > 0;
 		} catch (SQLException e) {
@@ -389,19 +387,18 @@ public class DBConnector{
 	public ResultSet selectFromMenuByName(String name){
 		ResultSet rs = null;
 		try {
-			rs = stmt.executeQuery("select * from menu where name ='" +name+"'");
+			rs = stmt.executeQuery("select id,name,price,foodtype from menu,menuDates where menuID='" +currentDate()+"' and foodID=id and name='"+name+"'");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return rs;
-		
 	}
 	
 	//unda chaamatos menu-shi axali kerdzi. id tavisic unda izrdebodes chamatebisas menu cxrilshi
 	public void insertIntoMenu(String name, double price, String category){
 		try {
-			String a = currentDate();
 			stmt.executeUpdate("insert into menu (name, price, foodtype) values('"+name+"','"+price+"','"+category+"')");
+			stmt.executeUpdate("insert into menuDates(menuID, foodID) values('"+currentDate()+"', (select MAX(id) from menu));");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -410,7 +407,8 @@ public class DBConnector{
 	//menu xrilidan unda washalos mocemuli saxelis kerdzi
 	public void removeFromMenuByName(int id){
 		try {
-			stmt.executeUpdate("delete from menu where id = "+id);
+			stmt.executeUpdate("delete from menu where id="+id);
+			stmt.executeUpdate("delete from menuDates where menuID='"+currentDate()+"' and foodID="+id);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
