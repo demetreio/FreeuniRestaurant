@@ -1,6 +1,8 @@
 package ge.edu.freeuni.restaurant.presentation;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -33,7 +35,21 @@ public class MenuDateChangeServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		String date = "";
+		int day = Integer.parseInt(request.getParameter("day"));
+		int year = Integer.parseInt(request.getParameter("year"));
+		int month = Integer.parseInt(request.getParameter("month"));
+		
+		date+=year + "";
+		if(month<10) date+= "0"+month;
+		else date+=""+month;
+		if(day<10) date+= "0"+day;
+		else date+=""+day;
+		
+		request.getSession().setAttribute("date", date);
+		
+		RequestDispatcher dispatch = request.getRequestDispatcher("MenuView.jsp");
+		dispatch.forward(request, response);
 	}
 
 }

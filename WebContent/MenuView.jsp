@@ -34,17 +34,9 @@
 
 <select name="month">
 
-<option>January</option>
-<option>February</option>
-<option>March</option>
-<option>April</option>
-<option>May</option>
-<option>June</option>
-<option>July</option>
-<option>August</option>
-<option>September</option>
-<option>October</option>
-<option>December</option>
+<% for(int count=1; count<=12; count++){ %>
+    <option><%=count%></option>  
+<%} %>
 
 </select>
 
